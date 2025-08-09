@@ -1,3 +1,11 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Página não encontrada",
+  description:
+    "Desculpe, mas a página que você ao qual tentou acessar não existe.",
+};
+
 export default function NotFound() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">

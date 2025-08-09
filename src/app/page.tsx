@@ -1,6 +1,14 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sizebay - Início",
+  description:
+    "Página inicial do Sizebay Repo, onde você pode explorar repositórios do GitHub e descobrir projetos interessantes.",
+};
+
 export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
@@ -34,8 +42,11 @@ export default function Home() {
           Descubra projetos, veja estatísticas e navegue com uma
           interface rápida e elegante.
         </p>
-        <div className="mt-8 flex items-center justify-center">
-          <Link href="/repos">
+        <div className="mt-8 flex items-center justify-center ">
+          <Link
+            className="cursor-pointer"
+            href="/search-repositories"
+          >
             <Button size="lg">Começar agora</Button>
           </Link>
         </div>
