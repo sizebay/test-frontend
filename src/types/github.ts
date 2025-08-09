@@ -1,12 +1,12 @@
-export type GitHubOwner = {
+export type GitHubOwnerProps = {
   login: string;
 };
 
-export type GitHubRepo = {
+export type GitHubRepoProps = {
   id: number;
   name: string;
   full_name: string;
-  owner: GitHubOwner;
+  owner: GitHubOwnerProps;
   description: string | null;
   language: string | null;
   stargazers_count: number;
@@ -17,6 +17,6 @@ export type GitHubRepo = {
   html_url: string;
 };
 
-export type GitHubRepoDetails = GitHubRepo & {
+export type GitHubRepoDetailsProps = GitHubRepoProps & {
   subscribers_count?: number;
 };
