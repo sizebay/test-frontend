@@ -9,7 +9,7 @@ interface RepoListProps {
 
 export const RepoList = ({ username }: RepoListProps) => {
   const [page, setPage] = useState(1);
-  const perPage = 10;
+  const perPage = 12;
   const {
     data,
     isLoading,
@@ -17,6 +17,7 @@ export const RepoList = ({ username }: RepoListProps) => {
     error,
     hasNextPage,
     hasPrevPage,
+    totalPages,
   } = useUserRepos(username, page, perPage);
 
   if (!username) return null;
@@ -75,7 +76,7 @@ export const RepoList = ({ username }: RepoListProps) => {
           Anterior
         </Button>
         <span className="text-sm text-muted-foreground">
-          Página {page}
+          Página {page} de {totalPages}
         </span>
         <Button
           variant="outline"

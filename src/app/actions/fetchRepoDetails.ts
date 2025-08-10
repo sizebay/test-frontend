@@ -1,5 +1,6 @@
 "use server";
 
+import { api } from "@/services/api";
 import { GitHubRepoDetailsProps } from "@/types/github";
 import { unstable_cache } from "next/cache";
 
@@ -9,26 +10,19 @@ export const fetchRepoDetails = unstable_cache(
     repo: string
   ): Promise<GitHubRepoDetailsProps> => {
     try {
-      const response = await fetch(
+      const response = await api.get(
         `https://api.github.com/repos/${encodeURIComponent(
           owner
-        )}/${encodeURIComponent(repo)}`,
-        {
-          headers: {
-            Accept: "application/vnd.github.v3+json",
-            "User-Agent": "sizebay-app",
-          },
-        }
+        )}/${encodeURIComponent(repo)}`
       );
 
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error(
           `Failed to fetch repository details: ${response.statusText}`
         );
       }
 
-      const data = await response.json();
-      return data;
+      return response.data;
     } catch (error) {
       throw new Error(
         `Failed to fetch repository details for ${owner}/${repo}: ${

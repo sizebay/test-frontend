@@ -15,7 +15,7 @@ const serverQueryClient = new QueryClient({
 export async function prefetchUserRepos(
   username: string,
   page = 1,
-  perPage = 10
+  perPage = 12
 ) {
   if (!username) return;
 
