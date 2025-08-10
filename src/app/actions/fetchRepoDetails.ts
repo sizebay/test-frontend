@@ -1,23 +1,45 @@
-import { api } from "@/services/api";
+"use server";
+
 import { GitHubRepoDetailsProps } from "@/types/github";
+import { unstable_cache } from "next/cache";
 
-export async function fetchRepoDetails(
-  owner: string,
-  repo: string
-): Promise<GitHubRepoDetailsProps> {
-  try {
-    const res = await api.get(
-      `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(
-        repo
-      )}`
-    );
+export const fetchRepoDetails = unstable_cache(
+  async (
+    owner: string,
+    repo: string
+  ): Promise<GitHubRepoDetailsProps> => {
+    try {
+      const response = await fetch(
+        `https://api.github.com/repos/${encodeURIComponent(
+          owner
+        )}/${encodeURIComponent(repo)}`,
+        {
+          headers: {
+            Accept: "application/vnd.github.v3+json",
+            "User-Agent": "sizebay-app",
+          },
+        }
+      );
 
-    return res.data;
-  } catch (error) {
-    throw new Error(
-      `Failed to fetch repository details for ${owner}/${repo}: ${
-        error instanceof Error ? error.message : "Unknown error"
-      }`
-    );
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch repository details: ${response.statusText}`
+        );
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw new Error(
+        `Failed to fetch repository details for ${owner}/${repo}: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
+    }
+  },
+  ["repo-details"],
+  {
+    revalidate: 300, // 5 minutes
+    tags: ["repo-details"],
   }
-}
+);

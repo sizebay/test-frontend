@@ -11,8 +11,6 @@ export function useUserRepos(
     queryKey: ["repos", username, page, perPage],
     queryFn: () => fetchUserRepos(username, page, perPage),
     enabled: Boolean(username),
-    staleTime: 1000 * 60 * 5,
-    retry: 1,
   });
 
   const hasNextPage = (query.data?.length ?? 0) === perPage;

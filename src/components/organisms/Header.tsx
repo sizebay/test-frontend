@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ThemeToggle } from "../atoms/ThemeToggle";
+import { ThemeToggle } from "@/components/atoms/ThemeToggle";
 
 export const Header = () => {
   return (

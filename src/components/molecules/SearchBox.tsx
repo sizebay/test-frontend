@@ -1,32 +1,42 @@
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
+"use client";
+
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface SearchBoxProps {
   initialValue?: string;
 }
 
 export const SearchBox = ({ initialValue = "" }: SearchBoxProps) => {
-  const [value, setValue] = useState(initialValue);
+  const [username, setUsername] = useState(initialValue);
+  const router = useRouter();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (username.trim()) {
+      router.push(
+        `/search-repositories?username=${encodeURIComponent(
+          username.trim()
+        )}`
+      );
+    }
+  };
 
   return (
-    <form className="flex w-full items-center gap-2">
+    <form
+      onSubmit={handleSearch}
+      className="flex w-full max-w-md gap-2"
+    >
       <Input
-        aria-label="GitHub username"
-        placeholder="Digite o username do GitHub..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        type="text"
+        placeholder="Digite o nome do usuário do GitHub"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="flex-1"
       />
-      <Link
-        className="cursor-pointer"
-        href={{
-          pathname: "/search-repositories",
-          query: value ? { username: value } : {},
-        }}
-      >
-        <Button>Buscar</Button>
-      </Link>
+      <Button>Buscar</Button>
     </form>
   );
 };

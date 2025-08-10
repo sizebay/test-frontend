@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const Footer = () => {
   return (
     <footer className="w-full text-gray-300">
@@ -20,17 +22,13 @@ export const Footer = () => {
               </h3>
               <ul className="mt-4 space-y-2">
                 <li>
-                  <a href="/" className="hover:text-white transition">
-                    Início
-                  </a>
+                  <Link href="/">Início</Link>
                 </li>
+
                 <li>
-                  <a
-                    href="/search-repositories"
-                    className="hover:text-white transition"
-                  >
+                  <Link href="/search-repositories">
                     Repositórios
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

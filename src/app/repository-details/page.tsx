@@ -1,6 +1,6 @@
 import { RepositoryDetailsPage } from "@/components/pages/RepositoryDetailsPage";
 import { MainTemplate } from "@/components/templates/MainTemplate";
-import { useRepoDetails } from "@/hooks/useRepoDetails";
+import { prefetchRepoDetails } from "@/lib/prefetch";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,6 +15,11 @@ interface ServerCtxProps {
 
 export default async function RepositoryDetails(ctx: ServerCtxProps) {
   const { owner, repoId } = await ctx.searchParams;
+
+  // Prefetch repository details if owner and repoId are provided
+  if (owner && repoId) {
+    await prefetchRepoDetails(owner, repoId);
+  }
 
   return (
     <MainTemplate>

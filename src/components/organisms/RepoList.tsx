@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { RepoCard } from "../molecules/RepoCard";
+import { RepoCard } from "@/components/molecules/RepoCard";
 import { useUserRepos } from "@/hooks/useUserRepos";
 
 interface RepoListProps {
@@ -61,7 +61,7 @@ export const RepoList = ({ username }: RepoListProps) => {
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {data.map((repo: any) => (
+        {data.map((repo) => (
           <RepoCard key={repo.id} repo={repo} />
         ))}
       </div>

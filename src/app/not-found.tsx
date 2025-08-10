@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Página não encontrada",
@@ -14,9 +15,7 @@ export default function NotFound() {
         <p className="text-xl text-muted-foreground mb-4">
           Página não encontrada
         </p>
-        <a href="/" className="underline hover:no-underline">
-          Voltar para a página inicial
-        </a>
+        <Link href="/">Voltar para a página inicial</Link>
       </div>
     </div>
   );

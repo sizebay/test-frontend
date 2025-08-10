@@ -7,7 +7,5 @@ export function useRepoDetails(owner: string, repo: string) {
     queryKey: ["repo", owner, repo],
     queryFn: () => fetchRepoDetails(owner, repo),
     enabled: Boolean(owner && repo),
-    staleTime: 1000 * 60 * 5,
-    retry: 1,
   });
 }

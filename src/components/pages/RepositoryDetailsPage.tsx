@@ -1,14 +1,15 @@
 "use client";
-import { GitHubRepoDetailsProps } from "@/types/github";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "@/components/ui/card";
 import { useRepoDetails } from "@/hooks/useRepoDetails";
+import { useRouter } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 
 interface Props {
   owner: string;
@@ -20,9 +21,28 @@ export const RepositoryDetailsPage = ({ repoId, owner }: Props) => {
     owner,
     repoId
   );
+  const router = useRouter();
+
+  const handleGoBack = () => {
+    router.back();
+  };
+
   return (
     <section className="space-y-6">
-      <h1 className="text-3xl font-bold">Detalhes do Repositório</h1>
+      <div className="flex items-center gap-4">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleGoBack}
+          className="flex items-center gap-2"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Voltar
+        </Button>
+        <h1 className="text-3xl font-bold">
+          Detalhes do Repositório
+        </h1>
+      </div>
 
       {isLoading && (
         <div className="h-48 rounded-lg border bg-muted animate-pulse" />
