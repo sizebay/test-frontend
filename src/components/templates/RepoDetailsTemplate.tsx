@@ -22,7 +22,7 @@ interface RepoDetailsTemplateProps {
 
 export function RepoDetailsTemplate({ isLoading, error, data }: RepoDetailsTemplateProps) {
     return (
-        <div className="relative min-h-screen bg-gradient-to-r from-black via-blue-900 to-blue-600 flex items-center justify-center px-6 py-16 overflow-hidden">
+        <div className="relative min-h-screen bg-gradient-to-r from-black via-blue-900 to-blue-600 flex flex-col items-center justify-center px-6 py-16 overflow-hidden">
             <div className="absolute inset-0 z-10">
                 <img
                     src="/assets/thumb2.jpg"
@@ -30,6 +30,7 @@ export function RepoDetailsTemplate({ isLoading, error, data }: RepoDetailsTempl
                     className="w-full h-full object-cover"
                 />
             </div>
+
 
             {isLoading && (
                 <div className="relative z-20 flex flex-col items-center justify-center py-16 text-white">

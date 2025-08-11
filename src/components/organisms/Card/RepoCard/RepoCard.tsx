@@ -27,11 +27,11 @@ export function RepoCard({
 }: RepoCardProps) {
     const [loading, setLoading] = React.useState(false)
 
-    const handleStarClick = async () => {
+    const handleStarClick = () => {
         if (loading) return
         setLoading(true)
         if (onToggleStar) {
-            await onToggleStar(ownerLogin, name, isStarred)
+            onToggleStar(ownerLogin, name, isStarred)
         }
         setLoading(false)
     }

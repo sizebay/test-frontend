@@ -30,7 +30,6 @@ export function ReposGrid({
     loadMoreRef,
     onToggleStar,
 }: ReposGridProps) {
-    console.log('reposs', repos);
     return (
         <div className="overflow-y-auto flex-1 mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 hide-scrollbar">
             <AnimatePresence>

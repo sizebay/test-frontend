@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useRef, useEffect, useCallback, useMemo } from "react"
+import { useSearchParams, useRouter } from "next/navigation"
 import { SearchForm } from "../molecules/SearchForm/SearchForm"
 import { Button } from "../../components/atoms/Button/Button"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../components/atoms/Select/Select"
@@ -8,13 +9,15 @@ import { useGithubRepos } from "@/hooks/useGithubRepos"
 import { useQueryClient } from "@tanstack/react-query"
 import { useToggleStarred } from "@/hooks/useToggleStarred"
 
-
 export function RepositoriesTemplate() {
-    const [username, setUsername] = useState("")
-    const [searchUsername, setSearchUsername] = useState("")
-    const [type, setType] = useState("all")
-    const [language, setLanguage] = useState("")
-    const [sort, setSort] = useState("updated")
+    const router = useRouter()
+    const searchParams = useSearchParams()
+
+    const [username, setUsername] = useState(searchParams.get("username") || "")
+    const [searchUsername, setSearchUsername] = useState(searchParams.get("username") || "")
+    const [type, setType] = useState(searchParams.get("type") || "all")
+    const [language, setLanguage] = useState(searchParams.get("language") || "")
+    const [sort, setSort] = useState(searchParams.get("sort") || "updated")
 
     const {
         data,
@@ -24,9 +27,6 @@ export function RepositoriesTemplate() {
         hasNextPage,
         isFetchingNextPage,
     } = useGithubRepos(searchUsername, { type, language, sort })
-
-    // usa os hooks de star e unstar
-
 
     const observerRef = useRef<IntersectionObserver | null>(null)
     const loadMoreRef = useRef<HTMLDivElement | null>(null)
@@ -55,15 +55,43 @@ export function RepositoriesTemplate() {
         return () => observerRef.current?.disconnect()
     }, [handleObserver])
 
+    const updateQueryParams = useCallback(
+        (newParams: Record<string, string>) => {
+            const params = new URLSearchParams(searchParams.toString())
+            Object.entries(newParams).forEach(([key, value]) => {
+                if (value) {
+                    params.set(key, value)
+                } else {
+                    params.delete(key)
+                }
+            })
+            router.push(`?${params.toString()}`, { scroll: false })
+        },
+        [router, searchParams]
+    )
+
     const handleSearch = useCallback(() => {
-        if (username) setSearchUsername(username)
-    }, [username])
+        if (username) {
+            setSearchUsername(username)
+            updateQueryParams({
+                username,
+                type,
+                language,
+                sort,
+            })
+        }
+    }, [username, type, language, sort, updateQueryParams])
 
     useEffect(() => {
         if (searchUsername) {
-            setSearchUsername(prev => prev)
+            updateQueryParams({
+                username: searchUsername,
+                type,
+                language,
+                sort,
+            })
         }
-    }, [type, language, sort])
+    }, [type, language, sort, searchUsername, updateQueryParams])
 
     const repos = useMemo(() => {
         const map = new Map()
@@ -79,15 +107,47 @@ export function RepositoriesTemplate() {
     const { star, unstar } = useToggleStarred()
 
     const handleToggleStar = async (owner: string, repoName: string, isCurrentlyStarred: boolean) => {
+        queryClient.setQueryData(
+            ["repos", searchUsername, { type, language, sort }],
+            (oldData: any) => {
+                if (!oldData) return oldData
+                return {
+                    ...oldData,
+                    pages: oldData.pages.map((page: any) =>
+                        page.map((repo: any) =>
+                            repo.owner.login === owner && repo.name === repoName
+                                ? { ...repo, isStarred: !isCurrentlyStarred }
+                                : repo
+                        )
+                    ),
+                }
+            }
+        )
+
         let success = false
         if (isCurrentlyStarred) {
             success = await unstar(owner, repoName)
         } else {
             success = await star(owner, repoName)
         }
-        if (success) {
-            await queryClient.invalidateQueries({ queryKey: ["repos", searchUsername, { type, language, sort }] })
-        } else {
+
+        if (!success) {
+            queryClient.setQueryData(
+                ["repos", searchUsername, { type, language, sort }],
+                (oldData: any) => {
+                    if (!oldData) return oldData
+                    return {
+                        ...oldData,
+                        pages: oldData.pages.map((page: any) =>
+                            page.map((repo: any) =>
+                                repo.owner.login === owner && repo.name === repoName
+                                    ? { ...repo, isStarred: isCurrentlyStarred }
+                                    : repo
+                            )
+                        ),
+                    }
+                }
+            )
             alert("Erro ao atualizar estrela")
         }
     }
@@ -116,7 +176,7 @@ export function RepositoriesTemplate() {
                     />
 
                     {showFilters && (
-                        <div className="mt-4 flex justify-between gap-4 ">
+                        <div className="mt-4 flex flex-col sm:flex-row sm:items-center gap-4 w-full">
                             <Select
                                 value={language || "all"}
                                 onValueChange={(val) => setLanguage(val === "all" ? "" : val)}
@@ -195,7 +255,7 @@ export function RepositoriesTemplate() {
                         isLoading={isLoading}
                         isFetchingNextPage={isFetchingNextPage}
                         loadMoreRef={loadMoreRef}
-                        onToggleStar={handleToggleStar} // Passa o callback
+                        onToggleStar={handleToggleStar}
                     />
                 </div>
             </div>
