@@ -20,3 +20,21 @@ export type GitHubRepoProps = {
 export type GitHubRepoDetailsProps = GitHubRepoProps & {
   subscribers_count?: number;
 };
+
+export type GitHubUserProps = {
+  login: string;
+  id: number;
+  avatar_url: string;
+  html_url: string;
+  name: string | null;
+  bio: string | null;
+  company: string | null;
+  blog: string | null;
+  location: string | null;
+  twitter_username: string | null;
+  public_repos: number;
+  followers: number;
+  following: number;
+  created_at: string;
+  updated_at: string;
+};

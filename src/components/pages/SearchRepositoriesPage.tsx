@@ -2,6 +2,8 @@
 
 import { SearchBox } from "@/components/molecules/SearchBox";
 import { RepoList } from "@/components/organisms/RepoList";
+import { Search } from "lucide-react";
+import { UserCard } from "../molecules/UserCard";
 
 interface SearchRepositoriesPageProps {
   username?: string;
@@ -21,7 +23,26 @@ export function SearchRepositoriesPage({
         <SearchBox initialValue={username} />
       </div>
 
-      {username && <RepoList username={username} />}
+      {!username && (
+        <div className="rounded-lg border border-dashed p-8 text-center text-muted-foreground">
+          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border">
+            <Search className="h-5 w-5" aria-hidden />
+          </div>
+          <p>
+            Digite um username do GitHub acima e clique em Buscar para
+            começar.
+          </p>
+        </div>
+      )}
+
+      {username && (
+        <div className="space-y-6 pt-2">
+          <UserCard username={username} />
+          <div className="pt-2">
+            <RepoList username={username} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
