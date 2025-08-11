@@ -6,10 +6,10 @@ import { Header } from '@/components/organisms/Header/Header'
 
 
 export const metadata: Metadata = {
-  title: "Buscar Repositórios | Test Frontend",
+  title: "Test Frontend",
   description: "Encontre repositórios do GitHub por nome de usuário.",
   openGraph: {
-    title: "Buscar Repositórios",
+    title: "Test Frontend",
     description: "Encontre repositórios do GitHub por nome de usuário.",
     siteName: "Test Frontend",
     locale: "pt_BR",

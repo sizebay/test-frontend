@@ -8,7 +8,7 @@ import { Facebook, Github, Instagram, LinkedinIcon } from 'lucide-react'
 const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/repositories', label: 'Repositórios' },
-    { href: '/contato', label: 'Contato' },
+    { href: '/contact', label: 'Contato' },
 ]
 
 export const Header: React.FC = () => {
