@@ -13,9 +13,7 @@ afterEach(() => {
 
 const createWrapper = () => {
     const queryClient = new QueryClient({
-        defaultOptions: {
-            queries: { retry: false },
-        },
+        defaultOptions: { queries: { retry: false } },
     })
     return ({ children }: { children: React.ReactNode }) => (
         <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
@@ -40,15 +38,24 @@ function TestComponent({ username }: { username: string }) {
 
 describe('useGithubRepos', () => {
     it('deve buscar e renderizar repositórios', async () => {
-        mockedAxios.get.mockResolvedValueOnce({
-            data: [
-                { id: 1, name: 'repo1', description: null, language: 'TS', owner: { login: 'user' } },
-                { id: 2, name: 'repo2', description: 'desc', language: 'JS', owner: { login: 'user' } },
-            ],
-            status: 200,
-            statusText: 'OK',
-            headers: {},
-            config: {},
+        mockedAxios.get.mockImplementation((url) => {
+            if (url.includes(`/users/user/repos`)) {
+                return Promise.resolve({
+                    data: [
+                        { id: 1, name: 'repo1', description: null, language: 'TS', owner: { login: 'user' } },
+                        { id: 2, name: 'repo2', description: 'desc', language: 'JS', owner: { login: 'user' } },
+                    ],
+                })
+            }
+            if (url.includes(`/user/starred`)) {
+                return Promise.resolve({
+                    data: [
+                        { id: 1, name: 'repo1', owner: { login: 'user' } },
+                        { id: 2, name: 'repo2', owner: { login: 'user' } },
+                    ],
+                })
+            }
+            return Promise.reject(new Error('URL não mockada: ' + url))
         })
 
         render(<TestComponent username="user" />, { wrapper: createWrapper() })

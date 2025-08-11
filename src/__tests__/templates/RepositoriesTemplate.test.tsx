@@ -49,9 +49,10 @@ describe('useGithubRepos', () => {
         })
 
         expect(result.current.data?.pages[0]).toEqual([
-            { id: 1, name: 'repo1', description: null, language: 'TS', owner: { login: 'user' } },
-            { id: 2, name: 'repo2', description: 'desc', language: 'JS', owner: { login: 'user' } },
+            { id: 1, name: 'repo1', description: null, language: 'TS', owner: { login: 'user' }, isStarred: true },
+            { id: 2, name: 'repo2', description: 'desc', language: 'JS', owner: { login: 'user' }, isStarred: true },
         ])
+
         expect(result.current.isError).toBe(false)
     })
 
