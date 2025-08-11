@@ -2,22 +2,20 @@ import Link from "next/link";
 
 export const Footer = () => {
   return (
-    <footer className="w-full text-gray-300">
+    <footer className="w-full">
       <div className="container mx-auto">
         <div className="max-w-7xl mx-auto px-4 py-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h2 className="text-xl font-bold text-white">
-                Sizebay
-              </h2>
-              <p className="mt-2 text-sm text-gray-400">
+              <h2 className="text-xl font-bold ">Sizebay</h2>
+              <p className="mt-2 text-sm">
                 Construindo soluções digitais de alto impacto para o
                 seu negócio.
               </p>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
+              <h3 className="text-sm font-semibold  uppercase tracking-wider">
                 Navegação
               </h3>
               <ul className="mt-4 space-y-2">
@@ -34,7 +32,7 @@ export const Footer = () => {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-white uppercase tracking-wider">
+              <h3 className="text-sm font-semibold  uppercase tracking-wider">
                 Contato
               </h3>
               <ul className="mt-4 space-y-2 text-sm">
