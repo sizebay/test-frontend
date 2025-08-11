@@ -1,5 +1,5 @@
-// TODO: Implement the function to fetch repositories from GitHub
-export async function fetchUserRepos(username : string, page = 1, perPage = 12): Promise<any[]> {
+import { Repo } from "@/types/github"
+export async function fetchUserRepos(username: string, page = 1, perPage = 12): Promise<Repo[]> {
   const search = new URLSearchParams({ username, page: String(page), per_page: String(perPage) })
 
   const res = await fetch(`https://api.github.com/users/${username}/repos?${search.toString()}`, {

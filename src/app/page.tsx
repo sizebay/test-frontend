@@ -1,5 +1,7 @@
 import ButtonAtom from "@/components/atoms/button-atom";
 import InputAtom from "@/components/atoms/input-atom";
+import SearchBox from "@/components/molecules/search-box";
+import RepoList from "@/components/organisms/repo-list";
 import { fetchUserRepos } from "@/services/github";
 
 export default async function Home() {
@@ -11,11 +13,7 @@ export default async function Home() {
   return (
     <main>
       <section className="flex flex-col items-center my-10">
-        <form className="flex flex-col items-center">
-          <h1>Ferramenta de pesquisa github</h1>
-          <InputAtom placeholder="Digite o nome do repositório" defaultValue={testUserName} />
-          <ButtonAtom className="mt-4">Pesquisar</ButtonAtom>
-        </form>
+        <RepoList />
       </section>
       <section className="flex flex-col items-center h-96 overflow-auto">
         <h2>Repositórios</h2>
