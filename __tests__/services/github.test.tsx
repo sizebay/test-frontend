@@ -86,7 +86,7 @@ describe('GitHub Service', () => {
       mockFetch.mockResolvedValueOnce({
         ok: false,
         json: async () => { throw new Error('JSON parse error') },
-      } as Response)
+      } as unknown as Response)
 
       await expect(fetchUserRepos('testuser')).rejects.toThrow('Erro ao buscar repositórios')
     })
@@ -171,7 +171,7 @@ describe('GitHub Service', () => {
       mockFetch.mockResolvedValueOnce({
         ok: false,
         json: async () => { throw new Error('JSON parse error') },
-      } as Response)
+      } as unknown as Response)
 
       await expect(fetchRepoDetails('testuser', 'test-repo')).rejects.toThrow('Erro ao buscar detalhes do repositório')
     })
@@ -203,7 +203,7 @@ describe('GitHub Service', () => {
 
       expect(mockFetch).toHaveBeenCalledTimes(2)
       
-      mockFetch.mock.calls.forEach(call => {
+      mockFetch.mock.calls.forEach((call: [input: string | URL | Request, init?: RequestInit | undefined]) => {
         const [, options] = call
         expect(options).toHaveProperty('headers')
         expect((options as any).headers).toMatchObject({
@@ -224,7 +224,7 @@ describe('GitHub Service', () => {
 
       expect(mockFetch).toHaveBeenCalledTimes(2)
       
-      mockFetch.mock.calls.forEach(call => {
+      mockFetch.mock.calls.forEach((call: [input: string | URL | Request, init?: RequestInit | undefined]) => {
         const [, options] = call
         expect((options as any).next).toEqual({ revalidate: 600 })
       })

@@ -3,10 +3,24 @@
 import { AlertCircle } from "lucide-react"
 import RepoCard from "../molecules/repo-card"
 import SearchBox from "../molecules/search-box"
+import PaginationControls from "../molecules/pagination-controls"
 import { useGitHubSearch } from "@/hooks/useGitHubSearch"
 
 export default function RepoList() {
-  const { username, setUsername, repos, isLoading, error } = useGitHubSearch()
+  const { 
+    username, 
+    setUsername, 
+    repos, 
+    isLoading, 
+    error,
+    currentPage,
+    hasNextPage,
+    hasPrevPage,
+    nextPage,
+    prevPage
+  } = useGitHubSearch()
+
+  const showPagination = !isLoading && !error && repos.length > 0 && (hasNextPage || hasPrevPage)
 
   return (
     <section className="w-full">
@@ -46,6 +60,17 @@ export default function RepoList() {
           />
         ))}
       </div>
+
+      {showPagination && (
+        <PaginationControls
+          currentPage={currentPage}
+          hasNextPage={hasNextPage}
+          hasPrevPage={hasPrevPage}
+          onNextPage={nextPage}
+          onPrevPage={prevPage}
+          isLoading={isLoading}
+        />
+      )}
     </section>
   )
 }
