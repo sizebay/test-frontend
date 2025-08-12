@@ -1,4 +1,4 @@
-import { Repository, RepositoryDetails, GitHubApiError } from '@/types'
+import { Repository, RepositoryDetails, GitHubUser, GitHubApiError } from '@/types'
 
 const GITHUB_API_BASE = 'https://api.github.com'
 
@@ -56,6 +56,10 @@ class GitHubApiService {
 
   async getRepositoryDetails(owner: string, repo: string, authToken?: string): Promise<RepositoryDetails> {
     return this.fetchFromGitHub<RepositoryDetails>(`/repos/${owner}/${repo}`, authToken)
+  }
+
+  async getUserDetails(username: string, authToken?: string): Promise<GitHubUser> {
+    return this.fetchFromGitHub<GitHubUser>(`/users/${username}`, authToken)
   }
 }
 

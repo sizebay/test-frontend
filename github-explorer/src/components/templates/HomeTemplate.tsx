@@ -1,14 +1,19 @@
 'use client'
 
-import { Repository } from '@/types'
+import { Repository, GitHubUser } from '@/types'
 import { Text } from '../atoms'
-import { SearchForm, AlertMessage } from '../molecules'
+import { SearchForm, AlertMessage, UserCard } from '../molecules'
 import { RepositoryGrid, Header } from '../organisms'
 
 interface HomeTemplateProps {
   // Search
   searchUsername: string
   onSearch: (username: string) => void
+  
+  // User
+  user: GitHubUser | null
+  userLoading: boolean
+  userError: string | null
   
   // Repositories
   repositories: Repository[]
@@ -24,6 +29,9 @@ interface HomeTemplateProps {
 export default function HomeTemplate({
   searchUsername,
   onSearch,
+  user,
+  userLoading,
+  userError,
   repositories,
   isLoading,
   error,
@@ -57,6 +65,22 @@ export default function HomeTemplate({
           initialValue={searchUsername}
           isLoading={isLoading}
         />
+
+        {/* User Card */}
+        {user && (
+          <div className="mb-8 flex justify-center">
+            <UserCard user={user} />
+          </div>
+        )}
+
+        {userError && (
+          <div className="mb-8">
+            <AlertMessage 
+              message={userError} 
+              type="error" 
+            />
+          </div>
+        )}
 
         {error && !shouldShowAuthHeader && (
           <div className="mb-8">

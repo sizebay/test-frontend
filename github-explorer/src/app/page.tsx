@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useGitHubRepositories } from '@/hooks/useGitHubRepositories'
+import { useUserDetails } from '@/hooks/useUserDetails'
 import { useGitHubAuth } from '@/hooks/useGitHubAuth'
 import { HomeTemplate } from '@/components/templates'
 
@@ -22,6 +23,7 @@ export default function Home() {
   }, [searchParams])
   
   const { repositories, isLoading, error } = useGitHubRepositories(searchUsername)
+  const { data: user, loading: userLoading, error: userError } = useUserDetails(searchUsername || null)
 
   const handleSearch = (searchValue: string) => {
     setUsername(searchValue)
@@ -38,6 +40,9 @@ export default function Home() {
     <HomeTemplate
       searchUsername={username}
       onSearch={handleSearch}
+      user={user || null}
+      userLoading={userLoading}
+      userError={userError?.message || null}
       repositories={repositories}
       isLoading={isLoading}
       error={error}
