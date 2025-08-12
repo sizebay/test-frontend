@@ -3,9 +3,12 @@ import { Button } from "@/components/ui/button";
 import { RepoCard } from "@/components/molecules/RepoCard";
 import { useUserRepos } from "@/hooks/useUserRepos";
 import { Skeleton } from "@/components/ui/skeleton";
+import { GitHubRepoProps } from "@/types/github";
+import { Search, AlertCircle, UserX } from "lucide-react";
 
 interface RepoListProps {
   username: string;
+  list: GitHubRepoProps[];
 }
 
 // Componente Skeleton para os cards de repositório
@@ -56,7 +59,22 @@ export const RepoList = ({ username }: RepoListProps) => {
     totalPages,
   } = useUserRepos(username, page, perPage);
 
-  if (!username) return null;
+  if (!username) {
+    return (
+      <div className="text-center py-12">
+        <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
+          <Search className="h-8 w-8 text-muted-foreground" />
+        </div>
+        <h3 className="text-lg font-semibold mb-2">
+          Digite um nome de usuário
+        </h3>
+        <p className="text-muted-foreground max-w-md mx-auto">
+          Para começar a explorar repositórios, digite o nome de um
+          usuário do GitHub no campo de busca acima.
+        </p>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -81,26 +99,76 @@ export const RepoList = ({ username }: RepoListProps) => {
   }
 
   if (isError) {
+    // Verifica se é erro 404 (usuário não encontrado)
+    const isUserNotFound =
+      error?.message?.includes("404") ||
+      error?.message?.toLowerCase().includes("not found") ||
+      error?.message?.toLowerCase().includes("não encontrado");
+
+    if (isUserNotFound) {
+      return (
+        <div className="text-center py-12">
+          <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
+            <UserX className="h-8 w-8 text-muted-foreground" />
+          </div>
+          <h3 className="text-lg font-semibold mb-2">
+            Usuário não encontrado
+          </h3>
+          <p className="text-muted-foreground max-w-md mx-auto mb-4">
+            O usuário <strong>&ldquo;{username}&rdquo;</strong> não
+            foi encontrado no GitHub. Verifique se o nome está correto
+            e tente novamente.
+          </p>
+          <div className="text-sm text-muted-foreground">
+            <p>Possíveis causas:</p>
+            <ul className="mt-2 space-y-1">
+              <li>• O nome de usuário está incorreto</li>
+              <li>• O usuário pode ter mudado de nome</li>
+              <li>• A conta pode ter sido desativada</li>
+            </ul>
+          </div>
+        </div>
+      );
+    }
+
+    // Outros tipos de erro
     return (
-      <div
-        role="alert"
-        className="rounded-lg border border-destructive/50 bg-destructive/5 p-4"
-      >
-        <p className="font-medium text-destructive">
-          Erro ao carregar repositórios.
+      <div className="text-center py-12">
+        <div className="mx-auto w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mb-4">
+          <AlertCircle className="h-8 w-8 text-destructive" />
+        </div>
+        <h3 className="text-lg font-semibold mb-2 text-destructive">
+          Erro ao carregar repositórios
+        </h3>
+        <p className="text-muted-foreground max-w-md mx-auto mb-4">
+          Não foi possível carregar os repositórios de{" "}
+          <strong>&ldquo;{username}&rdquo;</strong>. Tente novamente
+          em alguns instantes.
         </p>
-        <p className="text-sm text-muted-foreground mt-1">
-          {error?.message}
-        </p>
+        {error?.message && (
+          <div className="bg-muted/50 rounded-lg p-3 max-w-md mx-auto">
+            <p className="text-sm text-muted-foreground">
+              <strong>Detalhes do erro:</strong> {error.message}
+            </p>
+          </div>
+        )}
       </div>
     );
   }
 
   if (!data || data.length === 0) {
     return (
-      <div className="rounded-lg border p-6 text-center">
-        <p className="text-muted-foreground">
-          Nenhum repositório encontrado para &ldquo;{username}&rdquo;.
+      <div className="text-center py-12">
+        <div className="mx-auto w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
+          <Search className="h-8 w-8 text-muted-foreground" />
+        </div>
+        <h3 className="text-lg font-semibold mb-2">
+          Nenhum repositório encontrado
+        </h3>
+        <p className="text-muted-foreground max-w-md mx-auto">
+          O usuário <strong>&ldquo;{username}&rdquo;</strong> não
+          possui repositórios públicos ou todos os repositórios são
+          privados.
         </p>
       </div>
     );

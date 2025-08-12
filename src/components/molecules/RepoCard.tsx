@@ -6,9 +6,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, GitBranch, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Calendar, GitBranch, Star, Heart } from "lucide-react";
 import { formatDistanceToNow } from "@/utils/date";
 import { GitHubRepoProps } from "@/types/github";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import { ClientOnly } from "@/components/providers/ClientOnly";
 import Link from "next/link";
 
 export const RepoCard = ({ repo }: { repo: GitHubRepoProps }) => {
@@ -30,6 +33,9 @@ export const RepoCard = ({ repo }: { repo: GitHubRepoProps }) => {
             </CardDescription>
           </div>
           <div className="flex items-center space-x-2">
+            <ClientOnly>
+              <FavoriteButton repo={repo} />
+            </ClientOnly>
             <Badge variant="secondary" className="text-xs">
               {repo.language || "N/A"}
             </Badge>
@@ -57,5 +63,31 @@ export const RepoCard = ({ repo }: { repo: GitHubRepoProps }) => {
         </div>
       </CardContent>
     </Card>
+  );
+};
+
+const FavoriteButton = ({ repo }: { repo: GitHubRepoProps }) => {
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const isFavorited = isFavorite(repo.id);
+
+  const handleToggleFavorite = () => {
+    toggleFavorite(repo);
+  };
+
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={handleToggleFavorite}
+      className={`p-2 h-auto ${
+        isFavorited
+          ? "text-red-500 hover:text-red-600"
+          : "text-muted-foreground hover:text-foreground"
+      }`}
+    >
+      <Heart
+        className={`h-4 w-4 ${isFavorited ? "fill-current" : ""}`}
+      />
+    </Button>
   );
 };

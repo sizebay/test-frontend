@@ -99,20 +99,20 @@ export const RepositoryDetailsPage = ({ repoId, owner }: Props) => {
                     {data.full_name}
                   </span>
                 </div>
-                <a
-                  href={data.html_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group"
+                <Button
+                  asChild
+                  variant="outline"
+                  className="flex items-center gap-2 hover:bg-primary hover:text-primary-foreground transition-colors"
                 >
-                  <Button
-                    variant="outline"
-                    className="flex items-center gap-2 group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                  <a
+                    href={data.html_url}
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     <ExternalLink className="h-4 w-4" />
                     Ver no GitHub
-                  </Button>
-                </a>
+                  </a>
+                </Button>
               </CardTitle>
               {data.description && (
                 <CardDescription className="text-base text-muted-foreground mt-2">

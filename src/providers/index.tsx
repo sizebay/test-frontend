@@ -6,6 +6,7 @@ import { HydrationBoundaryWrapper } from "@/components/providers/HydrationBounda
 import { ThemeProvider } from "next-themes";
 import { ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { FavoritesProvider } from "@/contexts/FavoritesContext";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
@@ -15,24 +16,26 @@ export function Providers({ children }: { children: ReactNode }) {
       themes={["light", "dark"]}
     >
       <ReactQueryProvider>
-        <ErrorBoundary
-          fallbackRender={() => (
-            <div className="min-h-screen flex items-center justify-center">
-              <div className="text-center">
-                <h1 className="text-2xl font-bold mb-2">
-                  Algo deu errado
-                </h1>
-                <p className="text-muted-foreground">
-                  Tente recarregar a página.
-                </p>
+        <FavoritesProvider>
+          <ErrorBoundary
+            fallbackRender={() => (
+              <div className="min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                  <h1 className="text-2xl font-bold mb-2">
+                    Algo deu errado
+                  </h1>
+                  <p className="text-muted-foreground">
+                    Tente recarregar a página.
+                  </p>
+                </div>
               </div>
-            </div>
-          )}
-        >
-          <HydrationBoundaryWrapper>
-            {children}
-          </HydrationBoundaryWrapper>
-        </ErrorBoundary>
+            )}
+          >
+            <HydrationBoundaryWrapper>
+              {children}
+            </HydrationBoundaryWrapper>
+          </ErrorBoundary>
+        </FavoritesProvider>
       </ReactQueryProvider>
       <Toaster />
     </ThemeProvider>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ThemeToggle } from "@/components/atoms/ThemeToggle";
+import { FavoritesCounter } from "@/components/atoms/FavoritesCounter";
+import { Heart } from "lucide-react";
 
 export const Header = () => {
   return (
@@ -20,6 +22,14 @@ export const Header = () => {
                   className="hover:underline"
                 >
                   Repositórios
+                </Link>
+                <Link
+                  href="/favorites"
+                  className="hover:underline flex items-center gap-1"
+                >
+                  <Heart className="h-4 w-4" />
+                  Favoritos
+                  <FavoritesCounter />
                 </Link>
               </nav>
               <ThemeToggle />

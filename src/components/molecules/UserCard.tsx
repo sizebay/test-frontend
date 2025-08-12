@@ -9,7 +9,13 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUser } from "@/hooks/useUser";
 
-import { ExternalLink, FolderGit2, Users } from "lucide-react";
+import {
+  ExternalLink,
+  FolderGit2,
+  Users,
+  UserX,
+  AlertCircle,
+} from "lucide-react";
 
 interface UserCardProps {
   username: string;
@@ -46,15 +52,51 @@ export const UserCard = ({ username }: UserCardProps) => {
   }
 
   if (isError) {
+    // Verifica se é erro 404 (usuário não encontrado)
+    const isUserNotFound =
+      error?.message?.includes("404") ||
+      error?.message?.toLowerCase().includes("not found") ||
+      error?.message?.toLowerCase().includes("não encontrado");
+
+    if (isUserNotFound) {
+      return (
+        <Card className="overflow-hidden">
+          <CardHeader className="flex flex-row items-center gap-4">
+            <div className="h-16 w-16 bg-muted rounded-full flex items-center justify-center">
+              <UserX className="h-8 w-8 text-muted-foreground" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h2 className="text-xl font-semibold leading-tight truncate text-muted-foreground">
+                Usuário não encontrado
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                O usuário <strong>&ldquo;{username}&rdquo;</strong>{" "}
+                não foi encontrado no GitHub.
+              </p>
+            </div>
+          </CardHeader>
+        </Card>
+      );
+    }
+
+    // Outros tipos de erro
     return (
-      <div role="alert" className="rounded-lg border p-4">
-        <p className="font-medium">
-          Não foi possível carregar o usuário.
-        </p>
-        <p className="text-sm text-muted-foreground mt-1">
-          {error?.message}
-        </p>
-      </div>
+      <Card className="overflow-hidden">
+        <CardHeader className="flex flex-row items-center gap-4">
+          <div className="h-16 w-16 bg-destructive/10 rounded-full flex items-center justify-center">
+            <AlertCircle className="h-8 w-8 text-destructive" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <h2 className="text-xl font-semibold leading-tight truncate text-destructive">
+              Erro ao carregar usuário
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Não foi possível carregar as informações do usuário.
+              Tente novamente em alguns instantes.
+            </p>
+          </div>
+        </CardHeader>
+      </Card>
     );
   }
 
@@ -82,7 +124,7 @@ export const UserCard = ({ username }: UserCardProps) => {
             <a
               href={data.html_url}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noreferrer"
               className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:underline"
               aria-label={`Abrir perfil GitHub de ${data.login}`}
             >

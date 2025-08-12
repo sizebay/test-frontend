@@ -39,7 +39,7 @@ export function SearchRepositoriesPage({
         <div className="space-y-6 pt-2">
           <UserCard username={username} />
           <div className="pt-2">
-            <RepoList username={username} />
+            <RepoList username={username} list={[]} />
           </div>
         </div>
       )}

@@ -43,12 +43,9 @@ export default function Home() {
           interface rápida e elegante.
         </p>
         <div className="mt-8 flex items-center justify-center ">
-          <Link
-            className="cursor-pointer"
-            href="/search-repositories"
-          >
-            <Button size="lg">Começar agora</Button>
-          </Link>
+          <Button asChild size="lg">
+            <Link href="/search-repositories">Começar agora</Link>
+          </Button>
         </div>
       </section>
     </div>
