@@ -1,0 +1,79 @@
+'use client'
+
+import { Repository } from '@/types'
+import { Text } from '../atoms'
+import { SearchForm, AlertMessage } from '../molecules'
+import { RepositoryGrid, Header } from '../organisms'
+
+interface HomeTemplateProps {
+  // Search
+  searchUsername: string
+  onSearch: (username: string) => void
+  
+  // Repositories
+  repositories: Repository[]
+  isLoading: boolean
+  error: string | null
+  
+  // Auth
+  isAuthenticated: boolean
+  showAuthError?: boolean
+  authErrorMessage?: string
+}
+
+export default function HomeTemplate({
+  searchUsername,
+  onSearch,
+  repositories,
+  isLoading,
+  error,
+  isAuthenticated,
+  showAuthError = false,
+  authErrorMessage
+}: HomeTemplateProps) {
+  const shouldShowAuthHeader = showAuthError && !isAuthenticated && authErrorMessage
+  
+  return (
+    <div className="min-h-screen bg-gray-900 text-white">
+      {shouldShowAuthHeader && (
+        <Header 
+          showAuthButton={true} 
+          authMessage={authErrorMessage} 
+        />
+      )}
+      
+      <main className="container mx-auto px-6 py-8">
+        <div className="flex flex-col text-center mb-12">
+          <Text variant="heading" size="xl" className="mb-4">
+            Explore Repositórios GitHub
+          </Text>
+          <Text color="secondary" size="lg">
+            Descubra projetos incríveis e suas estatísticas
+          </Text>
+        </div>
+
+        <SearchForm 
+          onSearch={onSearch}
+          initialValue={searchUsername}
+          isLoading={isLoading}
+        />
+
+        {error && !shouldShowAuthHeader && (
+          <div className="mb-8">
+            <AlertMessage 
+              message={error} 
+              type="error" 
+            />
+          </div>
+        )}
+
+        <RepositoryGrid 
+          repositories={repositories}
+          isLoading={isLoading}
+          error={shouldShowAuthHeader ? null : error}
+          emptyMessage={searchUsername ? `Nenhum repositório encontrado para "${searchUsername}"` : 'Digite um nome de usuário para começar'}
+        />
+      </main>
+    </div>
+  )
+}
