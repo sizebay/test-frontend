@@ -12,18 +12,31 @@ export type RepoCardProps = {
 
 export default function RepoCard({ name, fullName, description, language, owner }: RepoCardProps) {
   return (
-    <Card className="hover:shadow-sm transition-shadow">
+    <Card 
+      className="hover:shadow-sm transition-shadow focus-within-ring"
+      role="listitem"
+    >
       <CardHeader>
         <CardTitle className="text-base flex flex-wrap items-center gap-2">
-          <Link href={`/${owner}/${name}`} className="underline underline-offset-4">
+          <Link 
+            href={`/${owner}/${name}`} 
+            className="underline underline-offset-4 focus-ring rounded-sm"
+            aria-label={`Ver detalhes do repositório ${fullName}`}
+          >
             {fullName}
           </Link>
-          {language ? <BadgeAtom variant="secondary">{language}</BadgeAtom> : null}
+          {language ? (
+            <BadgeAtom variant="secondary" aria-label={`Linguagem de programação: ${language}`}>
+              {language}
+            </BadgeAtom>
+          ) : null}
         </CardTitle>
       </CardHeader>
       {description ? (
         <CardContent>
-          <p className="text-sm text-muted-foreground line-clamp-3">{description}</p>
+          <p className="text-sm text-muted-foreground line-clamp-3" title={description}>
+            {description}
+          </p>
         </CardContent>
       ) : null}
     </Card>

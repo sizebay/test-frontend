@@ -39,6 +39,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-focus: var(--focus);
+  --color-focus-bg: var(--focus-bg);
 }
 
 :root {
@@ -74,6 +76,8 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --focus: oklch(0.647 0.129 243.83); /* #60A5FA - blue-400 mais suave */
+  --focus-bg: oklch(0.957 0.031 243.83); /* #DBEAFE - blue-100 */
 }
 
 .dark {
@@ -108,6 +112,8 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --focus: oklch(0.769 0.118 243.83); /* #93C5FD - blue-300 para dark mode */
+  --focus-bg: oklch(0.279 0.063 243.83); /* #1E40AF - blue-800 para dark mode */
 }
 
 @layer base {
@@ -116,5 +122,44 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .skeleton-loading {
+    @apply animate-pulse bg-gradient-to-r from-muted via-muted/50 to-muted;
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Custom focus styles */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-2;
+  }
+
+  .focus-within-ring {
+    @apply focus-within:ring-2 focus-within:ring-focus focus-within:ring-offset-2;
   }
 }

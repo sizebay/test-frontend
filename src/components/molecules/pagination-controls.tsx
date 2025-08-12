@@ -2,6 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import ButtonAtom from "../atoms/button-atom"
+import { useKeyboardNavigation } from "@/hooks/useKeyboardNavigation"
 
 type PaginationControlsProps = {
   currentPage: number
@@ -20,20 +21,34 @@ export default function PaginationControls({
   onPrevPage,
   isLoading = false
 }: PaginationControlsProps) {
+  useKeyboardNavigation({
+    onArrowLeft: hasPrevPage && !isLoading ? onPrevPage : undefined,
+    onArrowRight: hasNextPage && !isLoading ? onNextPage : undefined,
+    enabled: true
+  })
+
   return (
-    <div className="flex items-center justify-center gap-4 py-6">
+    <div className="space-y-2">
+      <nav aria-label="Navegação de páginas" className="flex items-center justify-center gap-2 sm:gap-4 py-6 px-4">
       <ButtonAtom
         variant="outline"
         size="sm"
         onClick={onPrevPage}
         disabled={!hasPrevPage || isLoading}
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 text-xs sm:text-sm px-2 sm:px-3"
+        aria-label={`Ir para página anterior (página ${currentPage - 1})`}
+        aria-disabled={!hasPrevPage || isLoading}
       >
-        <ChevronLeft className="h-4 w-4" />
-        Anterior
+        <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden="true" />
+        <span className="hidden sm:inline">Anterior</span>
+        <span className="sm:hidden">Ant</span>
       </ButtonAtom>
       
-      <span className="text-sm text-muted-foreground min-w-[80px] text-center">
+      <span 
+        className="text-xs sm:text-sm text-muted-foreground min-w-[60px] sm:min-w-[80px] text-center"
+        aria-current="page"
+        aria-label={`Página atual: ${currentPage}`}
+      >
         Página {currentPage}
       </span>
       
@@ -42,11 +57,18 @@ export default function PaginationControls({
         size="sm"
         onClick={onNextPage}
         disabled={!hasNextPage || isLoading}
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 text-xs sm:text-sm px-2 sm:px-3"
+        aria-label={`Ir para próxima página (página ${currentPage + 1})`}
+        aria-disabled={!hasNextPage || isLoading}
       >
-        Próximo
-        <ChevronRight className="h-4 w-4" />
+        <span className="hidden sm:inline">Próximo</span>
+        <span className="sm:hidden">Próx</span>
+        <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" aria-hidden="true" />
       </ButtonAtom>
+      </nav>
+      <p className="text-xs text-muted-foreground text-center">
+        Use as setas ← → do teclado para navegar
+      </p>
     </div>
   )
 }

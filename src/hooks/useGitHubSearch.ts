@@ -5,7 +5,7 @@ import { useQueryState } from 'nuqs'
 import { fetchUserRepos } from '@/services/github'
 import { useDebounce } from './useDebounce'
 import type { Repo } from '@/types/github'
-import { useEffect } from 'react'
+import { useEffect, useCallback, useMemo } from 'react'
 
 export function useGitHubSearch(defaultUsername = "jorgemadson") {
   const [username, setUsername] = useQueryState("username", { 
@@ -36,20 +36,21 @@ export function useGitHubSearch(defaultUsername = "jorgemadson") {
     }
   )
 
-  const repos: Repo[] = data || []
-  const hasNextPage = repos.length === 12 // If we got 12 repos, there might be more
+  const repos: Repo[] = useMemo(() => data || [], [data])
+  const hasNextPage = useMemo(() => repos.length === 12, [repos.length])
+  const hasPrevPage = useMemo(() => currentPage > 1, [currentPage])
   
-  const nextPage = () => {
+  const nextPage = useCallback(() => {
     if (hasNextPage) {
       setCurrentPage(currentPage + 1)
     }
-  }
+  }, [hasNextPage, currentPage, setCurrentPage])
   
-  const prevPage = () => {
+  const prevPage = useCallback(() => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1)
     }
-  }
+  }, [currentPage, setCurrentPage])
 
   return {
     username: username || '',
@@ -60,7 +61,7 @@ export function useGitHubSearch(defaultUsername = "jorgemadson") {
     error,
     currentPage,
     hasNextPage,
-    hasPrevPage: currentPage > 1,
+    hasPrevPage,
     nextPage,
     prevPage,
     setCurrentPage,

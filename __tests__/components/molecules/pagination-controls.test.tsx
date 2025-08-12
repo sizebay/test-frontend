@@ -23,7 +23,7 @@ describe('PaginationControls', () => {
   it('calls onPrevPage when previous button is clicked', () => {
     render(<PaginationControls {...defaultProps} />)
     
-    const prevButton = screen.getByRole('button', { name: /anterior/i })
+    const prevButton = screen.getByRole('button', { name: /ir para página anterior/i })
     fireEvent.click(prevButton)
     
     expect(defaultProps.onPrevPage).toHaveBeenCalledTimes(1)
@@ -32,7 +32,7 @@ describe('PaginationControls', () => {
   it('calls onNextPage when next button is clicked', () => {
     render(<PaginationControls {...defaultProps} />)
     
-    const nextButton = screen.getByRole('button', { name: /próximo/i })
+    const nextButton = screen.getByRole('button', { name: /ir para próxima página/i })
     fireEvent.click(nextButton)
     
     expect(defaultProps.onNextPage).toHaveBeenCalledTimes(1)
@@ -41,22 +41,22 @@ describe('PaginationControls', () => {
   it('disables previous button when hasPrevPage is false', () => {
     render(<PaginationControls {...defaultProps} hasPrevPage={false} />)
     
-    const prevButton = screen.getByRole('button', { name: /anterior/i })
+    const prevButton = screen.getByRole('button', { name: /ir para página anterior/i })
     expect(prevButton).toBeDisabled()
   })
 
   it('disables next button when hasNextPage is false', () => {
     render(<PaginationControls {...defaultProps} hasNextPage={false} />)
     
-    const nextButton = screen.getByRole('button', { name: /próximo/i })
+    const nextButton = screen.getByRole('button', { name: /ir para próxima página/i })
     expect(nextButton).toBeDisabled()
   })
 
   it('disables both buttons when loading', () => {
     render(<PaginationControls {...defaultProps} isLoading={true} />)
     
-    const prevButton = screen.getByRole('button', { name: /anterior/i })
-    const nextButton = screen.getByRole('button', { name: /próximo/i })
+    const prevButton = screen.getByRole('button', { name: /ir para página anterior/i })
+    const nextButton = screen.getByRole('button', { name: /ir para próxima página/i })
     
     expect(prevButton).toBeDisabled()
     expect(nextButton).toBeDisabled()
@@ -67,7 +67,7 @@ describe('PaginationControls', () => {
     
     expect(screen.getByText('Página 1')).toBeInTheDocument()
     
-    const prevButton = screen.getByRole('button', { name: /anterior/i })
+    const prevButton = screen.getByRole('button', { name: /ir para página anterior/i })
     expect(prevButton).toBeDisabled()
   })
 
@@ -76,7 +76,7 @@ describe('PaginationControls', () => {
     
     expect(screen.getByText('Página 5')).toBeInTheDocument()
     
-    const nextButton = screen.getByRole('button', { name: /próximo/i })
+    const nextButton = screen.getByRole('button', { name: /ir para próxima página/i })
     expect(nextButton).toBeDisabled()
   })
 })
