@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState, useEffect } from 'react'
 import { GitHubUser } from '@/types'
 import { Avatar } from '@/components/atoms'
 import { Button } from '@/components/atoms'
@@ -9,7 +11,17 @@ interface UserCardProps {
 }
 
 export function UserCard({ user, className = '' }: UserCardProps) {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const formatDate = (dateString: string) => {
+    if (!isClient) {
+      // Fallback simples para SSR
+      return new Date(dateString).getFullYear().toString()
+    }
     return new Date(dateString).toLocaleDateString('pt-BR')
   }
 
