@@ -15,7 +15,7 @@ export default function RepoDetails({ data }: RepoDetailsProps) {
   return (
     <div className="max-w-3xl mx-auto">
       <BackLink />
-      
+
       <Card>
         <CardHeader>
           <CardTitle className="flex flex-wrap items-center gap-2">
@@ -30,13 +30,13 @@ export default function RepoDetails({ data }: RepoDetailsProps) {
             </p>
           ) : null}
 
-          <RepoStats 
+          <RepoStats
             stars={data.stargazers_count}
             forks={data.forks_count}
             openIssues={data.open_issues_count}
           />
 
-          <RepoDates 
+          <RepoDates
             createdAt={data.created_at}
             updatedAt={data.updated_at}
           />
