@@ -2,16 +2,13 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from '@jest/globals'
 import BackLink from '@/components/molecules/back-link'
 
-// Mock do componente Next.js Link
-jest.mock('next/link', () => {
-  return function MockedLink({ children, href, ...props }: any) {
-    return (
-      <a href={href} {...props}>
-        {children}
-      </a>
-    )
-  }
-})
+// Mock do Next.js useRouter
+const mockBack = jest.fn()
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    back: mockBack,
+  }),
+}))
 
 describe('BackLink', () => {
   it('should render the back link with correct text', () => {
@@ -20,26 +17,27 @@ describe('BackLink', () => {
     expect(screen.getByText('Voltar')).toBeInTheDocument()
   })
 
-  it('should have correct href attribute pointing to home', () => {
+  it('should render as a button element', () => {
     render(<BackLink />)
     
-    const link = screen.getByLabelText('Voltar para a busca')
-    expect(link).toHaveAttribute('href', '/')
+    const button = screen.getByLabelText('Voltar para a busca')
+    expect(button.tagName.toLowerCase()).toBe('button')
   })
 
   it('should have proper accessibility attributes', () => {
     render(<BackLink />)
     
-    const link = screen.getByLabelText('Voltar para a busca')
-    expect(link).toHaveAttribute('aria-label', 'Voltar para a busca')
+    const button = screen.getByLabelText('Voltar para a busca')
+    expect(button).toHaveAttribute('aria-label', 'Voltar para a busca')
   })
 
   it('should have correct CSS classes for styling', () => {
     render(<BackLink />)
     
-    const link = screen.getByLabelText('Voltar para a busca')
-    expect(link).toHaveClass(
+    const button = screen.getByLabelText('Voltar para a busca')
+    expect(button).toHaveClass(
       'inline-flex',
+      'cursor-pointer',
       'items-center', 
       'gap-2',
       'text-sm',
@@ -70,25 +68,25 @@ describe('BackLink', () => {
     expect(svgIcon).toHaveClass('h-4', 'w-4')
   })
 
-  it('should render as a clickable link element', () => {
+  it('should render as a clickable button element', () => {
     render(<BackLink />)
     
-    const link = screen.getByRole('link')
-    expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute('href', '/')
+    const button = screen.getByRole('button')
+    expect(button).toBeInTheDocument()
+    expect(button).toHaveAttribute('aria-label', 'Voltar para a busca')
   })
 
   it('should have proper text content structure', () => {
     render(<BackLink />)
     
-    const link = screen.getByLabelText('Voltar para a busca')
-    expect(link.textContent?.trim()).toBe('Voltar')
+    const button = screen.getByLabelText('Voltar para a busca')
+    expect(button.textContent?.trim()).toBe('Voltar')
   })
 
   it('should be accessible via keyboard navigation', () => {
     render(<BackLink />)
     
-    const link = screen.getByLabelText('Voltar para a busca')
-    expect(link.tagName.toLowerCase()).toBe('a')
+    const button = screen.getByLabelText('Voltar para a busca')
+    expect(button.tagName.toLowerCase()).toBe('button')
   })
 })
