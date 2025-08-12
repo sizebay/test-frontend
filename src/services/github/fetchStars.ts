@@ -11,7 +11,7 @@ export async function starRepository(owner: string, repo: string): Promise<boole
         console.log("Starring repository:", owner, repo);
         await axios.put(
             `https://api.github.com/user/starred/${owner}/${repo}`,
-            null, // body vazio
+            null,
             {
                 headers: {
                     Accept: "application/vnd.github+json",

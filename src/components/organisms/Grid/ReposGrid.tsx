@@ -12,7 +12,7 @@ export interface Repo {
     owner: {
         login: string
     }
-    isStarred?: boolean // novo
+    isStarred?: boolean
 }
 
 interface ReposGridProps {

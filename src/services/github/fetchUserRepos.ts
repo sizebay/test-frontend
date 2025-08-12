@@ -34,15 +34,12 @@ export async function fetchUserRepos(
     let repos: Repo[] = reposRes.data
     const starredRepos: Repo[] = starredRes.data
 
-    // Cria um Set para busca rápida
     const starredSet = new Set(
         starredRepos.map((repo) => `${repo.owner.login}/${repo.name}`)
     )
 
-    console.log('starredSet', starredSet);
 
     repos = repos.map((repo) => {
-        console.log('repo--- map', starredSet.has(`${repo.owner.login}/${repo.name}`) || false)
         return {
             ...repo,
             isStarred: starredSet.has(`${repo.owner.login}/${repo.name}`) || false,
