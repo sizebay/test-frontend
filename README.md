@@ -1,5 +1,7 @@
 # Teste Prático - Desenvolvedor Frontend React/Next.js
 
+## Gitview - consulta de usuários e repositórios Github
+
 ## 🎯 Objetivo
 
 Este teste prático tem como objetivo avaliar suas habilidades técnicas em desenvolvimento frontend, especificamente:
@@ -13,6 +15,7 @@ Este teste prático tem como objetivo avaliar suas habilidades técnicas em dese
 ## 📋 Especificações do Projeto
 
 ### Tecnologias Obrigatórias
+
 - **Framework**: Next.js (versão 13+ recomendada)
 - **Linguagem**: TypeScript
 - **API**: GitHub Public API (`https://api.github.com`)
@@ -22,6 +25,7 @@ Este teste prático tem como objetivo avaliar suas habilidades técnicas em dese
 ### Funcionalidades Requeridas
 
 #### 1. Página de Listagem de Repositórios
+
 - **Endpoint**: `https://api.github.com/users/{username}/repos`
 - **Funcionalidades**:
   - Input para inserir username do GitHub
@@ -31,6 +35,7 @@ Este teste prático tem como objetivo avaliar suas habilidades técnicas em dese
   - Estados de loading, erro e dados vazios
 
 #### 2. Página de Detalhes do Repositório
+
 - **Endpoint**: `https://api.github.com/repos/{owner}/{repo}`
 - **Informações obrigatórias**:
   - Nome do repositório
@@ -44,10 +49,10 @@ Este teste prático tem como objetivo avaliar suas habilidades técnicas em dese
 
 ## 🏗️ Estrutura do Projeto (Design Atômico)
 
-Organize seu projeto seguindo rigorosamente a metodologia de Design Atômico:
-
 ```
 src/
+├── app/
+│   └── repository/     # Página de detalhes do repositório selecionado
 ├── components/
 │   ├── atoms/           # Elementos básicos (Button, Input, Text, Icon)
 │   ├── molecules/       # Combinações de átomos (SearchBox, RepoCard)
@@ -64,144 +69,123 @@ src/
 ## ⚡ Requisitos Técnicos
 
 ### 1. Design Atômico
-- [ ] Separação clara entre átomos, moléculas, organismos, templates e páginas
-- [ ] Componentes reutilizáveis e bem documentados
-- [ ] Props tipadas com TypeScript
-- [ ] Storybook é um diferencial (opcional)
+
+- [x] Separação clara entre átomos, moléculas, organismos, templates e páginas
+- [x] Componentes reutilizáveis e bem documentados
+- [x] Props tipadas com TypeScript
+- [x] Storybook é um diferencial (opcional)
 
 ### 2. Boas Práticas React/Next.js
-- [ ] Uso de Server Components quando apropriado
-- [ ] Implementação de Error Boundaries
-- [ ] Otimizações de performance (useMemo, useCallback quando necessário)
-- [ ] SEO básico (meta tags, títulos dinâmicos)
-- [ ] Responsividade mobile-first
+
+- [x] Uso de Server Components quando apropriado
+- [x] Implementação de Error Boundaries
+- [x] Otimizações de performance (useMemo, useCallback quando necessário)
+- [x] SEO básico (meta tags, títulos dinâmicos)
+- [x] Responsividade mobile-first
 
 ### 3. Hooks do React
-- [ ] **useState**: Gerenciamento de estado local
-- [ ] **useEffect**: Efeitos colaterais e lifecycle
-- [ ] **useContext**: Compartilhamento de estado global (se necessário)
-- [ ] **Custom Hooks**: Criação de pelo menos 1 hook personalizado
-- [ ] **useMemo/useCallback**: Otimizações quando apropriado
+
+- [x] **useState**: Gerenciamento de estado local
+- [x] **useEffect**: Efeitos colaterais e lifecycle
+- [x] **useContext**: Compartilhamento de estado global (se necessário)
+- [x] **Custom Hooks**: Criação de pelo menos 1 hook personalizado
+- [x] **useMemo/useCallback**: Otimizações quando apropriado
 
 ### 4. Implementação de Cache
+
 Escolha uma das opções e implemente corretamente:
 
-#### Opção A: SWR
+#### React Query (TanStack Query)
+
 ```typescript
-import useSWR from 'swr'
+import { useQuery } from "@tanstack/react-query";
 
-const { data, error, isLoading } = useSWR(
-  `/api/users/${username}/repos`,
-  fetcher,
-  {
-    revalidateOnFocus: false,
-    dedupingInterval: 300000, // 5 minutos
-  }
-)
-```
+const {
+  data: user,
+  error: userError,
+  isFetching: userLoading,
+} = useQuery({
+  queryKey: ["user", username],
+  queryFn: () => getGithubUser(username),
+  enabled: false,
+});
 
-#### Opção B: React Query (TanStack Query)
-```typescript
-import { useQuery } from '@tanstack/react-query'
-
-const { data, isLoading, error } = useQuery({
-  queryKey: ['repos', username],
-  queryFn: () => fetchUserRepos(username),
-  staleTime: 300000, // 5 minutos
-})
-```
-
-#### Opção C: Next.js Fetch Cache
-```typescript
-const repos = await fetch(`https://api.github.com/users/${username}/repos`, {
-  next: { revalidate: 300 } // 5 minutos
-})
+const {
+  data: repositories,
+  error: repositoriesError,
+  isFetching: reposLoading,
+} = useQuery({
+  queryKey: ["repos", username],
+  queryFn: () => getGithubRepositories(username),
+  enabled: !!user,
+});
 ```
 
 ### 5. Testes Unitários
-- [ ] **Mínimo obrigatório**: 
+
+- [x] **Mínimo obrigatório**:
   - 2 componentes atômicos testados
   - 1 funcionalidade principal (busca de repositórios)
   - 1 custom hook testado
-- [ ] **Cobertura**: Testes de renderização, interação e estados
-- [ ] **Mocks**: APIs mockadas adequadamente
-- [ ] **Casos de teste**: Happy path, loading, error states
+- [x] **Cobertura**: Testes de renderização, interação e estados
+- [x] **Mocks**: APIs mockadas adequadamente
+- [x] **Casos de teste**: Happy path, loading, error states
 
-## 🚀 Instruções de Entrega
-
-### 1. Configuração do Repositório
-1. Faça um fork deste repositório
-2. Clone o fork para sua máquina local
-3. Crie uma branch com seu nome: `feature/nome-sobrenome`
-4. Desenvolva o projeto na sua branch
-
-### 2. Desenvolvimento
-1. Inicie o projeto Next.js com TypeScript
-2. Configure as dependências necessárias
-3. Implemente as funcionalidades seguindo os requisitos
-4. Escreva os testes unitários
-5. Documente o código quando necessário
-
-### 3. Commits
-**⚠️ IMPORTANTE**: Seus commits serão avaliados! Siga as boas práticas:
-
-- Use **Conventional Commits**: `feat:`, `fix:`, `test:`, `docs:`, etc.
-- Commits atômicos e descritivos
-- Mensagens em português ou inglês (seja consistente)
-- Exemplos:
-  ```
-  feat: add search component with atomic design structure
-  test: add unit tests for Button atom component
-  feat: implement SWR cache for GitHub API calls
-  fix: handle error states in repository details page
-  docs: update README with setup instructions
-  ```
-
-### 4. Pull Request
-Quando finalizar o desenvolvimento:
-
-1. Push da sua branch para o fork
-2. Abra um Pull Request para a branch `main` do repositório original
-3. **Título do PR**: `[TESTE] Nome Completo - Desenvolvedor Frontend`
-
-#### Template do Pull Request:
-```markdown
+````markdown
 ## 📝 Descrição
-Breve descrição do que foi implementado.
+
+Foi implmentado todas as funcionalidades pedidas. O design do projeto segue em um tom moderno e dark com a opção de tema light.
+
+Como funciona: No input inicial o usuário insere o username do perfil github e, se encontrado, será mostrado dois card, um de usuário e outro com a listagem dos repositórios.
+
+Há cobertura para caso o usuário não tenha sido encontrado, caso não tenha repositórios e caso esteja com acesso negado pela api do github.
 
 ## ✅ Checklist de Requisitos
-- [ ] Design Atômico implementado
-- [ ] Hooks do React utilizados adequadamente
-- [ ] Cache implementado (especificar qual: SWR/React Query/Next.js)
-- [ ] Testes unitários incluídos
-- [ ] TypeScript configurado
-- [ ] Responsividade implementada
+
+- [x] Design Atômico implementado
+- [x] Hooks do React utilizados adequadamente
+- [x] Cache implementado (especificar qual: SWR/React Query/Next.js)
+- [x] Testes unitários incluídos
+- [x] TypeScript configurado
+- [x] Responsividade implementada
 
 ## 🧪 Testes
-- Total de testes: X
-- Componentes testados: [listar]
-- Hooks testados: [listar]
-- Cobertura estimada: X%
+
+- Total de testes: 9
+- Componentes testados: [button, input]
+- Hooks testados: [userSearchFilter]
+- Cobertura estimada: 100%
 
 ## 🚀 Como executar
+
 ```bash
 # Comandos para instalar e executar
 npm install
 npm run dev
 npm run test
 ```
+````
 
 ## 📱 Screenshots
-[Adicione capturas de tela da aplicação funcionando]
+
+![Logo do projeto](./public/images/home.png)
+![Logo do projeto](./public/images/userfound.png)
+![Logo do projeto](./public/images/repo.png)
 
 ## 🔧 Decisões Técnicas
+
 Explique brevemente suas principais decisões arquiteturais:
-- Por que escolheu determinada biblioteca de cache
-- Como organizou os componentes atômicos
-- Desafios encontrados e soluções
+
+- **Por que escolheu determinada biblioteca de cache**: Já utilizo as bibliotecas e extensões da Tanstack em muitos projetos com NextJs, então possuindo familiridade resolvi adota-la. O funcionado o gerenciamento de dados em cache e as atualizações sem alteração na arvore inteira ou ate mesmo em todo os dados de um objeto/array são um fator crucial.
+
+- **Como organizou os componentes atômicos**: Eu utilizei a biblioteca ShadcnUI para ter os atoms, a base de componentes, com algumas adaptações particulares do meu projeto, como as estilizações e comportamento do input. Criei as molecules com a junção de atoms e/ou funcionalidades, usando o conceito de reusabilidade. Os organisms são os componentes mais completos e únicos que muitas vezes são client-side para não compromenter o carregamento server-side da página principal.
+
+- **Desafios encontrados e soluções**: Encontrar uma forma de fazer que tenha uma chamada server-side nesse desafio, a única chamada server-side que foi implementada com utilidade foi a da página de detalhes do repositório. A estruturação em "componentes atômicos" também foi algo novo, até então não utilizei esse tipo de design patterns.
 
 ## ⏱️ Tempo Investido
-Aproximadamente X horas
+
+Aproximadamente 10 horas
+
 ```
 
 ## 📏 Critérios de Avaliação
@@ -254,3 +238,4 @@ Aproximadamente X horas
 **Boa sorte! 🚀**
 
 Estamos ansiosos para ver sua solução e conhecer seu estilo de desenvolvimento!
+```
