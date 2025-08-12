@@ -1,28 +1,17 @@
 "use client"
-import useSWR from 'swr';
 
-import { useCallback, useMemo, useState } from "react"
 import { AlertCircle } from "lucide-react"
 import RepoCard from "../molecules/repo-card"
 import SearchBox from "../molecules/search-box"
-import { fetchUserRepos } from "@/services/github"
+import { useGitHubSearch } from "@/hooks/useGitHubSearch"
 
 export default function RepoList() {
-  const [username, setUsername] = useState<string>("jorgemadson")
-  const [isError, setError] = useState(false)
-
-  const {data, isLoading, error} = useSWR(`repos/${username}`, () => fetchUserRepos(username))
-
-  const repos = useMemo(() => data || [], [data])
-
-  const onSearch = useCallback((u: string) => {
-    setUsername(u || "jorgemadson")
-  }, [])
+  const { username, setUsername, repos, isLoading, error } = useGitHubSearch()
 
   return (
     <section className="w-full">
       <div className="mb-6">
-        <SearchBox onSearch={onSearch} isLoading={isLoading} defaultUsername={username} />
+        <SearchBox username={username} setUsername={setUsername} isLoading={isLoading} />
       </div>
 
       {isLoading ? (
@@ -33,7 +22,7 @@ export default function RepoList() {
         </div>
       ) : null}
 
-      {isError ? (
+      {error ? (
         <div className="flex items-center gap-2 p-4 rounded-md border text-sm">
           <AlertCircle className="h-4 w-4 text-destructive" />
           <span>{(error as Error)?.message || "Erro ao carregar repositórios"}</span>
@@ -41,7 +30,7 @@ export default function RepoList() {
       ) : null}
 
       {/* Empty state */}
-      {!isLoading && !isError && repos.length === 0 ? (
+      {!isLoading && !error && repos.length === 0 ? (
         <p className="text-sm text-muted-foreground">Nenhum repositório encontrado para "{username}".</p>
       ) : null}
 
