@@ -32,7 +32,7 @@ export function RepositoryHeader({
       <div className="flex items-center justify-between flex-wrap gap-4">
         <div>
           <Text variant="heading" size="xl" className="text-white mb-2">
-            {repositoryName}
+            {repositoryName}{' '}
           </Text>
           <Text className="text-gray-400">
             por <span className="text-blue-400">{ownerLogin}</span>

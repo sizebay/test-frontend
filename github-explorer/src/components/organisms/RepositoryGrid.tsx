@@ -19,7 +19,7 @@ export default function RepositoryGrid({
 }: RepositoryGridProps) {
   if (error) {
     return (
-      <div className="text-center py-12">
+      <div className="flex flex-col text-center py-12">
         <Text color="error" size="lg" className="mb-4">
           Erro ao carregar repositórios
         </Text>

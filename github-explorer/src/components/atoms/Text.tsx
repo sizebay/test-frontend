@@ -9,6 +9,7 @@ interface TextProps {
   color?: 'primary' | 'secondary' | 'muted' | 'accent' | 'warning' | 'error'
   weight?: 'normal' | 'medium' | 'semibold' | 'bold'
   className?: string
+  style?: React.CSSProperties
 }
 
 export default function Text({
@@ -17,7 +18,8 @@ export default function Text({
   size = 'md',
   color = 'primary',
   weight = 'normal',
-  className = ''
+  className = '',
+  style
 }: TextProps) {
   const variantClasses = {
     body: '',
@@ -53,7 +55,7 @@ export default function Text({
   const classes = `${variantClasses[variant]} ${sizeClasses[size]} ${colorClasses[color]} ${weightClasses[weight]} ${className}`
   
   return (
-    <span className={classes}>
+    <span className={classes} style={style}>
       {children}
     </span>
   )

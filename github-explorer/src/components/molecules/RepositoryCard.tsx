@@ -15,7 +15,7 @@ export default function RepositoryCard({ repository, onClick }: RepositoryCardPr
   if (onClick) {
     return (
       <div
-        className="flex flex-col p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:border-gray-700 dark:bg-gray-800 cursor-pointer"
+        className="flex flex-col p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:border-gray-700 dark:bg-gray-800 cursor-pointer h-48"
         onClick={onClick}
       >
         <Text 
@@ -31,7 +31,13 @@ export default function RepositoryCard({ repository, onClick }: RepositoryCardPr
         <Text 
           color="secondary" 
           size="sm" 
-          className="mb-3"
+          className="mb-3 flex-1 overflow-hidden"
+          style={{
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            textOverflow: 'ellipsis'
+          }}
         >
           {repository.description}
         </Text>
@@ -67,7 +73,7 @@ export default function RepositoryCard({ repository, onClick }: RepositoryCardPr
 
   return (
     <Link href={repositoryUrl} className="block">
-      <div className="flex flex-col p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:border-gray-700 dark:bg-gray-800 cursor-pointer">
+      <div className="flex flex-col p-6 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow dark:border-gray-700 dark:bg-gray-800 cursor-pointer h-48">
         <Text 
           variant="heading" 
           size="lg" 
@@ -81,7 +87,13 @@ export default function RepositoryCard({ repository, onClick }: RepositoryCardPr
           <Text 
             color="secondary" 
             size="sm" 
-            className="mb-3"
+            className="mb-3 flex-1 overflow-hidden"
+            style={{
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              textOverflow: 'ellipsis'
+            }}
           >
             {repository.description}
           </Text>

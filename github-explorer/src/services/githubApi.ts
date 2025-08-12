@@ -8,7 +8,7 @@ class GitHubApiService {
       'Accept': 'application/vnd.github.v3+json',
       'User-Agent': 'GitHub-Explorer-App'
     }
-
+    
     // Adiciona token de autenticação se disponível
     if (authToken) {
       headers['Authorization'] = `Bearer ${authToken}`
