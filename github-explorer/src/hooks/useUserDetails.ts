@@ -33,7 +33,7 @@ export function useUserDetails(username: string | null): ApiResponse<GitHubUser>
     }
 
     fetchUserDetails()
-  }, [username, token])
+  }, [username, authToken])
 
   return { data, error, loading }
 }
