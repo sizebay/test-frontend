@@ -40,11 +40,11 @@ export default function Button({
       disabled={disabled || isLoading}
       {...props}
     >
+      {isLoading && (
+        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>
+      )}
       {isLoading ? (
-        <>
-          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>
-          <span>Carregando...</span>
-        </>
+        <span>Carregando...</span>
       ) : (
         children
       )}

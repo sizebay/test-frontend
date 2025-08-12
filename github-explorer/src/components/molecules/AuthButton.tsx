@@ -18,9 +18,11 @@ export default function AuthButton({
 }: AuthButtonProps) {
   if (isLoading) {
     return (
-      <Button variant="ghost" isLoading>
-        Carregando...
-      </Button>
+      <div suppressHydrationWarning>
+        <Button variant="ghost" isLoading>
+          Carregando...
+        </Button>
+      </div>
     )
   }
   
