@@ -12,13 +12,13 @@ interface RepositoryHeaderProps {
   className?: string
 }
 
-export const RepositoryHeader: React.FC<RepositoryHeaderProps> = ({
+export function RepositoryHeader({
   repositoryName,
   ownerLogin,
   username,
   githubUrl,
   className
-}) => {
+}: RepositoryHeaderProps) {
   return (
     <div className={cn('mb-8', className)}>
       <Link 

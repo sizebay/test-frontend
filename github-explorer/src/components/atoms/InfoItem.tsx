@@ -9,13 +9,13 @@ interface InfoItemProps {
   className?: string
 }
 
-export const InfoItem: React.FC<InfoItemProps> = ({
+export function InfoItem({
   icon,
   label,
   value,
   iconColor = 'text-blue-400',
   className
-}) => {
+}: InfoItemProps) {
   return (
     <div className={cn('flex items-center', className)}>
       {icon && (

@@ -15,7 +15,7 @@ interface RepositoryInfoProps {
   className?: string
 }
 
-export const RepositoryInfo: React.FC<RepositoryInfoProps> = ({
+export function RepositoryInfo({
   language,
   createdAt,
   updatedAt,
@@ -25,7 +25,7 @@ export const RepositoryInfo: React.FC<RepositoryInfoProps> = ({
   isPrivate,
   topics,
   className
-}) => {
+}: RepositoryInfoProps) {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('pt-BR', {
       year: 'numeric',

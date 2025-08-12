@@ -15,14 +15,14 @@ interface RepositoryDetailsTemplateProps {
   className?: string
 }
 
-export const RepositoryDetailsTemplate: React.FC<RepositoryDetailsTemplateProps> = ({
+export function RepositoryDetailsTemplate({
   repository,
   isLoading,
   error,
   username,
   onRetry,
   className
-}) => {
+}: RepositoryDetailsTemplateProps) {
   if (isLoading) {
     return (
       <div className={cn('min-h-screen bg-gray-900 text-white p-6', className)}>

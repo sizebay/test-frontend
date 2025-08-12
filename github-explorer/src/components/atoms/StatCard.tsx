@@ -9,13 +9,13 @@ interface StatCardProps {
   className?: string
 }
 
-export const StatCard: React.FC<StatCardProps> = ({
+export function StatCard({
   icon,
   value,
   label,
   iconColor = 'text-blue-400',
   className
-}) => {
+}: StatCardProps) {
   return (
     <div className={cn(
       'bg-gray-800 rounded-lg p-6 text-center',
