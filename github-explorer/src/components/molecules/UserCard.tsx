@@ -20,11 +20,11 @@ export function UserCard({ user, className = '' }: UserCardProps) {
   }
 
   return (
-    <div className={`bg-white rounded-2xl shadow-lg p-6 max-w-md mx-auto border border-gray-100 ${className}`}>
+    <div className={`bg-gray-800 rounded-2xl shadow-lg p-6 max-w-md mx-auto border border-gray-700 ${className}`}>
       {/* Header com avatar e informações básicas */}
       <div className="flex items-start gap-4 mb-6">
         <div className="relative">
-          <div className="ring-4 ring-blue-100 rounded-full">
+          <div className="ring-4 ring-blue-500/20 rounded-full">
             <Avatar
               src={user.avatar_url}
               alt={user.name || user.login}
@@ -34,17 +34,17 @@ export function UserCard({ user, className = '' }: UserCardProps) {
         </div>
         
         <div className="flex-1 min-w-0">
-          <h2 className="text-xl font-bold text-gray-900 truncate">
+          <h2 className="text-xl font-bold text-white truncate">
             {user.name || user.login}
           </h2>
           {user.location && (
-            <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
+            <p className="text-sm text-gray-400 flex items-center gap-1 mt-1">
               <span>📍</span>
               {user.location}
             </p>
           )}
           {user.bio && (
-            <p className="text-sm text-gray-700 mt-2 line-clamp-2">
+            <p className="text-sm text-gray-300 mt-2 line-clamp-2">
               {user.bio}
             </p>
           )}
@@ -54,25 +54,25 @@ export function UserCard({ user, className = '' }: UserCardProps) {
       {/* Informações detalhadas */}
       <div className="space-y-3">
         <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-blue-600">Username</span>
-          <span className="text-sm text-gray-900 font-mono">{user.login}</span>
+          <span className="text-sm font-medium text-blue-400">Username</span>
+          <span className="text-sm text-white font-mono">{user.login}</span>
         </div>
         
         {user.company && (
           <div className="flex justify-between items-center">
-            <span className="text-sm font-medium text-blue-600">Company</span>
-            <span className="text-sm text-gray-900">{user.company}</span>
+            <span className="text-sm font-medium text-blue-400">Company</span>
+            <span className="text-sm text-white">{user.company}</span>
           </div>
         )}
         
         {user.blog && (
           <div className="flex justify-between items-center">
-            <span className="text-sm font-medium text-blue-600">Website</span>
+            <span className="text-sm font-medium text-blue-400">Website</span>
             <a 
               href={formatWebsite(user.blog) || '#'} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-sm text-blue-500 hover:text-blue-700 truncate max-w-32"
+              className="text-sm text-blue-300 hover:text-blue-100 truncate max-w-32"
             >
               {user.blog}
             </a>
@@ -80,27 +80,27 @@ export function UserCard({ user, className = '' }: UserCardProps) {
         )}
         
         <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-blue-600">Followers</span>
-          <span className="text-sm text-gray-900 font-semibold">{user.followers}</span>
+          <span className="text-sm font-medium text-blue-400">Followers</span>
+          <span className="text-sm text-white font-semibold">{user.followers}</span>
         </div>
         
         <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-blue-600">Public Repos</span>
-          <span className="text-sm text-gray-900 font-semibold">{user.public_repos}</span>
+          <span className="text-sm font-medium text-blue-400">Public Repos</span>
+          <span className="text-sm text-white font-semibold">{user.public_repos}</span>
         </div>
         
         <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-blue-600">Member Since</span>
-          <span className="text-sm text-gray-900">{formatDate(user.created_at)}</span>
+          <span className="text-sm font-medium text-blue-400">Member Since</span>
+          <span className="text-sm text-white">{formatDate(user.created_at)}</span>
         </div>
       </div>
 
       {/* Botão de ação */}
-      <div className="mt-6 pt-4 border-t border-gray-100">
+      <div className="mt-6 pt-4 border-t border-gray-700">
         <Button
           onClick={() => window.open(user.html_url, '_blank')}
           variant="secondary"
-          className="w-full text-pink-500 border border-pink-200 hover:bg-pink-50 hover:border-pink-300 bg-transparent"
+          className="w-full text-blue-400 border border-blue-500/30 hover:bg-blue-500/10 hover:border-blue-400 bg-transparent"
         >
           View Profile
         </Button>

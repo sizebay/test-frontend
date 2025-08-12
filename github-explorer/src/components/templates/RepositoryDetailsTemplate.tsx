@@ -27,16 +27,41 @@ export function RepositoryDetailsTemplate({
     return (
       <div className={cn('min-h-screen bg-gray-900 text-white p-6', className)}>
         <div className="max-w-4xl mx-auto">
-          <div className="animate-pulse">
-            <LoadingSkeleton variant="text" className="h-8 w-1/3 mb-6" />
-            <LoadingSkeleton variant="card" className="h-12 mb-4" />
-            <LoadingSkeleton variant="text" className="h-6 w-2/3 mb-8" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="animate-pulse space-y-6">
+            {/* Header skeleton */}
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
+              <div className="h-8 bg-gray-700 rounded w-1/3 mb-4"></div>
+              <div className="h-4 bg-gray-700 rounded w-1/4"></div>
+            </div>
+            
+            {/* Description skeleton */}
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
+              <div className="h-6 bg-gray-700 rounded w-2/3 mb-2"></div>
+              <div className="h-4 bg-gray-700 rounded w-full mb-2"></div>
+              <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+            </div>
+            
+            {/* Stats skeleton */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[...Array(3)].map((_, i) => (
-                <LoadingSkeleton key={i} variant="card" className="h-20" />
+                <div key={i} className="bg-gray-800 border border-gray-700 rounded-lg p-6">
+                  <div className="h-8 bg-gray-700 rounded w-16 mb-2"></div>
+                  <div className="h-4 bg-gray-700 rounded w-20"></div>
+                </div>
               ))}
             </div>
-            <LoadingSkeleton variant="card" className="h-32" />
+            
+            {/* Info skeleton */}
+            <div className="bg-gray-800 border border-gray-700 rounded-lg p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[...Array(6)].map((_, i) => (
+                  <div key={i} className="flex justify-between">
+                    <div className="h-4 bg-gray-700 rounded w-20"></div>
+                    <div className="h-4 bg-gray-700 rounded w-24"></div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
