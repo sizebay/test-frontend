@@ -7,7 +7,7 @@ export function useUserDetails(username: string | null): ApiResponse<GitHubUser>
   const [data, setData] = useState<GitHubUser | undefined>(undefined)
   const [error, setError] = useState<any>(undefined)
   const [loading, setLoading] = useState(false)
-  const { token } = useGitHubAuth()
+  const { authToken } = useGitHubAuth()
 
   useEffect(() => {
     if (!username) {
@@ -22,7 +22,7 @@ export function useUserDetails(username: string | null): ApiResponse<GitHubUser>
       setError(undefined)
       
       try {
-        const userDetails = await githubApi.getUserDetails(username, token)
+        const userDetails = await githubApi.getUserDetails(username, authToken)
         setData(userDetails)
       } catch (err) {
         setError(err)

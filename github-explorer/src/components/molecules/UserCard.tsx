@@ -24,12 +24,13 @@ export function UserCard({ user, className = '' }: UserCardProps) {
       {/* Header com avatar e informações básicas */}
       <div className="flex items-start gap-4 mb-6">
         <div className="relative">
-          <Avatar
-            src={user.avatar_url}
-            alt={user.name || user.login}
-            size="lg"
-            className="ring-4 ring-blue-100"
-          />
+          <div className="ring-4 ring-blue-100 rounded-full">
+            <Avatar
+              src={user.avatar_url}
+              alt={user.name || user.login}
+              size="lg"
+            />
+          </div>
         </div>
         
         <div className="flex-1 min-w-0">
@@ -68,7 +69,7 @@ export function UserCard({ user, className = '' }: UserCardProps) {
           <div className="flex justify-between items-center">
             <span className="text-sm font-medium text-blue-600">Website</span>
             <a 
-              href={formatWebsite(user.blog)} 
+              href={formatWebsite(user.blog) || '#'} 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-sm text-blue-500 hover:text-blue-700 truncate max-w-32"
@@ -98,8 +99,8 @@ export function UserCard({ user, className = '' }: UserCardProps) {
       <div className="mt-6 pt-4 border-t border-gray-100">
         <Button
           onClick={() => window.open(user.html_url, '_blank')}
-          variant="outline"
-          className="w-full text-pink-500 border-pink-200 hover:bg-pink-50 hover:border-pink-300"
+          variant="secondary"
+          className="w-full text-pink-500 border border-pink-200 hover:bg-pink-50 hover:border-pink-300 bg-transparent"
         >
           View Profile
         </Button>
