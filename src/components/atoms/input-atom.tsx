@@ -1,14 +1,12 @@
-"use client"
+import { Input } from "@/components/ui/input"
+import type { ComponentProps } from "react"
 
-import { Input, type InputProps } from "@/components/ui/input"
-import { forwardRef } from "react"
-
-export type InputAtomProps = InputProps & {
+export type InputAtomProps = ComponentProps<"input"> & {
   label?: string
   id?: string
 }
 
-const InputAtom = forwardRef<HTMLInputElement, InputAtomProps>(function InputAtom({ label, id, ...props }, ref) {
+export default function InputAtom({ label, id, ...props }: InputAtomProps) {
   return (
     <div className="w-full">
       {label ? (
@@ -16,11 +14,7 @@ const InputAtom = forwardRef<HTMLInputElement, InputAtomProps>(function InputAto
           {label}
         </label>
       ) : null}
-      <Input id={id} ref={ref} {...props} />
+      <Input id={id} {...props} />
     </div>
   )
-})
-
-InputAtom.displayName = "InputAtom"
-
-export default InputAtom
+}

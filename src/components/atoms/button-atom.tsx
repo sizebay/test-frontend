@@ -1,17 +1,8 @@
 import { Button } from "@/components/ui/button"
-import type { ButtonHTMLAttributes } from "react"
+import type { ComponentProps } from "react"
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
-import { forwardRef } from "react"
+export type ButtonAtomProps = ComponentProps<typeof Button>
 
-export type ButtonAtomProps = ButtonProps & {
-  "aria-label"?: string
+export default function ButtonAtom(props: ButtonAtomProps) {
+  return <Button {...props} />
 }
-
-const ButtonAtom = forwardRef<HTMLButtonElement, ButtonAtomProps>(function ButtonAtom(props, ref) {
-  return <Button ref={ref} {...props} />
-})
-
-ButtonAtom.displayName = "ButtonAtom"
-
-export default ButtonAtom
