@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, FormEvent, useCallback } from 'react'
+import { useState, FormEvent, useCallback, useEffect } from 'react'
 import { Button } from '../atoms'
 
 interface SearchFormProps {
@@ -15,6 +15,10 @@ export default function SearchForm({
   isLoading = false 
 }: SearchFormProps) {
   const [username, setUsername] = useState(initialValue)
+
+  useEffect(() => {
+    setUsername(initialValue)
+  }, [initialValue])
 
   const handleSubmit = useCallback((e: FormEvent) => {
     e.preventDefault()
