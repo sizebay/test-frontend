@@ -14,7 +14,8 @@
   --neutral-200: #f3f3f5;
   --neutral-300: #ececf0;
   --neutral-400: #cbced4;
-  --neutral-500: #717182;
+  --neutral-500: #a5a7ac;
+  --neutral-600: #717182;
   --neutral-800: #030213;
   --neutral-900: oklch(0.145 0 0);
 
@@ -73,6 +74,7 @@
   --color-neutral-300: var(--neutral-300);
   --color-neutral-400: var(--neutral-400);
   --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
   --color-neutral-800: var(--neutral-800);
   --color-neutral-900: var(--neutral-900);
 
