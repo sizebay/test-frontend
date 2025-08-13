@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { GitHubUser } from '@/types'
 import { Avatar } from '@/components/atoms'
 import { Button } from '@/components/atoms'
@@ -17,13 +17,15 @@ export function UserCard({ user, className = '' }: UserCardProps) {
     setIsClient(true)
   }, [])
 
-  const formatDate = (dateString: string) => {
-    if (!isClient) {
-      // Fallback simples para SSR
-      return new Date(dateString).getFullYear().toString()
+  const formatDate = useMemo(() => {
+    return (dateString: string) => {
+      if (!isClient) {
+        // Fallback simples para SSR
+        return new Date(dateString).getFullYear().toString()
+      }
+      return new Date(dateString).toLocaleDateString('pt-BR')
     }
-    return new Date(dateString).toLocaleDateString('pt-BR')
-  }
+  }, [isClient])
 
   const formatWebsite = (blog: string | null) => {
     if (!blog) return null

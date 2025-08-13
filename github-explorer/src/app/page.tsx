@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { useGitHubRepositories } from '@/hooks/useGitHubRepositories'
 import { useUserDetails } from '@/hooks/useUserDetails'
@@ -25,13 +25,13 @@ export default function Home() {
   const { repositories, isLoading, error } = useGitHubRepositories(searchUsername)
   const { data: user, loading: userLoading, error: userError } = useUserDetails(searchUsername || null)
 
-  const handleSearch = (searchValue: string) => {
+  const handleSearch = useCallback((searchValue: string) => {
     setUsername(searchValue)
     setSearchUsername(searchValue)
     const newUrl = new URL(window.location.href)
     newUrl.searchParams.set('user', searchValue)
     router.push(newUrl.pathname + newUrl.search)
-  }
+  }, [router])
 
   const isRateLimitError = error?.includes('403') || error?.includes('rate limit')
   const shouldShowAuthHeader = isRateLimitError && !isAuthenticated

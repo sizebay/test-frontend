@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Text } from '../atoms'
 import { Repository } from '@/types'
+import { useMemo } from 'react'
 
 interface RepositoryCardProps {
   repository: Repository
@@ -10,7 +11,17 @@ interface RepositoryCardProps {
 }
 
 export default function RepositoryCard({ repository, onClick }: RepositoryCardProps) {
-  const repositoryUrl = `/${repository.owner.login}/${repository.name}`
+  const repositoryUrl = useMemo(() => {
+    return `/${repository.owner.login}/${repository.name}`
+  }, [repository.owner.login, repository.name])
+
+  const stats = useMemo(() => {
+    return {
+      stars: repository.stargazers_count,
+      forks: repository.forks_count,
+      language: repository.language
+    }
+  }, [repository.stargazers_count, repository.forks_count, repository.language])
 
   if (onClick) {
     return (
@@ -45,24 +56,24 @@ export default function RepositoryCard({ repository, onClick }: RepositoryCardPr
       
       <div className="flex items-center justify-between text-sm">
         <div className="flex items-center gap-4">
-          {repository.language && (
+          {stats.language && (
             <div className="flex items-center gap-1">
               <span className="w-3 h-3 rounded-full bg-blue-500"></span>
               <Text color="muted" size="sm">
-                {repository.language}
+                {stats.language}
               </Text>
             </div>
           )}
           
           <div className="flex items-center gap-1">
             <Text color="muted" size="sm">
-              ⭐ {repository.stargazers_count}
+              ⭐ {stats.stars}
             </Text>
           </div>
           
           <div className="flex items-center gap-1">
             <Text color="muted" size="sm">
-              🍴 {repository.forks_count}
+              🍴 {stats.forks}
             </Text>
           </div>
         </div>
@@ -101,24 +112,24 @@ export default function RepositoryCard({ repository, onClick }: RepositoryCardPr
         
         <div className="flex items-center justify-between text-sm">
           <div className="flex items-center gap-4">
-            {repository.language && (
+            {stats.language && (
               <div className="flex items-center gap-1">
                 <span className="w-3 h-3 rounded-full bg-blue-500"></span>
                 <Text color="muted" size="sm">
-                  {repository.language}
+                  {stats.language}
                 </Text>
               </div>
             )}
             
             <div className="flex items-center gap-1">
               <Text color="muted" size="sm">
-                ⭐ {repository.stargazers_count}
+                ⭐ {stats.stars}
               </Text>
             </div>
             
             <div className="flex items-center gap-1">
               <Text color="muted" size="sm">
-                🍴 {repository.forks_count}
+                🍴 {stats.forks}
               </Text>
             </div>
           </div>

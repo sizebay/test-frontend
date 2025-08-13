@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode } from 'react'
+import { ReactNode, useMemo } from 'react'
 
 interface TextProps {
   children: ReactNode
@@ -21,38 +21,40 @@ export default function Text({
   className = '',
   style
 }: TextProps) {
-  const variantClasses = {
-    body: '',
-    caption: 'text-xs',
-    label: 'text-sm',
-    heading: 'font-semibold'
-  }
-  
-  const sizeClasses = {
-    xs: 'text-xs',
-    sm: 'text-sm',
-    md: 'text-base',
-    lg: 'text-lg',
-    xl: 'text-xl'
-  }
-  
-  const colorClasses = {
-    primary: 'text-white',
-    secondary: 'text-gray-300',
-    muted: 'text-gray-400',
-    accent: 'text-blue-400',
-    warning: 'text-yellow-400',
-    error: 'text-red-400'
-  }
-  
-  const weightClasses = {
-    normal: 'font-normal',
-    medium: 'font-medium',
-    semibold: 'font-semibold',
-    bold: 'font-bold'
-  }
-  
-  const classes = `${variantClasses[variant]} ${sizeClasses[size]} ${colorClasses[color]} ${weightClasses[weight]} ${className}`
+  const classes = useMemo(() => {
+    const variantClasses = {
+      body: '',
+      caption: 'text-xs',
+      label: 'text-sm',
+      heading: 'font-semibold'
+    }
+    
+    const sizeClasses = {
+      xs: 'text-xs',
+      sm: 'text-sm',
+      md: 'text-base',
+      lg: 'text-lg',
+      xl: 'text-xl'
+    }
+    
+    const colorClasses = {
+      primary: 'text-white',
+      secondary: 'text-gray-300',
+      muted: 'text-gray-400',
+      accent: 'text-blue-400',
+      warning: 'text-yellow-400',
+      error: 'text-red-400'
+    }
+    
+    const weightClasses = {
+      normal: 'font-normal',
+      medium: 'font-medium',
+      semibold: 'font-semibold',
+      bold: 'font-bold'
+    }
+    
+    return `${variantClasses[variant]} ${sizeClasses[size]} ${colorClasses[color]} ${weightClasses[weight]} ${className}`
+  }, [variant, size, color, weight, className])
   
   return (
     <span className={classes} style={style}>

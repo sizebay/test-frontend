@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { GitHubUser, ApiResponse } from '@/types'
 import { githubApi } from '@/services/githubApi'
 import { useGitHubAuth } from './useGitHubAuth'
@@ -9,7 +9,7 @@ export function useUserDetails(username: string | null): ApiResponse<GitHubUser>
   const [loading, setLoading] = useState(false)
   const { authToken } = useGitHubAuth()
 
-  useEffect(() => {
+  const fetchUserDetails = useCallback(async () => {
     if (!username) {
       setData(undefined)
       setError(undefined)
@@ -17,23 +17,23 @@ export function useUserDetails(username: string | null): ApiResponse<GitHubUser>
       return
     }
 
-    const fetchUserDetails = async () => {
-      setLoading(true)
-      setError(undefined)
-      
-      try {
-        const userDetails = await githubApi.getUserDetails(username, authToken)
-        setData(userDetails)
-      } catch (err) {
-        setError(err)
-        setData(undefined)
-      } finally {
-        setLoading(false)
-      }
+    setLoading(true)
+    setError(undefined)
+    
+    try {
+      const userDetails = await githubApi.getUserDetails(username, authToken)
+      setData(userDetails)
+    } catch (err) {
+      setError(err)
+      setData(undefined)
+    } finally {
+      setLoading(false)
     }
-
-    fetchUserDetails()
   }, [username, authToken])
+
+  useEffect(() => {
+    fetchUserDetails()
+  }, [fetchUserDetails])
 
   return { data, error, loading }
 }

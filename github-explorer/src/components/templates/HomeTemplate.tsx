@@ -1,6 +1,7 @@
 'use client'
 
 import { Repository, GitHubUser } from '@/types'
+import { useMemo } from 'react'
 import { Text } from '../atoms'
 import { SearchForm, AlertMessage, UserCard } from '../molecules'
 import { RepositoryGrid, Header } from '../organisms'
@@ -39,7 +40,13 @@ export default function HomeTemplate({
   showAuthError = false,
   authErrorMessage
 }: HomeTemplateProps) {
-  const shouldShowAuthHeader = showAuthError && !isAuthenticated && authErrorMessage
+  const shouldShowAuthHeader = useMemo(() => {
+    return showAuthError && !isAuthenticated && authErrorMessage
+  }, [showAuthError, isAuthenticated, authErrorMessage])
+
+  const emptyMessage = useMemo(() => {
+    return searchUsername ? `Nenhum repositório encontrado para "${searchUsername}"` : 'Digite um nome de usuário para começar'
+  }, [searchUsername])
   
   return (
     <div className="min-h-screen bg-gray-900 text-white">
@@ -95,7 +102,7 @@ export default function HomeTemplate({
           repositories={repositories}
           isLoading={isLoading}
           error={shouldShowAuthHeader ? null : error}
-          emptyMessage={searchUsername ? `Nenhum repositório encontrado para "${searchUsername}"` : 'Digite um nome de usuário para começar'}
+          emptyMessage={emptyMessage}
         />
       </main>
     </div>

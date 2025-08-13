@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { Logo } from '../atoms'
 import { UserProfile, AuthButton, AlertMessage } from '../molecules'
@@ -18,13 +18,13 @@ export default function Header({ showAuthButton = false, authMessage }: HeaderPr
     setIsClient(true)
   }, [])
 
-  const handleSignIn = () => {
+  const handleSignIn = useCallback(() => {
     signIn('github')
-  }
+  }, [])
 
-  const handleSignOut = () => {
+  const handleSignOut = useCallback(() => {
     signOut()
-  }
+  }, [])
 
   const isLoading = !isClient || status === 'loading'
   const isAuthenticated = isClient && !!session

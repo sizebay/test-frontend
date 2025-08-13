@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useCallback } from 'react'
 import { Button } from '../atoms'
 
 interface SearchFormProps {
@@ -16,12 +16,12 @@ export default function SearchForm({
 }: SearchFormProps) {
   const [username, setUsername] = useState(initialValue)
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = useCallback((e: FormEvent) => {
     e.preventDefault()
     if (username.trim()) {
       onSearch(username.trim())
     }
-  }
+  }, [username, onSearch])
 
   return (
     <form onSubmit={handleSubmit} className="mb-8">
