@@ -6,13 +6,36 @@ const meta: Meta<typeof Typography> = {
   title: "Atoms/Typography",
   component: Typography,
   tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "O componente **Typography** padroniza estilos tipográficos, garantindo consistência visual no sistema de design.",
+      },
+    },
+    layout: "centered",
+  },
   argTypes: {
     size: {
       control: "select",
       options: ["sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl"],
+      description: "Define o tamanho da tipografia.",
+      table: {
+        type: { summary: "sm | md | lg | xl | 2xl | 3xl | 4xl | 5xl" },
+        defaultValue: { summary: "md" },
+      },
     },
     as: {
-      control: false,
+      control: "text",
+      description: "Tag HTML ou componente a ser usado como wrapper semântico.",
+      table: {
+        type: { summary: "string | React.ElementType" },
+        defaultValue: { summary: "p" },
+      },
+    },
+    children: {
+      control: "text",
+      description: "Conteúdo de texto a ser exibido.",
     },
   },
 };
