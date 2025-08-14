@@ -31,6 +31,19 @@ src/
 └── tests/ # Jest + RTL (atoms, hooks, molecules)
 
 
+# 🚀 Como rodar
+
+``bash
+# Instalar dependências
+npm install
+
+# Rodar em modo desenvolvimento
+npm run dev
+
+# Abrir no navegador
+http://localhost:3000
+
+
 
 ## 🧠 Decisões Técnicas
 
