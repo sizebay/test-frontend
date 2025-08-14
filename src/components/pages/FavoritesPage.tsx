@@ -5,50 +5,42 @@ import { FavoritesList } from "@/components/organisms/FavoritesList";
 import { Heart, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClientOnly } from "@/components/providers/ClientOnly";
+import { MainTemplate } from "@/components/templates/MainTemplate";
 import Link from "next/link";
 
 export const FavoritesPage = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-4">
-              <Button
-                asChild
-                variant="ghost"
-                size="sm"
-                className="gap-2"
-              >
-                <Link href="/search-repositories">
-                  <ArrowLeft className="h-4 w-4" />
-                  Voltar
-                </Link>
-              </Button>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg">
-                <Heart className="h-6 w-6 text-red-500" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold tracking-tight">
-                  Repositórios Favoritos
-                </h1>
-                <ClientOnly>
-                  <FavoritesDescription />
-                </ClientOnly>
-              </div>
-            </div>
+    <MainTemplate>
+      {/* Header */}
+      <div className="mb-8">
+        <div className="flex items-center gap-4 mb-4">
+          <Button asChild variant="ghost" size="sm" className="gap-2">
+            <Link href="/search-repositories">
+              <ArrowLeft className="h-4 w-4" />
+              Voltar
+            </Link>
+          </Button>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-red-100 dark:bg-red-900/20 rounded-lg">
+            <Heart className="h-6 w-6 text-red-500" />
           </div>
-
-          {/* Content */}
-          <ClientOnly>
-            <FavoritesContent />
-          </ClientOnly>
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">
+              Repositórios Favoritos
+            </h1>
+            <ClientOnly>
+              <FavoritesDescription />
+            </ClientOnly>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Content */}
+      <ClientOnly>
+        <FavoritesContent />
+      </ClientOnly>
+    </MainTemplate>
   );
 };
 
