@@ -26,7 +26,7 @@ const buttonVariants = cva(
         tertiary: "bg-transparent text-foreground hover:bg-accent-100",
       },
       size: {
-        default: "h-9 px-4 py-2",
+        default: "h-8 px-4 py-2",
       },
     },
     defaultVariants: {

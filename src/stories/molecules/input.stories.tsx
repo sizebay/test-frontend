@@ -1,9 +1,10 @@
+import { Search } from "lucide-react";
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 import { Input } from "@/components";
 
 const meta = {
-  title: "Atoms/Input",
+  title: "Molecules/Input",
   component: Input,
   parameters: {
     layout: "centered",
@@ -31,5 +32,21 @@ export const Disabled: Story = {
   args: {
     placeholder: "Input desabilitado",
     disabled: true,
+  },
+};
+
+export const WithLeftIcon: Story = {
+  args: {
+    placeholder: "Input",
+    leftIcon: <Search />,
+    id: "input-with-left-icon",
+  },
+};
+
+export const WithRightIcon: Story = {
+  args: {
+    placeholder: "Input",
+    rightIcon: <Search />,
+    id: "input-with-right-icon",
   },
 };
