@@ -17,19 +17,19 @@ Inclui testes com **Jest + React Testing Library**.
 - **Navbar e Footer** fixos
 
 ## 🧱 Arquitetura (Atomic Design)
-
+```
 src/
--├── components/
--│ ├── atoms/ # Button, Input, Avatar, Badge, LanguageIcon
--│ ├── layout/ # Footer, Navbar
--│ ├── molecules/ # RepoCard, RepoCardSkeleton, SearchBox, UserInfo
--│ ├── organisms/ # RepoDetails, RepoList, UserProfileCard
--│ └── templates/ # MainTemplate
--├── hooks/ # useUserRepo, userRepoDetails, userUserProfile
--├── services/ # githubAPI
--├── types/ # github.ts
--└── tests/ # Jest + RTL (atoms, hooks, molecules)
-
+├── components/
+│ ├── atoms/ # Button, Input, Avatar, Badge, LanguageIcon
+│ ├── layout/ # Footer, Navbar
+│ ├── molecules/ # RepoCard, RepoCardSkeleton, SearchBox, UserInfo
+│ ├── organisms/ # RepoDetails, RepoList, UserProfileCard
+│ └── templates/ # MainTemplate
+├── hooks/ # useUserRepo, userRepoDetails, userUserProfile
+├── services/ # githubAPI
+├── types/ # github.ts
+└── tests/ # Jest + RTL (atoms, hooks, molecules)
+```
 
 # 🚀 Como rodar
 
@@ -55,9 +55,9 @@ http://localhost:3000
 ## 🧪 Testes
 
 Stack: Jest + React Testing Library
--2 átomos: Button, Input
--1 hook: useUserRepo
--1 funcionalidade: SearchBox
+- 2 átomos: Button, Input
+- 1 hook: useUserRepo
+- 1 funcionalidade: SearchBox
 
 ## 🖼️ Preview
 
