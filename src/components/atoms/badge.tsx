@@ -3,8 +3,14 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@/helpers";
 
+export type BadgeVariants = "default" | "secondary";
+
+export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
+  variant?: BadgeVariants;
+};
+
 const badgeVariants = cva(
-  "flex flex-row items-center justify-center gap-2 px-2 py-0.5 whitespace-nowrap rounded-md text-xs font-medium",
+  "flex flex-row items-center justify-center gap-2 px-2 py-0.5 whitespace-nowrap rounded-md text-xs font-medium cursor-default",
   {
     variants: {
       variant: {
@@ -17,12 +23,6 @@ const badgeVariants = cva(
     },
   }
 );
-
-export type BadgeVariants = "default" | "secondary";
-
-export type BadgeProps = HTMLAttributes<HTMLSpanElement> & {
-  variant?: BadgeVariants;
-};
 
 export function Badge({ variant = "default", ...props }: BadgeProps) {
   return (

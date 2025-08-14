@@ -1,3 +1,5 @@
+import { Plus } from "lucide-react";
+
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { fn } from "storybook/internal/test";
 
@@ -18,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     variant: "default",
-    children: "Botão Default",
+    children: "Clicar",
     onClick: () => fn(),
   },
 };
@@ -26,7 +28,7 @@ export const Default: Story = {
 export const Secondary: Story = {
   args: {
     variant: "secondary",
-    children: "Botão Secondary",
+    children: "Clicar",
     onClick: () => fn(),
   },
 };
@@ -34,7 +36,23 @@ export const Secondary: Story = {
 export const Disabled: Story = {
   args: {
     variant: "default",
-    children: "Desabilitado",
+    children: "Clicar",
     disabled: true,
+  },
+};
+
+export const WithLeftIcon: Story = {
+  args: {
+    variant: "default",
+    children: "Clicar",
+    leftIcon: <Plus />,
+  },
+};
+
+export const WithRightIcon: Story = {
+  args: {
+    variant: "default",
+    children: "Clicar",
+    rightIcon: <Plus />,
   },
 };
