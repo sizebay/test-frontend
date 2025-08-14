@@ -33,7 +33,7 @@ src/
 
 # 🚀 Como rodar
 
-``bash
+```bash
 # Instalar dependências
 npm install
 
@@ -42,8 +42,7 @@ npm run dev
 
 # Abrir no navegador
 http://localhost:3000
-
-
+```
 
 ## 🧠 Decisões Técnicas
 
