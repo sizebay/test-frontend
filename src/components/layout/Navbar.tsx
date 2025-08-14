@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { FaBars, FaTimes, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
-import logo from '../../app/icon2.png'; // sem chaves
+import logo from '../../app/icon2.png';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

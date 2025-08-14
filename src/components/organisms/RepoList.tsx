@@ -44,7 +44,7 @@ export default function RepoList({ username, perPage = 12 }: Props) {
   };
 
   const hasPrev = page > 1 && !isLoading;
-  // Heurística: API não retorna total — habilita próxima se a página veio “cheia”
+  // Heurística: API não retorna total — habilita próxima se a página veio cheia
   const hasNext = repos.length === perPage && !isLoading;
 
   if (isLoading) {
