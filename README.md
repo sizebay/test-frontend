@@ -1,256 +1,302 @@
-# Teste Prático - Desenvolvedor Frontend React/Next.js
+# 🚀 GitHub Explorer - Sizebay
 
-## 🎯 Objetivo
+Uma aplicação moderna para explorar repositórios do GitHub com interface elegante e funcionalidades avançadas.
 
-Este teste prático tem como objetivo avaliar suas habilidades técnicas em desenvolvimento frontend, especificamente:
+![GitHub Explorer](https://img.shields.io/badge/Next.js-15.4.6-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+![React](https://img.shields.io/badge/React-19.1.0-blue?style=for-the-badge&logo=react)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
 
-- **Desenvolvimento com Design Atômico**: Estruturação clara e organizada de componentes
-- **Boas práticas React/Next.js**: Performance, organização e código limpo
-- **Uso eficiente de Hooks**: Aplicação correta de hooks nativos e personalizados
-- **Implementação de Cache**: Estratégias eficientes para otimização de API calls
-- **Testes Unitários**: Cobertura adequada e qualidade dos testes
+## 📋 Índice
 
-## 📋 Especificações do Projeto
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Funcionalidades](#-funcionalidades)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Instalação e Uso](#-instalação-e-uso)
+- [Testes](#-testes)
+- [Arquitetura](#-arquitetura)
 
-### Tecnologias Obrigatórias
-- **Framework**: Next.js (versão 13+ recomendada)
-- **Linguagem**: TypeScript
-- **API**: GitHub Public API (`https://api.github.com`)
-- **Cache**: SWR, React Query (TanStack Query) ou soluções nativas do Next.js
-- **Testes**: Jest + React Testing Library
+## 🎯 Sobre o Projeto
 
-### Funcionalidades Requeridas
+O **GitHub Explorer** é uma aplicação web desenvolvida para explorar repositórios do GitHub de forma intuitiva e eficiente. A aplicação permite buscar repositórios por usuário, visualizar detalhes completos e gerenciar favoritos.
 
-#### 1. Página de Listagem de Repositórios
-- **Endpoint**: `https://api.github.com/users/{username}/repos`
-- **Funcionalidades**:
-  - Input para inserir username do GitHub
-  - Listagem dos repositórios públicos do usuário
-  - Exibição de informações básicas: nome, descrição, linguagem principal
-  - Paginação ou carregamento otimizado
-  - Estados de loading, erro e dados vazios
+### ✨ Características Principais
 
-#### 2. Página de Detalhes do Repositório
-- **Endpoint**: `https://api.github.com/repos/{owner}/{repo}`
-- **Informações obrigatórias**:
-  - Nome do repositório
-  - Descrição completa
-  - Número de estrelas
-  - Número de forks
-  - Issues abertas
-  - Linguagem principal
-  - Data de criação e última atualização
-  - Link para o repositório no GitHub
+- 🔍 **Busca Inteligente**: Pesquise repositórios por username do GitHub
+- 📱 **Design Responsivo**: Interface otimizada para todos os dispositivos
+- 🌙 **Tema Escuro/Claro**: Alternância automática baseada na preferência do usuário
+- ❤️ **Sistema de Favoritos**: Salve e gerencie seus repositórios favoritos
+- ⚡ **Performance Otimizada**: Cache inteligente e carregamento rápido
+- 🧪 **Testes Completos**: Cobertura de testes unitários
 
-## 🏗️ Estrutura do Projeto (Design Atômico)
+## 🚀 Funcionalidades
 
-Organize seu projeto seguindo rigorosamente a metodologia de Design Atômico:
+### 📄 Páginas Principais
+
+#### 1. **Página Inicial**
+
+- Landing page com design moderno
+- Call-to-action para explorar repositórios
+- Elementos visuais atrativos
+
+#### 2. **Busca de Repositórios**
+
+- Input para inserir username do GitHub
+- Listagem paginada de repositórios
+- Informações básicas: nome, descrição, linguagem, estrelas
+- Estados de loading, erro e dados vazios
+- Botão para favoritar repositórios
+
+#### 3. **Detalhes do Repositório**
+
+- Informações completas do repositório
+- Estatísticas detalhadas (stars, forks, issues)
+- Links diretos para o GitHub
+- Histórico de atualizações
+
+#### 4. **Favoritos**
+
+- Lista de repositórios favoritados
+- Persistência local dos dados
+- Interface intuitiva para gerenciamento
+
+### 🎨 Interface
+
+- **Design Atômico**: Componentes organizados hierarquicamente
+- **Responsividade**: Mobile-first approach
+- **Acessibilidade**: Navegação por teclado e screen readers
+- **Animações**: Transições suaves e feedback visual
+
+## 🛠️ Tecnologias Utilizadas
+
+### **Frontend**
+
+- **Next.js 15.4.6** - Framework React com SSR/SSG
+- **React 19.1.0** - Biblioteca de interface
+- **TypeScript 5.0** - Tipagem estática
+- **Tailwind CSS 4.0** - Framework CSS utilitário
+
+### **Gerenciamento de Estado**
+
+- **TanStack Query** - Cache e gerenciamento de dados
+- **React Context** - Estado global para favoritos
+
+### **UI/UX**
+
+- **Radix UI** - Componentes acessíveis
+- **Lucide React** - Ícones modernos
+- **Next Themes** - Gerenciamento de temas
+- **Sonner** - Notificações elegantes
+
+### **Testes**
+
+- **Jest** - Framework de testes
+- **React Testing Library** - Testes de componentes
+- **Testing Library User Event** - Simulação de interações
+
+### **Desenvolvimento**
+
+- **ESLint** - Linting de código
+- **Turbopack** - Bundler rápido para desenvolvimento
+
+## 📁 Estrutura do Projeto
 
 ```
 src/
+├── app/                    # App Router (Next.js 13+)
+│   ├── actions/           # Server Actions
+│   ├── favorites/         # Página de favoritos
+│   ├── repository-details/ # Página de detalhes
+│   ├── search-repositories/ # Página de busca
+│   └── globals.css        # Estilos globais
 ├── components/
-│   ├── atoms/           # Elementos básicos (Button, Input, Text, Icon)
-│   ├── molecules/       # Combinações de átomos (SearchBox, RepoCard)
-│   ├── organisms/       # Grupos complexos (RepoList, Header, Footer)
-│   ├── templates/       # Layouts de página
-│   └── pages/          # Páginas completas
-├── hooks/              # Custom hooks
-├── services/           # Serviços de API
-├── types/              # Definições TypeScript
-├── utils/              # Funções utilitárias
-└── __tests__/          # Testes organizados por componente
+│   ├── atoms/            # Componentes básicos
+│   │   ├── FavoritesCounter.tsx
+│   │   └── ThemeToggle.tsx
+│   ├── molecules/        # Combinações de átomos
+│   │   ├── RepoCard.tsx
+│   │   ├── SearchBox.tsx
+│   │   └── UserCard.tsx
+│   ├── organisms/        # Componentes complexos
+│   │   ├── FavoritesList.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   └── RepoList.tsx
+│   ├── pages/           # Páginas completas
+│   ├── providers/       # Providers React
+│   ├── templates/       # Layouts
+│   └── ui/             # Componentes base (shadcn/ui)
+├── contexts/           # Contextos React
+├── hooks/             # Custom hooks
+├── lib/              # Utilitários
+├── services/         # Serviços de API
+├── types/           # Definições TypeScript
+├── utils/           # Funções utilitárias
+└── __tests__/       # Testes organizados
 ```
 
-## ⚡ Requisitos Técnicos
+## 🚀 Instalação e Uso
 
-### 1. Design Atômico
-- [ ] Separação clara entre átomos, moléculas, organismos, templates e páginas
-- [ ] Componentes reutilizáveis e bem documentados
-- [ ] Props tipadas com TypeScript
-- [ ] Storybook é um diferencial (opcional)
+### **Pré-requisitos**
 
-### 2. Boas Práticas React/Next.js
-- [ ] Uso de Server Components quando apropriado
-- [ ] Implementação de Error Boundaries
-- [ ] Otimizações de performance (useMemo, useCallback quando necessário)
-- [ ] SEO básico (meta tags, títulos dinâmicos)
-- [ ] Responsividade mobile-first
+- Node.js 18+
+- npm ou yarn
 
-### 3. Hooks do React
-- [ ] **useState**: Gerenciamento de estado local
-- [ ] **useEffect**: Efeitos colaterais e lifecycle
-- [ ] **useContext**: Compartilhamento de estado global (se necessário)
-- [ ] **Custom Hooks**: Criação de pelo menos 1 hook personalizado
-- [ ] **useMemo/useCallback**: Otimizações quando apropriado
+### **1. Clone o repositório**
 
-### 4. Implementação de Cache
-Escolha uma das opções e implemente corretamente:
-
-#### Opção A: SWR
-```typescript
-import useSWR from 'swr'
-
-const { data, error, isLoading } = useSWR(
-  `/api/users/${username}/repos`,
-  fetcher,
-  {
-    revalidateOnFocus: false,
-    dedupingInterval: 300000, // 5 minutos
-  }
-)
+```bash
+git clone url_do_projeto
+cd github-explorer
 ```
 
-#### Opção B: React Query (TanStack Query)
-```typescript
-import { useQuery } from '@tanstack/react-query'
+### **2. Instale as dependências**
 
-const { data, isLoading, error } = useQuery({
-  queryKey: ['repos', username],
-  queryFn: () => fetchUserRepos(username),
-  staleTime: 300000, // 5 minutos
-})
+```bash
+npm install
+# ou
+yarn install
 ```
 
-#### Opção C: Next.js Fetch Cache
-```typescript
-const repos = await fetch(`https://api.github.com/users/${username}/repos`, {
-  next: { revalidate: 300 } // 5 minutos
-})
+### **3. Execute o projeto**
+
+```bash
+# Desenvolvimento
+npm run dev
+
+# Build para produção
+npm run build
+
+# Iniciar produção
+npm start
 ```
 
-### 5. Testes Unitários
-- [ ] **Mínimo obrigatório**: 
-  - 2 componentes atômicos testados
-  - 1 funcionalidade principal (busca de repositórios)
-  - 1 custom hook testado
-- [ ] **Cobertura**: Testes de renderização, interação e estados
-- [ ] **Mocks**: APIs mockadas adequadamente
-- [ ] **Casos de teste**: Happy path, loading, error states
+### **4. Acesse a aplicação**
 
-## 🚀 Instruções de Entrega
-
-### 1. Configuração do Repositório
-1. Faça um fork deste repositório
-2. Clone o fork para sua máquina local
-3. Crie uma branch com seu nome: `feature/nome-sobrenome`
-4. Desenvolva o projeto na sua branch
-
-### 2. Desenvolvimento
-1. Inicie o projeto Next.js com TypeScript
-2. Configure as dependências necessárias
-3. Implemente as funcionalidades seguindo os requisitos
-4. Escreva os testes unitários
-5. Documente o código quando necessário
-
-### 3. Commits
-**⚠️ IMPORTANTE**: Seus commits serão avaliados! Siga as boas práticas:
-
-- Use **Conventional Commits**: `feat:`, `fix:`, `test:`, `docs:`, etc.
-- Commits atômicos e descritivos
-- Mensagens em português ou inglês (seja consistente)
-- Exemplos:
-  ```
-  feat: add search component with atomic design structure
-  test: add unit tests for Button atom component
-  feat: implement SWR cache for GitHub API calls
-  fix: handle error states in repository details page
-  docs: update README with setup instructions
-  ```
-
-### 4. Pull Request
-Quando finalizar o desenvolvimento:
-
-1. Push da sua branch para o fork
-2. Abra um Pull Request para a branch `main` do repositório original
-3. **Título do PR**: `[TESTE] Nome Completo - Desenvolvedor Frontend`
-
-#### Template do Pull Request:
-```markdown
-## 📝 Descrição
-Breve descrição do que foi implementado.
-
-## ✅ Checklist de Requisitos
-- [ ] Design Atômico implementado
-- [ ] Hooks do React utilizados adequadamente
-- [ ] Cache implementado (especificar qual: SWR/React Query/Next.js)
-- [ ] Testes unitários incluídos
-- [ ] TypeScript configurado
-- [ ] Responsividade implementada
+Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
 
 ## 🧪 Testes
-- Total de testes: X
-- Componentes testados: [listar]
-- Hooks testados: [listar]
-- Cobertura estimada: X%
 
-## 🚀 Como executar
+### **Executar todos os testes**
+
 ```bash
-# Comandos para instalar e executar
-npm install
-npm run dev
-npm run test
+npm test
 ```
 
-## 📱 Screenshots
-[Adicione capturas de tela da aplicação funcionando]
+### **Executar testes em modo watch**
 
-## 🔧 Decisões Técnicas
-Explique brevemente suas principais decisões arquiteturais:
-- Por que escolheu determinada biblioteca de cache
-- Como organizou os componentes atômicos
-- Desafios encontrados e soluções
-
-## ⏱️ Tempo Investido
-Aproximadamente X horas
+```bash
+npm run test:watch
 ```
 
-## 📏 Critérios de Avaliação
+### **Verificar cobertura de testes**
 
-### 1. Código (60%)
-- **Design Atômico**: Estrutura clara e organizada (15%)
-- **Boas práticas React/Next.js**: Performance e organização (15%)
-- **Hooks**: Uso adequado e eficiente (10%)
-- **Cache**: Implementação eficiente e clara (10%)
-- **Testes**: Cobertura e qualidade (10%)
+```bash
+npm run test:coverage
+```
 
-### 2. Commits (20%)
-- Qualidade das mensagens de commit
-- Atomicidade dos commits
-- Uso de Conventional Commits
-- Histórico limpo e organizado
+### **Estrutura dos Testes**
 
-### 3. Documentação (20%)
-- Qualidade do Pull Request
-- README do projeto
-- Comentários no código quando necessário
-- Instruções claras de execução
+- **Componentes**: Testes de renderização e interação
+- **Hooks**: Testes de lógica e estados
+- **Actions**: Testes de chamadas de API
+- **Cobertura**: Mínimo de 80% de cobertura
 
-## ⏰ Prazo e Considerações
+## 🏗️ Arquitetura
 
-- **Prazo**: 5 dias úteis após o recebimento
-- **Dúvidas**: Podem ser enviadas por email ou Issues no repositório
-- **Entrega**: Pull Request conforme instruções acima
+### **Design Atômico**
 
-## 🎯 Dicas para se Destacar
+O projeto segue rigorosamente a metodologia de Design Atômico:
 
-- **Performance**: Implementar lazy loading, code splitting
-- **UX**: Adicionar skeleton loading, animações suaves
-- **Acessibilidade**: ARIA labels, navegação por teclado
-- **Error Handling**: Tratamento elegante de erros
-- **Documentação**: Storybook ou documentação detalhada dos componentes
-- **Extra**: Dark mode, filtros avançados, favoritar repositórios
+- **Atoms**: Componentes básicos (Button, Input, Icon)
+- **Molecules**: Combinações simples (SearchBox, RepoCard)
+- **Organisms**: Componentes complexos (Header, Footer, RepoList)
+- **Templates**: Layouts de página
+- **Pages**: Páginas completas
 
-## 📚 Recursos Úteis
+### **Gerenciamento de Estado**
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [React Query Documentation](https://tanstack.com/query/latest)
-- [SWR Documentation](https://swr.vercel.app/)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- [GitHub API Documentation](https://docs.github.com/en/rest)
-- [Atomic Design Methodology](https://bradfrost.com/blog/post/atomic-web-design/)
+- **TanStack Query**: Cache e sincronização de dados
+- **React Context**: Estado global para favoritos
+- **Local Storage**: Persistência de dados locais
+
+### **Performance**
+
+- **Server Components**: Renderização no servidor quando apropriado
+- **Code Splitting**: Carregamento sob demanda
+- **Image Optimization**: Otimização automática de imagens
+- **Caching**: Cache inteligente de requisições
+
+### **API Integration**
+
+- **GitHub REST API**: Endpoints oficiais do GitHub
+- **Error Handling**: Tratamento robusto de erros
+- **Rate Limiting**: Respeito aos limites da API
+
+## 🎨 Design System
+
+### **Cores**
+
+- **Primary**: Azul principal da marca
+- **Secondary**: Cor secundária para acentos
+- **Accent**: Cor de destaque para ações
+- **Muted**: Cores suaves para textos secundários
+
+### **Tipografia**
+
+- **Font Family**: Sistema de fontes do sistema
+- **Hierarchy**: Títulos, subtítulos e corpo de texto bem definidos
+- **Responsive**: Tamanhos adaptáveis por breakpoint
+
+### **Componentes**
+
+- **Button**: Variações primary, secondary, ghost
+- **Input**: Campos de texto com validação
+- **Card**: Containers para conteúdo
+- **Badge**: Indicadores e tags
+
+## 📱 Responsividade
+
+### **Breakpoints**
+
+- **Mobile**: < 640px
+- **Tablet**: 640px - 1024px
+- **Desktop**: > 1024px
+
+### **Adaptações**
+
+- **Header**: Menu hambúrguer em mobile
+- **Grid**: Layout responsivo para listagens
+- **Typography**: Tamanhos adaptáveis
+- **Spacing**: Espaçamentos otimizados
+
+## 🔧 Configuração
+
+### **Variáveis de Ambiente**
+
+```env
+# .env.local
+NEXT_PUBLIC_GITHUB_API_URL=https://api.github.com
+```
+
+### **Configurações do Next.js**
+
+- **Turbopack**: Para desenvolvimento rápido
+- **TypeScript**: Configuração estrita
+- **ESLint**: Regras de qualidade de código
+- **Tailwind**: Configuração customizada
+
+## 👨‍💻 Desenvolvido por
+
+**Nicolas Braga** - Desenvolvedor Frontend na Sizebay
+
+- 📧 Email: ncls.braga19@gmail.com
+- 📱 Telefone: (92) 98202-7275
+- 🌐 LinkedIn: [Nicolas Braga](https://www.linkedin.com/in/nclsbraga97/)
 
 ---
 
-**Boa sorte! 🚀**
-
-Estamos ansiosos para ver sua solução e conhecer seu estilo de desenvolvimento!
+<div align="center">
+  <p>Feito com ❤️ pela equipe Sizebay</p>
+  <p>Construindo soluções digitais de alto impacto para o seu negócio.</p>
+</div>
