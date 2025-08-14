@@ -46,7 +46,7 @@ http://localhost:3000
 
 ## 🧠 Decisões Técnicas
 
-Next.js 13+ com App Router
+- Next.js 13+ com App Router
 React Query para cache de API GitHub
 Paginação habilitada apenas se a página atual vier completa (repos.length === perPage)
 Acessibilidade com aria-label e elementos semânticos
