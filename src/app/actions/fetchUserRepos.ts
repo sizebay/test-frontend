@@ -11,7 +11,8 @@ export async function fetchUserRepos(
   page = 1,
   perPage = 12
 ): Promise<ReposResponse> {
-  if (!username) return { data: [], totalCount: 0 };
+  if (!username || username.trim() === "")
+    return { data: [], totalCount: 0 };
 
   const [reposRes, userRes] = await Promise.all([
     api.get(
