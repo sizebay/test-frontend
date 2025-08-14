@@ -17,7 +17,7 @@ Inclui testes com **Jest + React Testing Library**.
 - **Navbar e Footer** fixos
 
 ## 🧱 Arquitetura (Atomic Design)
-
+```
 src/
 ├── components/
 │ ├── atoms/ # Button, Input, Avatar, Badge, LanguageIcon
@@ -29,7 +29,7 @@ src/
 ├── services/ # githubAPI
 ├── types/ # github.ts
 └── tests/ # Jest + RTL (atoms, hooks, molecules)
-
+```
 
 # 🚀 Como rodar
 
@@ -42,23 +42,22 @@ npm run dev
 
 # Abrir no navegador
 http://localhost:3000
-
+```
 
 ## 🧠 Decisões Técnicas
 
-Next.js 13+ com App Router
-React Query para cache de API GitHub
-Paginação habilitada apenas se a página atual vier completa (repos.length === perPage)
-Acessibilidade com aria-label e elementos semânticos
-Atomic Design para facilitar manutenção e reuso
+- Next.js 13+ com App Router
+- React Query para cache de API GitHub
+- Paginação habilitada apenas se a página atual vier completa (repos.length === perPage)
+- Acessibilidade com aria-label e elementos semânticos
+- Atomic Design para facilitar manutenção e reuso
 
 ## 🧪 Testes
 
 Stack: Jest + React Testing Library
-
-2 átomos: Button, Input
-1 hook: useUserRepo
-1 funcionalidade: SearchBox
+- 2 átomos: Button, Input
+- 1 hook: useUserRepo
+- 1 funcionalidade: SearchBox
 
 ## 🖼️ Preview
 
