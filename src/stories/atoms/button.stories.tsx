@@ -33,6 +33,14 @@ export const Secondary: Story = {
   },
 };
 
+export const Tertiary: Story = {
+  args: {
+    variant: "tertiary",
+    children: "Clicar",
+    onClick: () => fn(),
+  },
+};
+
 export const Disabled: Story = {
   args: {
     variant: "default",

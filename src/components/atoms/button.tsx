@@ -5,7 +5,7 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@/helpers";
 
-export type ButtonVariants = "default" | "secondary";
+export type ButtonVariants = "default" | "secondary" | "tertiary";
 export type ButtonSizes = "default";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -23,6 +23,7 @@ const buttonVariants = cva(
         default: "bg-neutral-800 text-background hover:bg-neutral-800/90",
         secondary:
           "bg-neutral-100 text-foreground hover:bg-accent-100 border border-neutral-400",
+        tertiary: "bg-transparent text-foreground hover:bg-accent-100",
       },
       size: {
         default: "h-9 px-4 py-2",
