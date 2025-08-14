@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import { fn } from "storybook/internal/test";
 
 import { Skeleton } from "@/components";
 

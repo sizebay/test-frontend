@@ -1,3 +1,11 @@
+import { Page, PageBody, Typography } from "@/components";
+
 export default function Home() {
-  return <h1>Hello World</h1>;
+  return (
+    <Page>
+      <PageBody>
+        <Typography size="4xl">Hello World</Typography>
+      </PageBody>
+    </Page>
+  );
 }

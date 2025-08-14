@@ -2,7 +2,6 @@
 
 import {
   cloneElement,
-  HTMLAttributes,
   InputHTMLAttributes,
   JSX,
   LabelHTMLAttributes,

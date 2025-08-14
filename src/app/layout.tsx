@@ -5,6 +5,7 @@ import "@/global/styles.css";
 const openSans = Open_Sans({
   weight: ["500", "400"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
 "use client";
 
-import { HTMLAttributes, HTMLElementType } from "react";
+import { ElementType, HTMLAttributes, HTMLElementType } from "react";
 
 import { cn } from "@/helpers";
 
@@ -16,7 +16,7 @@ export type TypographySizes =
 
 export type TypographyProps = HTMLAttributes<HTMLHeadingElement> & {
   size?: TypographySizes;
-  as?: HTMLElementType;
+  as?: ElementType;
 };
 
 export function Typography({
@@ -37,5 +37,10 @@ export function Typography({
 
   const Comp = as ? as : typrographyMap[size];
 
-  return <Comp {...props} className={cn(`text-${size}`, props.className)} />;
+  return (
+    <Comp
+      {...props}
+      className={cn(`text-${size} text-foreground`, props.className)}
+    />
+  );
 }
