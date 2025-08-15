@@ -47,7 +47,7 @@ export const mockGithubRepositories: TGithubRepository[] = [
 
 export function RepositoriesList() {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="w-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {mockGithubRepositories.map((repository) => (
         <RepositoryCard key={repository.id} repository={repository} />
       ))}
