@@ -1,3 +1,5 @@
+"use client";
+
 import { HTMLAttributes } from "react";
 
 import { cn } from "@/helpers";
@@ -12,6 +14,7 @@ export function Card(props: CardProps) {
       className={cn(
         "flex flex-col gap-2",
         "w-full",
+        "bg-neutral-200",
         "border border-surface-200",
         "rounded-lg",
         "p-4",

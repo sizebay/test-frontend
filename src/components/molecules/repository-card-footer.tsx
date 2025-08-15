@@ -1,3 +1,5 @@
+"use client";
+
 import { Eye, GitFork, LucideProps, Star } from "lucide-react";
 
 import { TGithubRepository } from "@/types";

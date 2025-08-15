@@ -1,3 +1,5 @@
+"use client";
+
 import { TGithubRepository } from "@/types";
 import { cn } from "@/helpers";
 

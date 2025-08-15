@@ -1,3 +1,5 @@
+"use client";
+
 import { RepositoryVisibilityTranslator } from "@/translators";
 import { TGithubRepository } from "@/types";
 import { cn } from "@/helpers";
