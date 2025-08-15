@@ -3,11 +3,12 @@ import { Suspense } from "react";
 import { AsyncSearchParams } from "@/types";
 import { GithubRepositoriesMapper } from "@/mappers";
 import { HTTPClient } from "@/infra";
+import { ListRepositoriesService } from "@/services";
 
 import { Page, PageBody } from "../atoms";
 import { SearchInput } from "../organisms";
 import { RepositoriesList, SkeletonRepositoriesList } from "../templates";
-import { ListRepositoriesService } from "@/services";
+import { SearchUserEmptyState, UserNotFoundEmptyState } from "../molecules";
 
 type RepositoriesListPage = {
   searchParams: AsyncSearchParams;
@@ -25,6 +26,7 @@ export async function RepositoriesListPage(props: RepositoriesListPage) {
     <Page>
       <PageBody>
         <SearchInput />
+        {!search && <SearchUserEmptyState />}
         <Suspense
           key={searchParams?.search}
           fallback={<SkeletonRepositoriesList />}

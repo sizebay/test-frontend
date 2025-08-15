@@ -5,3 +5,4 @@ export * from "./skeleton";
 export * from "./page";
 export * from "./card";
 export * from "./divider";
+export * from "./empty-state";
