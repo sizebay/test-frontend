@@ -8,7 +8,7 @@ import { ListRepositoriesService } from "@/services";
 import { Page, PageBody } from "../atoms";
 import { SearchInput } from "../organisms";
 import { RepositoriesList, SkeletonRepositoriesList } from "../templates";
-import { SearchUserEmptyState, UserNotFoundEmptyState } from "../molecules";
+import { SearchUserEmptyState } from "../molecules";
 
 type RepositoriesListPage = {
   searchParams: AsyncSearchParams;
