@@ -6,7 +6,7 @@ import { HTTPClient } from "@/infra";
 
 import { Page, PageBody } from "../atoms";
 import { SearchInput } from "../organisms";
-import { RepositoriesList } from "../templates";
+import { RepositoriesList, SkeletonRepositoriesList } from "../templates";
 import { ListRepositoriesService } from "@/services";
 
 type RepositoriesListPage = {
@@ -25,7 +25,10 @@ export async function RepositoriesListPage(props: RepositoriesListPage) {
     <Page>
       <PageBody>
         <SearchInput />
-        <Suspense key={searchParams?.search} fallback={<p>Carregando...</p>}>
+        <Suspense
+          key={searchParams?.search}
+          fallback={<SkeletonRepositoriesList />}
+        >
           <RepositoriesList
             repositories={GithubRepositoriesMapper.toFrontend(repositories)}
           />

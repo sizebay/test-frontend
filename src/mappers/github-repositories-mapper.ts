@@ -9,7 +9,7 @@ export class GithubRepositoriesMapper {
     return repositories.map((repository) => ({
       id: repository.id,
       name: repository.name,
-      description: repository.description || "",
+      description: repository.description || "Sem descrição",
       url: repository.url,
       cloneUrl: repository.clone_url,
       gitUrl: repository.git_url,
