@@ -71,7 +71,7 @@ exports[`Renders homepage 1`] = `
               <p
                 class="text-md text-neutral-500 break-all"
               >
-                Dashboard interativo para monitoramento de câmeras com IA. aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                Dashboard interativo para monitoramento de câmeras com IA.
               </p>
             </div>
           </div>
