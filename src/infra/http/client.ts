@@ -5,7 +5,7 @@ import type { HTTPRequest, IHTTPClient } from "./contract";
 export class HTTPClient implements IHTTPClient {
   private constructor(
     private client: AxiosInstance = axios,
-    private baseUrl: string = "http://localhost:8080"
+    private baseUrl: string = "https://api.github.com"
   ) {
     this.client = client;
     this.baseUrl = baseUrl;

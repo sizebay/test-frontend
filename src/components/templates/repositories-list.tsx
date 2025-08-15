@@ -45,10 +45,14 @@ export const mockGithubRepositories: TGithubRepository[] = [
   },
 ];
 
-export function RepositoriesList() {
+type RepositoriesListProps = {
+  repositories: Array<TGithubRepository>;
+};
+
+export function RepositoriesList({ repositories }: RepositoriesListProps) {
   return (
     <div className="w-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {mockGithubRepositories.map((repository) => (
+      {repositories.map((repository) => (
         <RepositoryCard key={repository.id} repository={repository} />
       ))}
     </div>

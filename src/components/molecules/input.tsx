@@ -37,6 +37,7 @@ export function Input({ leftIcon, rightIcon, ...props }: InputProps) {
           "selection:bg-primary selection:text-primary-foreground",
           "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
           "focus-visible:outline-none",
+          "w-full",
           props.className
         )}
       />
