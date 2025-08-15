@@ -45,6 +45,7 @@
   --surface-0: oklch(0.985 0 0);
   --surface-50: oklch(0.97 0 0);
   --surface-100: oklch(0.922 0 0);
+  --surface-200: oklch(85.61% 0.00218 14.747);
   --surface-900: oklch(0.145 0 0);
   --surface-primary: #030213;
   --surface-primary-foreground: oklch(0.985 0 0);
@@ -106,6 +107,7 @@
   --color-surface-0: var(--surface-0);
   --color-surface-50: var(--surface-50);
   --color-surface-100: var(--surface-100);
+  --color-surface-200: var(--surface-200);
   --color-surface-900: var(--surface-900);
   --color-surface-primary: var(--surface-primary);
   --color-surface-primary-foreground: var(--surface-primary-foreground);
