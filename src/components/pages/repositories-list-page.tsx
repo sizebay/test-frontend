@@ -7,7 +7,7 @@ import { HTTPClient } from "@/infra";
 import { ListRepositoriesService } from "@/services";
 
 import { Page, PageBody } from "../atoms";
-import { RepositoriesListPageHeader, SearchInput } from "../organisms";
+import { RepositoriesListPageHeader, SearchBox } from "../organisms";
 import { RepositoriesList, SkeletonRepositoriesList } from "../templates";
 
 type RepositoriesListPage = {
@@ -22,7 +22,7 @@ export async function RepositoriesListPage(props: RepositoriesListPage) {
     <Page key={Math.random()}>
       <RepositoriesListPageHeader />
       <PageBody>
-        <SearchInput />
+        <SearchBox />
         <Suspense fallback={<SkeletonRepositoriesList />}>
           <RepositoriesList
             repositoriesService={listRepositoriesService}

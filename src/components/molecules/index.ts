@@ -14,3 +14,4 @@ export * from "./go-back-button";
 export * from "./login-info-card";
 export * from "./link-button";
 export * from "./text-with-divider";
+export * from "./pagination";

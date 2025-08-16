@@ -13,7 +13,7 @@ export class GithubRepositoriesMapper {
       gitUrl: repository.git_url,
       sshUrl: repository.ssh_url,
       visibility: repository.visibility,
-      mainLanguage: repository.language || "",
+      mainLanguage: repository.language || "-",
       openIssuesCount: repository.open_issues_count,
       forksCount: repository.forks_count,
       watchCount: repository.watchers_count,

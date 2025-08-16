@@ -5,7 +5,7 @@ import { cn } from "@/helpers";
 export type PageProps = HTMLAttributes<HTMLDivElement>;
 
 export function Page(props: PageProps) {
-  return <main {...props} className="h-screen w-screen bg-background" />;
+  return <main {...props} className="w-screen bg-background" />;
 }
 
 export type PageBodyProps = HTMLAttributes<HTMLDivElement>;

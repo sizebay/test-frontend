@@ -1,5 +1,5 @@
 import { Page, PageBody } from "../atoms";
-import { RepositoriesListPageHeader, SearchInput } from "../organisms";
+import { RepositoriesListPageHeader, SearchBox } from "../organisms";
 import { UserNotFoundEmptyState } from "../molecules";
 
 export function RepositoriesListNotFoundPage() {
@@ -7,7 +7,7 @@ export function RepositoriesListNotFoundPage() {
     <Page>
       <RepositoriesListPageHeader />
       <PageBody>
-        <SearchInput />
+        <SearchBox />
         <UserNotFoundEmptyState />
       </PageBody>
     </Page>

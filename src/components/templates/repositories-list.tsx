@@ -6,7 +6,7 @@ import { IListRepositoriesService } from "@/services";
 
 import { RepositoryCard } from "../organisms";
 import { GithubRepositoriesMapper } from "@/mappers";
-import { SearchUserEmptyState } from "../molecules";
+import { Pagination, SearchUserEmptyState } from "../molecules";
 
 type RepositoriesListProps = {
   repositoriesService: IListRepositoriesService;
@@ -32,13 +32,16 @@ export async function RepositoriesList({
   if (!search?.search) return <SearchUserEmptyState />;
 
   return (
-    <div className="w-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {repositories.data?.map((repository) => (
-        <RepositoryCard
-          key={repository.id}
-          repository={GithubRepositoriesMapper.toFrontend(repository)}
-        />
-      ))}
+    <div className="flex flex-col gap-4">
+      <div className="w-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {repositories.data?.map((repository) => (
+          <RepositoryCard
+            key={repository.id}
+            repository={GithubRepositoriesMapper.toFrontend(repository)}
+          />
+        ))}
+      </div>
+      <Pagination totalPages={10} />
     </div>
   );
 }
