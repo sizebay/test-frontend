@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/helpers";
 
 export type ButtonVariants = "default" | "secondary" | "tertiary";
-export type ButtonSizes = "default";
+export type ButtonSizes = "default" | "icon";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariants;
@@ -27,6 +27,7 @@ const buttonVariants = cva(
       },
       size: {
         default: "h-8 px-4 py-2",
+        icon: "h-8 w-8",
       },
     },
     defaultVariants: {
@@ -50,6 +51,7 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
+      type="button"
       {...props}
       className={cn(buttonVariants({ variant, size }), props.className)}
     >

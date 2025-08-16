@@ -1,11 +1,10 @@
 "use client";
 
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Input, InputProps } from "../molecules";
 import { Button } from "../atoms";
-import { useCallback, useState } from "react";
 
 type SearchBoxProps = InputProps;
 
@@ -24,6 +23,13 @@ export function SearchBox(props: SearchBoxProps) {
     } else {
       params.delete("search");
     }
+    router.replace(`${pathname}?${params.toString()}`);
+  };
+
+  const clearSearch = () => {
+    const params = new URLSearchParams(searchParams);
+    params.set("page", "1");
+    params.delete("search");
     router.replace(`${pathname}?${params.toString()}`);
   };
 
@@ -46,6 +52,11 @@ export function SearchBox(props: SearchBoxProps) {
         <Button className="w-full lg:w-fit" variant="secondary" type="submit">
           Buscar
         </Button>
+        {searchParams.get("search") && (
+          <Button size="icon" variant="tertiary" onClick={clearSearch}>
+            <X size={16} />
+          </Button>
+        )}
       </div>
     </form>
   );
