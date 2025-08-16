@@ -1,6 +1,10 @@
-import axios, { type AxiosError, type AxiosInstance } from "axios";
+import axios, {
+  HttpStatusCode,
+  type AxiosError,
+  type AxiosInstance,
+} from "axios";
 
-import type { HTTPRequest, IHTTPClient } from "./contract";
+import type { HTTPRequest, IHTTPClient, TDefaultResponse } from "./contract";
 
 export class HTTPClient implements IHTTPClient {
   private constructor(
@@ -17,7 +21,7 @@ export class HTTPClient implements IHTTPClient {
 
   async sendRequest<TResponse = unknown, TBody = unknown>(
     request: HTTPRequest<TBody>
-  ): Promise<TResponse> {
+  ): Promise<TDefaultResponse<TResponse>> {
     const { endpoint, headers, method, params, body } = request;
 
     try {
@@ -28,13 +32,24 @@ export class HTTPClient implements IHTTPClient {
         params,
         data: body,
       });
-      return data;
+
+      return {
+        data,
+        error: null,
+      };
     } catch (error) {
       const axiosError = error as AxiosError;
-      const status = axiosError.response?.status;
-      const message = axiosError.response?.data || axiosError.message;
+      const status = axiosError.response?.status as HttpStatusCode;
+      const message = (axiosError.response?.data ||
+        axiosError.message) as string;
 
-      throw new Error(`Erro com status ${status}: ${message}`);
+      return {
+        data: null,
+        error: {
+          status,
+          message,
+        },
+      };
     }
   }
 }

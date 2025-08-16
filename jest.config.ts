@@ -15,8 +15,20 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: "coverage",
   testEnvironment: "jsdom",
-  moduleNameMapper: { "^@/(.*)$": "<rootDir>/$1" },
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/$1",
+    "next-auth": "<rootDir>/src/__test__/mocks/next-auth.ts",
+  },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],
+  testMatch: ["**/__test__/**/*.spec.ts?(x)"],
+  transform: {
+    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
+  },
+  transformIgnorePatterns: [
+    "/node_modules/",
+    "^.+\\.module\\.(css|sass|scss)$",
+  ],
 };
 
 export default createNextJestConfig(config);

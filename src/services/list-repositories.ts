@@ -1,21 +1,39 @@
 import { GetGithubRepostoryDTO } from "@/DTOs";
-import { HTTPMethod, type IHTTPClient } from "@/infra";
+import { HTTPMethod, TDefaultResponse, type IHTTPClient } from "@/infra";
 
 export interface IListRepositoriesService {
-  exec(username: string): Promise<Array<GetGithubRepostoryDTO>>;
+  exec(
+    username: string,
+    token?: string
+  ): Promise<TDefaultResponse<Array<GetGithubRepostoryDTO>>>;
 }
 
 export class ListRepositoriesService implements IListRepositoriesService {
   constructor(private readonly httpClient: IHTTPClient) {}
 
-  async exec(username: string): Promise<Array<GetGithubRepostoryDTO>> {
-    if (!username) return [];
-    const data = await this.httpClient.sendRequest<
+  async exec(
+    username: string,
+    token?: string
+  ): Promise<TDefaultResponse<Array<GetGithubRepostoryDTO>>> {
+    if (!username)
+      return {
+        data: [],
+        error: null,
+      };
+
+    const { data, error } = await this.httpClient.sendRequest<
       Array<GetGithubRepostoryDTO>
     >({
       endpoint: `/users/${username}/repos`,
       method: HTTPMethod.GET,
+      headers: {
+        authorization: token ? `Bearer ${token}` : "",
+      },
     });
-    return data;
+
+    return {
+      data,
+      error,
+    };
   }
 }

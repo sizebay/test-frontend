@@ -18,7 +18,7 @@ export function Input({ leftIcon, rightIcon, ...props }: InputProps) {
   return (
     <div
       className={cn(
-        "border border-neutral-500",
+        "border border-neutral-400",
         "flex items-center gap-2 h-8 w-full min-w-0 rounded-md px-2 text-sm bg-neutral-200 transition-all outline-none",
         "focus-within:border-ring focus-within:ring-ring/50 focus-within:ring-[3px]",
         "hover:bg-background/80",

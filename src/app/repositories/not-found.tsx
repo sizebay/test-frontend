@@ -1,5 +1,5 @@
 import { RepositoriesListNotFoundPage } from "@/components";
 
-export default function NotFound() {
+export default async function NotFound() {
   return <RepositoriesListNotFoundPage />;
 }

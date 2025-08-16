@@ -86,7 +86,7 @@ export type CardDescriptionProps = TypographyProps;
 
 export function CardDescription(props: CardDescriptionProps) {
   return (
-    <Typography {...props} size="md" className="text-neutral-500 break-all" />
+    <Typography {...props} size="md" className="text-neutral-500 break-words" />
   );
 }
 

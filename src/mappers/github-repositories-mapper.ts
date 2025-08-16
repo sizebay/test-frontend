@@ -3,10 +3,8 @@ import { DateFormatter } from "@/formatters";
 import { TGithubRepository } from "@/types";
 
 export class GithubRepositoriesMapper {
-  static toFrontend(
-    repositories: Array<GetGithubRepostoryDTO>
-  ): Array<TGithubRepository> {
-    return repositories.map((repository) => ({
+  static toFrontend(repository: GetGithubRepostoryDTO): TGithubRepository {
+    return {
       id: repository.id,
       name: repository.name,
       description: repository.description || "Sem descrição",
@@ -25,6 +23,6 @@ export class GithubRepositoriesMapper {
       languages: [], // TODO: Mapear linguagens principais
       closedIssuesCount: 0, // TODO: Mapear issues fechadas
       issuesCount: 0, // TODO: Mapear issues fechadas
-    }));
+    };
   }
 }

@@ -37,7 +37,11 @@ export function SearchInput(props: SearchInputProps) {
         defaultValue={defaultValue}
         {...props}
       />
-      <Button className="w-full lg:w-fit" onClick={handleSearch}>
+      <Button
+        className="w-full lg:w-fit"
+        onClick={handleSearch}
+        variant="secondary"
+      >
         Buscar
       </Button>
     </div>

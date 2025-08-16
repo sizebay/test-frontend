@@ -1,9 +1,21 @@
+import { HttpStatusCode } from "axios";
+
 export enum HTTPMethod {
   GET = "GET",
   POST = "POST",
   PATCH = "PATCH",
   DELETE = "DELETE",
 }
+
+export type TError = {
+  message: string;
+  status: HttpStatusCode;
+};
+
+export type TDefaultResponse<TResponse = unknown> = {
+  data: TResponse | null;
+  error: TError | null;
+};
 
 export type HTTPRequest<TBody = unknown> = {
   endpoint: string;
@@ -16,5 +28,5 @@ export type HTTPRequest<TBody = unknown> = {
 export interface IHTTPClient {
   sendRequest<TResponse = unknown, TBody = unknown>(
     request: HTTPRequest<TBody>
-  ): Promise<TResponse>;
+  ): Promise<TDefaultResponse<TResponse>>;
 }

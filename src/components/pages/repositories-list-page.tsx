@@ -1,38 +1,32 @@
+"use server";
+
 import { Suspense } from "react";
 
 import { AsyncSearchParams } from "@/types";
-import { GithubRepositoriesMapper } from "@/mappers";
 import { HTTPClient } from "@/infra";
 import { ListRepositoriesService } from "@/services";
 
 import { Page, PageBody } from "../atoms";
-import { SearchInput } from "../organisms";
+import { RepositoriesListPageHeader, SearchInput } from "../organisms";
 import { RepositoriesList, SkeletonRepositoriesList } from "../templates";
-import { SearchUserEmptyState } from "../molecules";
 
 type RepositoriesListPage = {
   searchParams: AsyncSearchParams;
 };
 
 export async function RepositoriesListPage(props: RepositoriesListPage) {
-  const searchParams = await props.searchParams.searchParams;
-  const search = searchParams?.search || "";
-
   const httpClient = HTTPClient.create();
   const listRepositoriesService = new ListRepositoriesService(httpClient);
-  const repositories = await listRepositoriesService.exec(search);
 
   return (
-    <Page>
+    <Page key={Math.random()}>
+      <RepositoriesListPageHeader />
       <PageBody>
         <SearchInput />
-        {!search && <SearchUserEmptyState />}
-        <Suspense
-          key={searchParams?.search}
-          fallback={<SkeletonRepositoriesList />}
-        >
+        <Suspense fallback={<SkeletonRepositoriesList />}>
           <RepositoriesList
-            repositories={GithubRepositoriesMapper.toFrontend(repositories)}
+            repositoriesService={listRepositoriesService}
+            searchParams={props.searchParams}
           />
         </Suspense>
       </PageBody>

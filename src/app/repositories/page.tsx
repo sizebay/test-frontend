@@ -1,6 +1,6 @@
 import { RepositoriesListPage } from "@/components";
 import { AsyncSearchParams } from "@/types";
 
-export default async function Home(props: AsyncSearchParams) {
+export default async function Page(props: AsyncSearchParams) {
   return <RepositoriesListPage searchParams={props} />;
 }
