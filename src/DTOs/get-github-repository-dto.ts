@@ -1,12 +1,13 @@
 import { TGithubRepositoryVisibility } from "@/types";
+import { IGetGithubUserDTO } from "./get-github-user-dto";
 
-export interface GetGithubRepostoryDTO {
+export interface IGetGithubRepostoryDTO {
   id: number;
   node_id: string;
   name: string;
   full_name: string;
   private: boolean;
-  owner: GetGithubRepostoryDTO;
+  owner: IGetGithubUserDTO;
   html_url: string;
   description: string | null;
   fork: boolean;

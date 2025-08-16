@@ -1,5 +1,3 @@
-import { HttpStatusCode } from "axios";
-
 export enum HTTPMethod {
   GET = "GET",
   POST = "POST",
@@ -7,9 +5,13 @@ export enum HTTPMethod {
   DELETE = "DELETE",
 }
 
+export enum HTTPStatus {
+  NOT_FOUND = 404,
+}
+
 export type TError = {
   message: string;
-  status: HttpStatusCode;
+  status: HTTPStatus;
 };
 
 export type TDefaultResponse<TResponse = unknown> = {
@@ -22,7 +24,7 @@ export type HTTPRequest<TBody = unknown> = {
   method: HTTPMethod;
   body?: TBody;
   headers?: Record<string, string>;
-  params?: Record<string, string>;
+  params?: Record<string, string | number>;
 };
 
 export interface IHTTPClient {

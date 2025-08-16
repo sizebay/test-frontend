@@ -1,9 +1,9 @@
-import { GetGithubRepostoryDTO } from "@/DTOs";
+import { IGetGithubRepostoryDTO } from "@/DTOs";
 import { DateFormatter } from "@/formatters";
 import { TGithubRepository } from "@/types";
 
 export class GithubRepositoriesMapper {
-  static toFrontend(repository: GetGithubRepostoryDTO): TGithubRepository {
+  static toFrontend(repository: IGetGithubRepostoryDTO): TGithubRepository {
     return {
       id: repository.id,
       name: repository.name,

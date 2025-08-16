@@ -1,6 +1,7 @@
 import { HTMLAttributes } from "react";
 import { Typography, TypographyProps } from "./typography";
 import { cn } from "@/helpers";
+import { ClassNames } from "storybook/internal/theming";
 
 export type PageProps = HTMLAttributes<HTMLDivElement>;
 
@@ -29,7 +30,10 @@ export function PageTitle(props: PageTitleProps) {
     <Typography
       {...props}
       size="3xl"
-      className="w-full text-left text-neutral-900 font-medium flex items-center justify-start gap-2"
+      className={cn(
+        "w-full text-left text-neutral-900 font-medium flex items-center justify-start gap-2",
+        props.className
+      )}
     />
   );
 }

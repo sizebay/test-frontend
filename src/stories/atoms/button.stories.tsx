@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
 
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import type { Meta, StoryObj } from "@storybook/nextjs";
 import { fn } from "storybook/internal/test";
 
 import { Button } from "@/components";
@@ -72,6 +72,9 @@ const meta = {
     },
   },
   tags: ["autodocs"],
+  args: {
+    onClick: fn(),
+  },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -81,7 +84,6 @@ export const Default: Story = {
   args: {
     variant: "default",
     children: "Clicar",
-    onClick: () => fn(),
   },
 };
 
@@ -89,7 +91,6 @@ export const Secondary: Story = {
   args: {
     variant: "secondary",
     children: "Clicar",
-    onClick: () => fn(),
   },
 };
 
@@ -97,7 +98,6 @@ export const Tertiary: Story = {
   args: {
     variant: "tertiary",
     children: "Clicar",
-    onClick: () => fn(),
   },
 };
 

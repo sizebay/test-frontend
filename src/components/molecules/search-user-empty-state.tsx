@@ -10,7 +10,7 @@ import {
 
 export function SearchUserEmptyState() {
   return (
-    <EmptyState>
+    <EmptyState data-testid="search-user-empty-state">
       <EmptyStateBody>
         <EmptyStateIcon>
           <Search />

@@ -1,5 +1,6 @@
 export type AsyncSearchParams = {
-  searchParams?: Promise<{
+  searchParams: Promise<{
     search?: string;
+    page?: number;
   }>;
 };

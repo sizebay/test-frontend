@@ -1,3 +1,5 @@
+"use client";
+
 import { cloneElement, HTMLAttributes, JSX } from "react";
 
 import { cn } from "@/helpers";

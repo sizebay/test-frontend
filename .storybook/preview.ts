@@ -1,4 +1,4 @@
-import type { Preview } from "@storybook/nextjs-vite";
+import type { Preview } from "@storybook/nextjs";
 
 import "@/global/styles.css";
 
@@ -9,9 +9,6 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
-    },
-    a11y: {
-      test: "todo",
     },
   },
 };

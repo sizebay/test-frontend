@@ -1,32 +1,39 @@
-import { notFound } from "next/navigation";
-import { getSession } from "@/next-auth";
-
-import { AsyncSearchParams } from "@/types";
-import { IListRepositoriesService } from "@/services";
-
-import { RepositoryCard } from "../organisms";
+import { RequestParams } from "@/types";
 import { GithubRepositoriesMapper } from "@/mappers";
-import { Pagination, SearchUserEmptyState } from "../molecules";
+import { HTTPStatus, IHTTPClient } from "@/infra";
+
+import { RepositoryCard, SearchBox } from "../organisms";
+import {
+  Pagination,
+  SearchUserEmptyState,
+  UserNotFoundEmptyState,
+} from "../molecules";
+import { IGetRepositoriesAction } from "@/actions";
 
 type RepositoriesListProps = {
-  repositoriesService: IListRepositoriesService;
-  searchParams: AsyncSearchParams;
+  getRepositoriesAction: IGetRepositoriesAction;
+  httpClient: IHTTPClient;
+  requestParams: RequestParams & { token?: string };
 };
 
 export async function RepositoriesList({
-  repositoriesService,
-  searchParams: { searchParams },
+  getRepositoriesAction,
+  httpClient,
+  requestParams,
 }: RepositoriesListProps) {
-  const search = await searchParams;
-  const session = await getSession();
-
-  const repositories = await repositoriesService.exec(
-    search?.search || "",
-    session?.accessToken
-  );
+  const repositories = await getRepositoriesAction({
+    httpClient,
+    options: requestParams,
+  });
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full">
+      <SearchBox />
+      {!requestParams?.search && <SearchUserEmptyState />}
+      {repositories.error?.status === HTTPStatus.NOT_FOUND && (
+        <UserNotFoundEmptyState />
+      )}
+
       <div className="w-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {repositories.data?.map((repository) => (
           <RepositoryCard

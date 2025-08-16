@@ -12,6 +12,7 @@ export function GithubSignOutButton({ ...props }: GithubSignOutButtonProps) {
     <Button
       leftIcon={<LogOut size={16} />}
       onClick={() => signOut({ callbackUrl: "/login" })}
+      variant="tertiary"
       {...props}
     >
       Sair

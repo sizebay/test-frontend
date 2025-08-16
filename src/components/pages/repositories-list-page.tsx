@@ -3,30 +3,33 @@
 import { Suspense } from "react";
 
 import { AsyncSearchParams } from "@/types";
-import { HTTPClient } from "@/infra";
-import { ListRepositoriesService } from "@/services";
+import { GithubHTTPClient } from "@/infra";
 
 import { Page, PageBody } from "../atoms";
-import { RepositoriesListPageHeader, SearchBox } from "../organisms";
+import { RepositoriesListPageHeader } from "../organisms";
 import { RepositoriesList, SkeletonRepositoriesList } from "../templates";
+
+import { getSession } from "@/next-auth";
+import { getRepositories } from "@/actions";
 
 type RepositoriesListPage = {
   searchParams: AsyncSearchParams;
 };
 
 export async function RepositoriesListPage(props: RepositoriesListPage) {
-  const httpClient = HTTPClient.create();
-  const listRepositoriesService = new ListRepositoriesService(httpClient);
+  const session = await getSession();
+  const githubHttpClient = new GithubHTTPClient();
+  const { search, page } = await props.searchParams.searchParams;
 
   return (
     <Page key={Math.random()}>
       <RepositoriesListPageHeader />
       <PageBody>
-        <SearchBox />
         <Suspense fallback={<SkeletonRepositoriesList />}>
           <RepositoriesList
-            repositoriesService={listRepositoriesService}
-            searchParams={props.searchParams}
+            getRepositoriesAction={getRepositories}
+            httpClient={githubHttpClient}
+            requestParams={{ page, token: session?.accessToken, search }}
           />
         </Suspense>
       </PageBody>

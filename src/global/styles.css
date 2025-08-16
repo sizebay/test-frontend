@@ -1,13 +1,10 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
 
 :root {
   /* Font */
   --font-size-base: 14px;
   --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-sans: "Open Sans", Arial, Helvetica, sans-serif;
+  --font-weight-medium: 700;
 
   /* Neutral */
   --neutral-0: #ffffff;
@@ -69,6 +66,7 @@
   --text-5xl: calc(var(--font-size-base) * 3);       /* ~42px */
   --font-normal: var(--font-weight-normal);
   --font-medium: var(--font-weight-medium);
+  --font-main: var(--font-open-sans);
 
   /* Neutral */
   --color-neutral-0: var(--neutral-0);
@@ -124,6 +122,5 @@
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-sans);
-  font-display: swap;
+  font-family: var(--font-main);
 }

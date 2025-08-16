@@ -10,7 +10,7 @@ import {
 
 export function UserNotFoundEmptyState() {
   return (
-    <EmptyState>
+    <EmptyState data-testid="user-not-found-empty-state">
       <EmptyStateBody>
         <EmptyStateIcon>
           <User />

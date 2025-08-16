@@ -10,7 +10,6 @@ export * from "./search-user-empty-state";
 export * from "./user-error-empty-state";
 export * from "./github-signin-button";
 export * from "./github-signout-button";
-export * from "./go-back-button";
 export * from "./login-info-card";
 export * from "./link-button";
 export * from "./text-with-divider";

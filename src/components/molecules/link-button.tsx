@@ -8,7 +8,9 @@ type LinkButton = ButtonProps & LinkProps;
 export function LinkButton(props: LinkButton) {
   return (
     <Link href={props.href} className="w-full">
-      <Button {...props}>{props.children}</Button>
+      <Button variant="secondary" {...props}>
+        {props.children}
+      </Button>
     </Link>
   );
 }
