@@ -35,6 +35,7 @@ export function Pagination({ totalPages }: PaginationProps) {
         <Button
           key={page}
           variant={page === currentPage ? "default" : "tertiary"}
+          size="icon"
         >
           <Link href={createPageURL(page)}>{page}</Link>
         </Button>

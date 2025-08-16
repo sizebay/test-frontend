@@ -18,11 +18,15 @@ export function SearchBox(props: SearchBoxProps) {
   const handleSearch = (searchTerm: string) => {
     const params = new URLSearchParams(searchParams);
     params.set("page", "1");
+
+    if (params.get("search") === searchTerm) return;
+
     if (searchTerm) {
       params.set("search", searchTerm);
     } else {
       params.delete("search");
     }
+
     router.replace(`${pathname}?${params.toString()}`);
   };
 

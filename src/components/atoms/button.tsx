@@ -20,10 +20,11 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-neutral-800 text-background hover:bg-neutral-800/90",
+        default: "bg-neutral-800 text-background hover:bg-neutral-800/75",
         secondary:
           "bg-neutral-100 text-foreground hover:bg-accent-100 border border-neutral-400",
-        tertiary: "bg-transparent text-foreground hover:bg-accent-100",
+        tertiary:
+          "bg-transparent text-foreground hover:bg-accent-100 hover:opacity-50",
       },
       size: {
         default: "h-8 px-4 py-2",

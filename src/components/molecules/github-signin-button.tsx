@@ -11,7 +11,7 @@ export function GithubSignInButton({ ...props }: GithubSignInButtonProps) {
   return (
     <Button
       leftIcon={<Github size={16} />}
-      onClick={() => signIn("github", { callbackUrl: "/repositories" })}
+      onClick={() => signIn("github", { callbackUrl: "/" })}
       {...props}
     >
       Entrar com Github
