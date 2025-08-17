@@ -10,7 +10,7 @@ type GithubSignOutButtonProps = ButtonProps;
 export function GithubSignOutButton({ ...props }: GithubSignOutButtonProps) {
   return (
     <Button
-      leftIcon={<LogOut size={16} />}
+      leftIcon={<LogOut />}
       onClick={() => signOut({ callbackUrl: "/login" })}
       variant="tertiary"
       {...props}

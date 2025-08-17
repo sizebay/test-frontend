@@ -9,6 +9,7 @@ import {
   UserNotFoundEmptyState,
 } from "../molecules";
 import { IGetRepositoriesAction } from "@/actions";
+import Link from "next/link";
 
 type RepositoriesListProps = {
   getRepositoriesAction: IGetRepositoriesAction;
@@ -36,10 +37,14 @@ export async function RepositoriesList({
 
       <div className="w-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {repositories.data?.map((repository) => (
-          <RepositoryCard
+          <Link
             key={repository.id}
-            repository={GithubRepositoriesMapper.toFrontend(repository)}
-          />
+            href={`/${repository.owner.login}/${repository.name}`}
+          >
+            <RepositoryCard
+              repository={GithubRepositoriesMapper.toFrontend(repository)}
+            />
+          </Link>
         ))}
       </div>
       <Pagination totalPages={10} />

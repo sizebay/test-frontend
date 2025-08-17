@@ -8,14 +8,14 @@
 - [x] Estados de loading, erro e dados vazios
 
 ## 2. Página de Detalhes do Repositório
-- [] Nome do repositório
-- [] Descrição completa
-- [] Número de estrelas
-- [] Número de forks
+- [x] Nome do repositório
+- [x] Descrição completa
+- [x] Número de estrelas
+- [x] Número de forks
 - [] Issues abertas
-- [] Linguagem principal
-- [] Data de criação e última atualização
-- [] Link para o repositório no GitHub
+- [x] Linguagem principal
+- [x] Data de criação e última atualização
+- [x] Link para o repositório no GitHub
 
 # Requisitos Técnicos
 ## 1. Design Atômico

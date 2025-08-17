@@ -9,7 +9,7 @@ export function SkeletonRepositoryCard() {
     <Card>
       <SkeletonRepositoryCardHeader />
       <CardBody className="h-24">
-        <Skeleton className={"h-12 w-full"} />
+        <Skeleton className="h-12 w-full" />
       </CardBody>
       <SkeletonRepositoryCardFooter />
     </Card>

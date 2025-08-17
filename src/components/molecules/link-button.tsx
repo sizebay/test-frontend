@@ -1,16 +1,23 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
+import { cn } from "@/helpers";
+
 import { Button, type ButtonProps } from "../atoms";
-import Link, { type LinkProps } from "next/link";
 
-type LinkButton = ButtonProps & LinkProps;
+type LinkButton = ButtonProps & { href: string };
 
-export function LinkButton(props: LinkButton) {
+export function LinkButton({ href, ...props }: LinkButton) {
+  const router = useRouter();
   return (
-    <Link href={props.href} className="w-full">
-      <Button variant="secondary" {...props}>
-        {props.children}
-      </Button>
-    </Link>
+    <Button
+      variant="secondary"
+      onClick={() => router.replace(href)}
+      {...props}
+      className={cn(props.className, "self-start")}
+    >
+      {props.children}
+    </Button>
   );
 }

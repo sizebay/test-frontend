@@ -39,7 +39,7 @@ const buttonVariants = cva(
 
 const renderButtonIcon = (icon: JSX.Element) =>
   cloneElement(icon, {
-    size: 16,
+    className: "w-4 h-4",
   });
 
 export function Button({

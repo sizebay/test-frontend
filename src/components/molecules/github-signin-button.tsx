@@ -10,7 +10,7 @@ type GithubSignInButtonProps = ButtonProps;
 export function GithubSignInButton({ ...props }: GithubSignInButtonProps) {
   return (
     <Button
-      leftIcon={<Github size={16} />}
+      leftIcon={<Github />}
       onClick={() => signIn("github", { callbackUrl: "/" })}
       {...props}
     >
