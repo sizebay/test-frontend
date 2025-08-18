@@ -1,11 +1,10 @@
-import { type TGithubRepository } from "@/types";
-
 import {
   Card,
   CardBody,
   CardDetail,
   CardHeader,
   CardProps,
+  CardText,
   CardTitle,
   Divider,
 } from "../atoms";
@@ -30,7 +29,7 @@ export function RepositoryLanguages({
         {languages.map((language) => (
           <CardDetail key={language}>
             <div className="w-2 h-2 bg-helper-amber rounded-full" />
-            {language}
+            <CardText>{language}</CardText>
           </CardDetail>
         ))}
       </CardBody>

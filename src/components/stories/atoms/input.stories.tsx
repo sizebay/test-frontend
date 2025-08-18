@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs";
 import { Input } from "@/components";
 
 const meta = {
-  title: "Molecules/Input",
+  title: "Atoms/Input",
   component: Input,
   parameters: {
     layout: "centered",

@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button, Input, InputProps } from "../atoms";
 
-type SearchBoxProps = InputProps;
+type SearchBoxProps = Omit<InputProps, "">;
 
 export function SearchBox(props: SearchBoxProps) {
   const searchParams = useSearchParams();
@@ -53,11 +53,21 @@ export function SearchBox(props: SearchBoxProps) {
           {...props}
         />
         <div className="flex gap-4 w-full lg:w-fit">
-          <Button className="w-full lg:w-fit" variant="secondary" type="submit">
+          <Button
+            className="w-full lg:w-fit"
+            variant="secondary"
+            type="submit"
+            disabled={props.disabled}
+          >
             Buscar
           </Button>
           {searchParams.get("search") && (
-            <Button size="icon" variant="tertiary" onClick={clearSearch}>
+            <Button
+              size="icon"
+              variant="tertiary"
+              onClick={clearSearch}
+              disabled={props.disabled}
+            >
               <X size={16} />
             </Button>
           )}
