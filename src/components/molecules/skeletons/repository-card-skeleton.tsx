@@ -13,7 +13,7 @@ import {
 export function RepositoryCardSkeleton() {
   return (
     <Card>
-      <SkeletonRepositoryCardHeader />
+      <RepositoryCardHeaderSkeleton />
       <CardBody className="h-24">
         <Skeleton className="h-12 w-full" />
       </CardBody>
@@ -45,9 +45,9 @@ export function RepositoryCardFooterSkeleton() {
   );
 }
 
-export function SkeletonRepositoryCardHeader() {
+export function RepositoryCardHeaderSkeleton() {
   return (
-    <CardHeader className={"justify-start lg:justify-between"}>
+    <CardHeader className="justify-start lg:justify-between">
       <Skeleton className="h-5 w-52" />
       <Skeleton className="h-5 w-12" />
     </CardHeader>

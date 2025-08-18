@@ -10,7 +10,7 @@ import { getSession } from "@/next-auth";
 import { Page } from "../../atoms";
 import {
   RepositoryDetailPageHeader,
-  RepositoryDetailSkeleton,
+  RepositorySummarySkeleton,
 } from "../../molecules";
 import { RepositoryDetailPageBody } from "../../templates";
 
@@ -37,7 +37,7 @@ export async function RepositoryDetailPage({
   return (
     <Page key={Math.random()}>
       <RepositoryDetailPageHeader />
-      <Suspense fallback={<RepositoryDetailSkeleton />}>
+      <Suspense fallback={<RepositorySummarySkeleton />}>
         <RepositoryDetailPageBody
           getRepositoryByIdService={getRepositoryByIdService}
         />
