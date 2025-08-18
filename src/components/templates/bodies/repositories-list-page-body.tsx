@@ -2,7 +2,7 @@ import { GithubRepositoriesMapper } from "@/utils";
 import { HTTPStatus } from "@/infra";
 import { IGetRepositoriesService } from "@/services";
 
-import { RepositoriesList } from "../../organisms";
+import { RepositoriesList, RepositoriesListPagination } from "../../organisms";
 import {
   SearchBox,
   UserNotFoundEmptyState,
@@ -40,6 +40,7 @@ export async function RepositoriesListPageBody({
           )}
         />
       )}
+      <RepositoriesListPagination links={repositories.headers.link} />
     </PageBody>
   );
 }

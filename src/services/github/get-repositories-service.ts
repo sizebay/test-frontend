@@ -14,7 +14,7 @@ export class GetRepositoriesService implements IGetRepositoriesService {
 
   public async exec() {
     const { page = 1, perPage = 10, search, token } = this.serviceParams;
-    if (!search) return { data: [], error: null };
+    if (!search) return { data: [], error: null, headers: {} };
 
     const response = await this.httpClient.sendRequest<
       Array<IGetGithubRepostoryDTO>

@@ -1,3 +1,5 @@
+import { AxiosResponseHeaders } from "axios";
+
 export enum HTTPMethod {
   GET = "GET",
   POST = "POST",
@@ -17,6 +19,7 @@ export type TError = {
 export type TDefaultResponse<TResponse = unknown> = {
   data: TResponse | null;
   error: TError | null;
+  headers: Record<string, string>;
 };
 
 export type HTTPRequest<TBody = unknown> = {

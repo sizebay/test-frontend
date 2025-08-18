@@ -52,14 +52,16 @@ export function SearchBox(props: SearchBoxProps) {
           defaultValue={defaultValue}
           {...props}
         />
-        <Button className="w-full lg:w-fit" variant="secondary" type="submit">
-          Buscar
-        </Button>
-        {searchParams.get("search") && (
-          <Button size="icon" variant="tertiary" onClick={clearSearch}>
-            <X size={16} />
+        <div className="flex gap-4 w-full lg:w-fit">
+          <Button className="w-full lg:w-fit" variant="secondary" type="submit">
+            Buscar
           </Button>
-        )}
+          {searchParams.get("search") && (
+            <Button size="icon" variant="tertiary" onClick={clearSearch}>
+              <X size={16} />
+            </Button>
+          )}
+        </div>
       </div>
     </form>
   );

@@ -1,4 +1,8 @@
-import axios, { type AxiosError, type AxiosInstance } from "axios";
+import axios, {
+  AxiosResponseHeaders,
+  type AxiosError,
+  type AxiosInstance,
+} from "axios";
 
 import type {
   HTTPRequest,
@@ -30,7 +34,7 @@ export abstract class HTTPClient implements IHTTPClient {
     const { endpoint, headers, method, params, body } = request;
 
     try {
-      const { data } = await this.client.request<TResponse>({
+      const response = await this.client.request<TResponse>({
         url: `${this.baseUrl}${endpoint}`,
         method,
         headers,
@@ -39,7 +43,8 @@ export abstract class HTTPClient implements IHTTPClient {
       });
 
       return {
-        data,
+        data: response.data,
+        headers: response.headers as AxiosResponseHeaders,
         error: null,
       };
     } catch (error) {
@@ -50,6 +55,7 @@ export abstract class HTTPClient implements IHTTPClient {
 
       return {
         data: null,
+        headers: axiosError.response?.headers as AxiosResponseHeaders,
         error: {
           status,
           message,

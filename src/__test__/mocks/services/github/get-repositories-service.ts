@@ -5,6 +5,7 @@ import { HTTPStatus, TError } from "@/infra";
 
 import { makeFakeGithubUserDTO } from "../../factories";
 import { IGetGithubRepostoryDTO } from "@/DTOs";
+import { AxiosResponseHeaders } from "axios";
 
 export class GetRepositoriesMockService implements IGetRepositoriesService {
   constructor(
@@ -24,10 +25,11 @@ export class GetRepositoriesMockService implements IGetRepositoriesService {
       defaultRepositories,
     } = this.serviceParams;
 
-    if (!search) return { data: [], error: null };
+    if (!search) return { data: [], error: null, headers: {} };
     if (error)
       return {
         data: [],
+        headers: {},
         error,
       };
 
@@ -43,11 +45,12 @@ export class GetRepositoriesMockService implements IGetRepositoriesService {
     );
 
     if (userRepositories.length > 0) {
-      return { data: userRepositories, error: null };
+      return { data: userRepositories, error: null, headers: {} };
     }
 
     return {
       data: [],
+      headers: {},
       error: {
         status: HTTPStatus.NOT_FOUND,
         message: `Usuário ${search} não encontrado`,

@@ -1,30 +1,14 @@
 "use client";
 
-import { BadgeAlert, Eye, GitFork, LucideProps, Star } from "lucide-react";
-
-import { TGithubRepository } from "@/types";
-import { cn, RepositoryVisibilityTranslator } from "@/utils";
-
 import {
-  Badge,
   CardBody,
-  CardDescription,
   CardDetail,
   CardFooter,
-  CardFooterProps,
   CardHeader,
-  CardHeaderProps,
-  CardProps,
-  CardText,
-  CardTitle,
-  CardTitleProps,
   PageBody,
   Skeleton,
-  type CardDescriptionProps,
 } from "../../atoms";
 
-import { RepositoryVisibilityIcon } from "../repository-visibility-icon";
-import { RepositoryActions } from "../repository-actions";
 import { RepositoryActionsSkeleton } from "./repository-actions-skeleton";
 
 export function RepositorySummaryHeaderSkeleton() {
