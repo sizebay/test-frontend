@@ -9,7 +9,7 @@ export interface TGithubRepository {
   };
   url: string;
   visibility: TGithubRepositoryVisibility;
-  languages: Array<string>;
+  languages?: Array<string>;
   mainLanguage: string;
   description: string;
   starsCount: number;

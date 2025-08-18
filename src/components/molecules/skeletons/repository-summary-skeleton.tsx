@@ -10,6 +10,7 @@ import {
 } from "../../atoms";
 
 import { RepositoryActionsSkeleton } from "./repository-actions-skeleton";
+import { RepositoryLanguagesSkeleton } from "./repository-languages-skeleton";
 
 export function RepositorySummaryHeaderSkeleton() {
   return (
@@ -58,6 +59,7 @@ export function RepositorySummarySkeleton() {
           <Skeleton className="h-4 w-60" />
         </div>
       </div>
+      <RepositoryLanguagesSkeleton />
     </PageBody>
   );
 }

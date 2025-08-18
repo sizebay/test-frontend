@@ -24,7 +24,6 @@ export class GithubRepositoriesMapper {
         id: repository.owner.id,
         name: repository.owner.login,
       },
-      languages: [], // TODO: Mapear linguagens principais
     };
   }
 }

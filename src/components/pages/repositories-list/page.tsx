@@ -6,7 +6,7 @@ import { AsyncSearchParams } from "@/types";
 import { GithubHTTPClient } from "@/infra";
 import { GetRepositoriesService } from "@/services";
 
-import { Page, PageProps } from "../../atoms";
+import { Page, PageBody, PageProps } from "../../atoms";
 import {
   RepositoriesListPageHeader,
   RepositoriesListSkeleton,
@@ -33,12 +33,14 @@ export async function RepositoriesListPage({
   return (
     <Page key={Math.random()} {...props}>
       <RepositoriesListPageHeader />
-      <Suspense fallback={<RepositoriesListSkeleton />}>
-        <RepositoriesListPageBody
-          getRepositoriesService={getRepositoriesService}
-          search={search}
-        />
-      </Suspense>
+      <PageBody>
+        <Suspense fallback={<RepositoriesListSkeleton />}>
+          <RepositoriesListPageBody
+            getRepositoriesService={getRepositoriesService}
+            search={search}
+          />
+        </Suspense>
+      </PageBody>
     </Page>
   );
 }

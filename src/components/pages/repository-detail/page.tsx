@@ -2,12 +2,15 @@
 
 import { Suspense } from "react";
 
-import { GetRepositoryByIdService } from "@/services";
+import {
+  GetRepositoryByIdService,
+  GetRepositoryLanguagesService,
+} from "@/services";
 import { GithubHTTPClient } from "@/infra";
 import { AsyncDynamicParams } from "@/types";
 import { getSession } from "@/next-auth";
 
-import { Page } from "../../atoms";
+import { Page, PageBody } from "../../atoms";
 import {
   RepositoryDetailPageHeader,
   RepositorySummarySkeleton,
@@ -23,25 +26,34 @@ export async function RepositoryDetailPage({
   params,
 }: RepositoryDetailPageProps) {
   const { repositoryName, userName } = await params;
-  const githubHttpClient = new GithubHTTPClient();
   const session = await getSession();
+
+  const servicesInput = {
+    repositoryName,
+    userName,
+    token: session?.accessToken,
+  };
+  const githubHttpClient = new GithubHTTPClient();
   const getRepositoryByIdService = new GetRepositoryByIdService(
     githubHttpClient,
-    {
-      repositoryName,
-      userName,
-      token: session?.accessToken,
-    }
+    servicesInput
+  );
+  const getRepositoryLanguagesService = new GetRepositoryLanguagesService(
+    githubHttpClient,
+    servicesInput
   );
 
   return (
     <Page key={Math.random()}>
       <RepositoryDetailPageHeader />
-      <Suspense fallback={<RepositorySummarySkeleton />}>
-        <RepositoryDetailPageBody
-          getRepositoryByIdService={getRepositoryByIdService}
-        />
-      </Suspense>
+      <PageBody>
+        <Suspense fallback={<RepositorySummarySkeleton />}>
+          <RepositoryDetailPageBody
+            getRepositoryByIdService={getRepositoryByIdService}
+            getRepositoryLanguagesService={getRepositoryLanguagesService}
+          />
+        </Suspense>
+      </PageBody>
     </Page>
   );
 }

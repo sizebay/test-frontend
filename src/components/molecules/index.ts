@@ -9,3 +9,4 @@ export * from "./skeletons";
 export * from "./search-box";
 export * from "./headers";
 export * from "./repository-summary";
+export * from "./repository-languages";
