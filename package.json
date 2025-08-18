@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev:storybook": "storybook dev -p 6006",
+    "dev-storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky",
     "chromatic": "npx chromatic --project-token=chpt_a72fc222223e122"
