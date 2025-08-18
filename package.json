@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@storybook/nextjs": "^9.1.2",
-    "axios": "^1.11.0",
     "babel-jest": "^30.0.5",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

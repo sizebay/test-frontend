@@ -1,5 +1,3 @@
-import { AxiosResponseHeaders } from "axios";
-
 export enum HTTPMethod {
   GET = "GET",
   POST = "POST",
@@ -9,6 +7,7 @@ export enum HTTPMethod {
 
 export enum HTTPStatus {
   NOT_FOUND = 404,
+  INTERNAL_SERVER_ERROR = 500,
 }
 
 export type TError = {

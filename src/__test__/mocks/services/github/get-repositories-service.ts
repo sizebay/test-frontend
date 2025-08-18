@@ -5,7 +5,6 @@ import { HTTPStatus, TError } from "@/infra";
 
 import { makeFakeGithubUserDTO } from "../../factories";
 import { IGetGithubRepostoryDTO } from "@/DTOs";
-import { AxiosResponseHeaders } from "axios";
 
 export class GetRepositoriesMockService implements IGetRepositoriesService {
   constructor(

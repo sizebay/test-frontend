@@ -1,30 +1,20 @@
-import axios, {
-  AxiosResponseHeaders,
-  type AxiosError,
-  type AxiosInstance,
-} from "axios";
-
-import type {
-  HTTPRequest,
+import {
+  type HTTPRequest,
   HTTPStatus,
-  IHTTPClient,
-  TDefaultResponse,
+  type IHTTPClient,
+  type TDefaultResponse,
 } from "./contract";
 
 interface HTTPClientConfig {
-  client?: AxiosInstance;
   baseUrl?: string;
 }
 
 export abstract class HTTPClient implements IHTTPClient {
-  private client: AxiosInstance;
+  private client;
   private baseUrl: string;
 
-  constructor({
-    baseUrl = "localhost:3000",
-    client = axios,
-  }: HTTPClientConfig) {
-    this.client = client;
+  constructor({ baseUrl = "localhost:3000" }: HTTPClientConfig) {
+    this.client = fetch;
     this.baseUrl = baseUrl;
   }
 
@@ -34,31 +24,45 @@ export abstract class HTTPClient implements IHTTPClient {
     const { endpoint, headers, method, params, body } = request;
 
     try {
-      const response = await this.client.request<TResponse>({
-        url: `${this.baseUrl}${endpoint}`,
+      const query = params
+        ? `?${new URLSearchParams(params as Record<string, string>)}`
+        : "";
+
+      const response = await this.client(`${this.baseUrl}${endpoint}${query}`, {
         method,
         headers,
-        params,
-        data: body,
+        body: body ? JSON.stringify(body) : undefined,
+        cache: "force-cache",
       });
 
-      return {
-        data: response.data,
-        headers: response.headers as AxiosResponseHeaders,
-        error: null,
-      };
-    } catch (error) {
-      const axiosError = error as AxiosError;
-      const status = axiosError.response?.status as HTTPStatus;
-      const message = (axiosError.response?.data ||
-        axiosError.message) as string;
+      const contentType = response.headers.get("content-type");
+      const data = contentType?.includes("application/json")
+        ? await response.json()
+        : await response.text();
+
+      if (!response.ok) {
+        return {
+          data: null,
+          headers: Object.fromEntries(response.headers.entries()),
+          error: {
+            status: response.status as HTTPStatus,
+            message: response.statusText,
+          },
+        };
+      }
 
       return {
+        data: data as TResponse,
+        headers: Object.fromEntries(response.headers.entries()),
+        error: null,
+      };
+    } catch (error: unknown) {
+      return {
         data: null,
-        headers: axiosError.response?.headers as AxiosResponseHeaders,
+        headers: {},
         error: {
-          status,
-          message,
+          status: HTTPStatus.INTERNAL_SERVER_ERROR,
+          message: (error as Error).message || "Unexpected error",
         },
       };
     }
