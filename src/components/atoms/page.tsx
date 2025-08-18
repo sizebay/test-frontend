@@ -1,12 +1,16 @@
 import { HTMLAttributes } from "react";
 import { Typography, TypographyProps } from "./typography";
-import { cn } from "@/helpers";
-import { ClassNames } from "storybook/internal/theming";
+import { cn } from "@/utils";
 
 export type PageProps = HTMLAttributes<HTMLDivElement>;
 
 export function Page(props: PageProps) {
-  return <main {...props} className="w-screen bg-background" />;
+  return (
+    <main
+      {...props}
+      className={cn("w-screen bg-background", props.className)}
+    />
+  );
 }
 
 export type PageBodyProps = HTMLAttributes<HTMLDivElement>;

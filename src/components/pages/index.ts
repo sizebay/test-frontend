@@ -1,4 +1,3 @@
-export * from "./repositories-list-page";
-export * from "./repositories-list-error-page";
-export * from "./signin-page";
-export * from "./repository-detail-page";
+export * from "./repositories-list";
+export * from "./repository-detail";
+export * from "./signin";

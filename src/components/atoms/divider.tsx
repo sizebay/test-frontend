@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/helpers";
+import { cn } from "@/utils";
 import { HTMLAttributes } from "react";
 
 type DividerOrientation = "horizontal" | "vertical";

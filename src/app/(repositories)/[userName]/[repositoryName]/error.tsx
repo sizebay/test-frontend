@@ -1,8 +1,8 @@
 "use client";
 
-import { RepositoryDetailErrorPage } from "@/components/pages/repository-detail-error-page copy";
+import { RepositoryDetailErrorPage } from "@/components";
 import { ErrorPageParams } from "@/types";
 
-export default function Error({ reset }: ErrorPageParams) {
-  return <RepositoryDetailErrorPage reset={() => reset()} />;
+export default function Error(props: ErrorPageParams) {
+  return <RepositoryDetailErrorPage {...props} />;
 }

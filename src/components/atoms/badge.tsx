@@ -3,7 +3,7 @@
 import { HTMLAttributes } from "react";
 import { cva } from "class-variance-authority";
 
-import { cn } from "@/helpers";
+import { cn } from "@/utils";
 
 export type BadgeVariants = "default" | "secondary";
 

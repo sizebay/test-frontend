@@ -2,7 +2,7 @@
 
 import { HTMLAttributes } from "react";
 
-import { cn } from "@/helpers";
+import { cn } from "@/utils";
 import { Typography, TypographyProps } from "./typography";
 
 export type CardProps = HTMLAttributes<HTMLDivElement>;
@@ -77,7 +77,10 @@ export function CardTitle(props: CardTitleProps) {
   return (
     <Typography
       {...props}
-      className="text-neutral-700 font-medium flex items-center justify-center gap-2 truncate"
+      className={cn(
+        "text-neutral-700 font-medium flex items-center justify-center gap-2 truncate",
+        props.className
+      )}
     />
   );
 }

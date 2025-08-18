@@ -1,12 +1,13 @@
 import { render, screen } from "@testing-library/react";
 
 import {
-  getRepositoriesMock,
+  GetRepositoriesMockService,
+  makeFakeGithubRepositories,
+  makeFakeGithubUserDTO,
   MOCK_GITHUB_USER_NAME,
   WRONG_MOCK_GITHUB_USER_NAME,
 } from "@/__test__/mocks";
-import { RepositoriesList } from "@/components";
-import { GithubHTTPClient } from "@/infra";
+import { RepositoriesListPageBody } from "@/components";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(() => ({
@@ -19,12 +20,14 @@ jest.mock("next/navigation", () => ({
 
 describe("RepositoriesList", () => {
   it("Deve exibir estado de busca não realizado", async () => {
-    const githubHttpClient = new GithubHTTPClient();
+    const getRepositoriesMockService = new GetRepositoriesMockService({
+      search: "",
+    });
+
     render(
-      await RepositoriesList({
-        getRepositoriesAction: getRepositoriesMock,
-        httpClient: githubHttpClient,
-        requestParams: { search: "" },
+      await RepositoriesListPageBody({
+        getRepositoriesService: getRepositoriesMockService,
+        search: "",
       })
     );
 
@@ -32,12 +35,18 @@ describe("RepositoriesList", () => {
   });
 
   it("Deve exibir estado de usuário não encontrado", async () => {
-    const githubHttpClient = new GithubHTTPClient();
+    const getRepositoriesMockService = new GetRepositoriesMockService({
+      search: WRONG_MOCK_GITHUB_USER_NAME,
+      defaultRepositories: makeFakeGithubRepositories(
+        5,
+        makeFakeGithubUserDTO()
+      ),
+    });
+
     render(
-      await RepositoriesList({
-        getRepositoriesAction: getRepositoriesMock,
-        httpClient: githubHttpClient,
-        requestParams: { search: WRONG_MOCK_GITHUB_USER_NAME },
+      await RepositoriesListPageBody({
+        getRepositoriesService: getRepositoriesMockService,
+        search: WRONG_MOCK_GITHUB_USER_NAME,
       })
     );
 
@@ -47,12 +56,15 @@ describe("RepositoriesList", () => {
   });
 
   it("Deve exibir repositorios", async () => {
-    const githubHttpClient = new GithubHTTPClient();
+    const getRepositoriesMockService = new GetRepositoriesMockService({
+      search: MOCK_GITHUB_USER_NAME,
+      repositoriesCount: 5,
+    });
+
     render(
-      await RepositoriesList({
-        getRepositoriesAction: getRepositoriesMock,
-        httpClient: githubHttpClient,
-        requestParams: { search: MOCK_GITHUB_USER_NAME },
+      await RepositoriesListPageBody({
+        getRepositoriesService: getRepositoriesMockService,
+        search: MOCK_GITHUB_USER_NAME,
       })
     );
 

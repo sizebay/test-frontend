@@ -3,7 +3,7 @@
 import { ButtonHTMLAttributes, cloneElement, JSX } from "react";
 import { cva } from "class-variance-authority";
 
-import { cn } from "@/helpers";
+import { cn } from "@/utils";
 
 export type ButtonVariants = "default" | "secondary" | "tertiary";
 export type ButtonSizes = "default" | "icon";

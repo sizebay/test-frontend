@@ -6,3 +6,7 @@ export * from "./page";
 export * from "./card";
 export * from "./divider";
 export * from "./empty-state";
+export * from "./input";
+export * from "./github";
+export * from "./link-button";
+export * from "./clipboard-button";

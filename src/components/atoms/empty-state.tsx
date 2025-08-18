@@ -2,7 +2,7 @@
 
 import { cloneElement, HTMLAttributes, JSX } from "react";
 
-import { cn } from "@/helpers";
+import { cn } from "@/utils";
 
 import { Typography, TypographyProps } from "./typography";
 

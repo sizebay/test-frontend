@@ -1,8 +1,8 @@
 "use client";
 
-import { ElementType, HTMLAttributes, HTMLElementType } from "react";
+import { ElementType, HTMLAttributes } from "react";
 
-import { cn } from "@/helpers";
+import { cn } from "@/utils";
 
 export type TypographySizes =
   | "sm"

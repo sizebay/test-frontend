@@ -1,8 +1,4 @@
-import axios, {
-  HttpStatusCode,
-  type AxiosError,
-  type AxiosInstance,
-} from "axios";
+import axios, { type AxiosError, type AxiosInstance } from "axios";
 
 import type {
   HTTPRequest,

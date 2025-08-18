@@ -1,2 +1,4 @@
 export * from "./make-fake-github-repositories-dto";
-export * from "./mock_github_user_name";
+export * from "./mock-github-user-name";
+export * from "./make-fake-github-repository-dto";
+export * from "./make-fake-github-user-dto";
