@@ -9,6 +9,8 @@ interface HTTPClientConfig {
   baseUrl?: string;
 }
 
+const ONE_MINUTE = 60;
+
 export abstract class HTTPClient implements IHTTPClient {
   private client;
   private baseUrl: string;
@@ -33,6 +35,7 @@ export abstract class HTTPClient implements IHTTPClient {
         headers,
         body: body ? JSON.stringify(body) : undefined,
         cache: "force-cache",
+        next: { revalidate: 5 * ONE_MINUTE },
       });
 
       const contentType = response.headers.get("content-type");
