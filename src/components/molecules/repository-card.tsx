@@ -86,7 +86,7 @@ export function RepositoryCardFooter({
       {...props}
       className={cn(
         props.className,
-        "flex flex-col items-start justify-center gap-3"
+        "flex flex-col items-start justify-center gap-3 overflow-hidden"
       )}
     >
       <div className="flex gap-4 items-center justify-start w-full">
