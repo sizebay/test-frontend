@@ -53,6 +53,51 @@
   --radius-base: 0.625rem;
 }
 
+.dark {
+  /* Neutral */
+  --neutral-0: #000000;
+  --neutral-50: oklch(0.145 0 0); /* fundo mais escuro */
+  --secondary-100: oklch(0.23 0.005 264.53);
+  --neutral-200: #1e1e2a;
+  --neutral-300: #2b2b38;
+  --neutral-400: #3d3d4d;
+  --neutral-500: #55556b;
+  --neutral-600: #7b7b90;
+  --neutral-800: #e0e0e5;
+  --neutral-900: #fafafa;
+
+  /* Accent */
+  --accent-100: #1f1f2d;
+  --accent-900: #fafafa;
+
+  /* Destructive */
+  --danger-500: #ff4d6d;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.1);
+
+  /* Outline */
+  --ring: oklch(0.9 0 0);
+
+  /* Helper Colors */
+  --helper-orange: oklch(0.75 0.222 41.116);
+  --helper-green: oklch(0.72 0.118 184.704);
+  --helper-cyan: oklch(0.65 0.07 227.392);
+  --helper-yellow: oklch(0.88 0.189 84.429);
+  --helper-amber: oklch(0.82 0.188 70.08);
+
+  /* Surface */
+  --surface-0: oklch(0.12 0 0);  /* fundo principal */
+  --surface-50: oklch(0.16 0 0);
+  --surface-100: oklch(0.2 0 0);
+  --surface-200: oklch(0.25 0.00218 14.747);
+  --surface-900: oklch(0.985 0 0);
+  --surface-primary: #fafafa;
+  --surface-primary-foreground: #030213;
+  --surface-accent-foreground: oklch(0.9 0 0);
+  --surface-ring: oklch(0.85 0 0);
+}
+
 
 @theme inline {
   /* Font */

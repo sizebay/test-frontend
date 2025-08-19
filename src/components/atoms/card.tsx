@@ -78,7 +78,7 @@ export function CardTitle(props: CardTitleProps) {
     <Typography
       {...props}
       className={cn(
-        "text-neutral-700 font-medium flex items-center justify-center gap-2 truncate",
+        "text-accent-900 font-medium flex items-center justify-center gap-2 truncate",
         props.className
       )}
     />

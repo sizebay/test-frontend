@@ -48,7 +48,7 @@ export function PageHeader(props: PageHeaderProps) {
   return (
     <div
       {...props}
-      className="flex flex-col lg:flex-row gap-4 items-center justify-between w-full py-6 px-2 sm:px-0 mx-auto max-w-full sm:max-w-5/6 lg:max-w-5xl"
+      className="flex flex-row-reverse lg:flex-row gap-2 items-center justify-end lg:justify-between w-full py-6 px-2 sm:px-0 mx-auto max-w-full sm:max-w-5/6 lg:max-w-5xl"
     />
   );
 }

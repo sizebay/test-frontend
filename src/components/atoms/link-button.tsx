@@ -2,8 +2,6 @@
 
 import { useRouter } from "next/navigation";
 
-import { cn } from "@/utils";
-
 import { Button, type ButtonProps } from "../atoms";
 
 export type LinkButtonProps = ButtonProps & { href: string };
@@ -11,12 +9,7 @@ export type LinkButtonProps = ButtonProps & { href: string };
 export function LinkButton({ href, ...props }: LinkButtonProps) {
   const router = useRouter();
   return (
-    <Button
-      variant="secondary"
-      onClick={() => router.replace(href)}
-      {...props}
-      className={cn(props.className, "self-start")}
-    >
+    <Button variant="secondary" onClick={() => router.replace(href)} {...props}>
       {props.children}
     </Button>
   );

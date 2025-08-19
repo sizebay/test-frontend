@@ -10,3 +10,4 @@ export * from "./input";
 export * from "./github";
 export * from "./link-button";
 export * from "./clipboard-button";
+export * from "./theme-switch-button";

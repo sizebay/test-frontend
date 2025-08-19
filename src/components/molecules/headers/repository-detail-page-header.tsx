@@ -2,7 +2,12 @@
 
 import { ArrowLeft } from "lucide-react";
 
-import { PageHeader, type PageHeaderProps, LinkButton } from "../../atoms";
+import {
+  PageHeader,
+  type PageHeaderProps,
+  LinkButton,
+  ThemeSwitchButton,
+} from "../../atoms";
 
 type RepositoryDetailPageHeaderProps = PageHeaderProps;
 
@@ -14,6 +19,7 @@ export function RepositoryDetailPageHeader(
       <LinkButton variant="tertiary" leftIcon={<ArrowLeft />} href="/login">
         Voltar para repositórios
       </LinkButton>
+      <ThemeSwitchButton />
     </PageHeader>
   );
 }

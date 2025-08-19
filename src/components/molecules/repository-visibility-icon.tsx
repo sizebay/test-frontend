@@ -15,7 +15,7 @@ export function RepositoryVisibilityIcon({
 }: RepositoryVisibilityIconProps) {
   const iconProps: LucideProps = {
     size: 16,
-    className: "text-neutral-700",
+    className: "text-accent-900",
     ...props,
   };
 

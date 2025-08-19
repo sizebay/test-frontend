@@ -8,6 +8,7 @@ import {
   GithubSignOutButton,
   LinkButton,
   type PageHeaderProps,
+  ThemeSwitchButton,
 } from "../../atoms";
 
 type RepositoriesListPageHeaderProps = PageHeaderProps;
@@ -19,12 +20,13 @@ export function RepositoriesListPageHeader(
   return (
     <PageHeader {...props}>
       {data?.user ? (
-        <GithubSignOutButton className="w-full lg:w-fit" />
+        <GithubSignOutButton />
       ) : (
         <LinkButton variant="tertiary" leftIcon={<ArrowLeft />} href="/login">
           Voltar ao Login
         </LinkButton>
       )}
+      <ThemeSwitchButton />
     </PageHeader>
   );
 }

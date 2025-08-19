@@ -22,7 +22,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-neutral-800 text-background hover:bg-neutral-800/75",
         secondary:
-          "bg-neutral-100 text-foreground hover:bg-accent-100 border border-neutral-400",
+          "bg-background-100 text-foreground hover:bg-accent-100 border border-neutral-400",
         tertiary:
           "bg-transparent text-foreground hover:bg-accent-100 hover:opacity-50",
       },
