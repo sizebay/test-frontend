@@ -1,256 +1,386 @@
 # Teste Prático - Desenvolvedor Frontend React/Next.js
 
-## 🎯 Objetivo
+Este projeto é uma aplicação web que permite aos usuários pesquisar **perfis** e **repositórios públicos** do GitHub.  
 
-Este teste prático tem como objetivo avaliar suas habilidades técnicas em desenvolvimento frontend, especificamente:
+### ⚡ Principais funcionalidades  
+- 🔐 **Autenticação social** com GitHub via `NextAuth`  
+- 👤 **Busca de usuários e listagem de repositórios** utilizando a **API pública do GitHub**  
+- 📂 **Página de detalhes** para cada repositório, também integrada à API pública  
+- 📱 **Design responsivo**, garantindo uma boa experiência em diferentes dispositivos  
+- ⚡ **Cache de requisições** com o `fetch cache` do `Next.js`, otimizando desempenho e tempo de resposta
+- 🌙 **Switch de tema** (modo claro/escuro)  
+- 📝 **Documentação de componentes** usando o **Storybook**
 
-- **Desenvolvimento com Design Atômico**: Estruturação clara e organizada de componentes
-- **Boas práticas React/Next.js**: Performance, organização e código limpo
-- **Uso eficiente de Hooks**: Aplicação correta de hooks nativos e personalizados
-- **Implementação de Cache**: Estratégias eficientes para otimização de API calls
-- **Testes Unitários**: Cobertura adequada e qualidade dos testes
+## Links de Deploy
+- [Deploy](https://teste-frontend-sizebay.vercel.app/)
+- [Chromatic](https://www.chromatic.com/library?appId=68a2ba57b7317e52a8195d69)
 
-## 📋 Especificações do Projeto
+## Sobre o autor
 
-### Tecnologias Obrigatórias
-- **Framework**: Next.js (versão 13+ recomendada)
-- **Linguagem**: TypeScript
-- **API**: GitHub Public API (`https://api.github.com`)
-- **Cache**: SWR, React Query (TanStack Query) ou soluções nativas do Next.js
-- **Testes**: Jest + React Testing Library
+### Daniel Gustavo Favero
+- [Github](https://github.com/danielg-favero)
+- [LinkedIn](https://www.linkedin.com/in/daniel-gustavo-favero)
+- [Portifólio](https://danielg-favero.vercel.app/)
+- [Email](mailto:danielfavero17@gmail.com)
 
-### Funcionalidades Requeridas
+## 📑 Sumário
 
-#### 1. Página de Listagem de Repositórios
-- **Endpoint**: `https://api.github.com/users/{username}/repos`
-- **Funcionalidades**:
-  - Input para inserir username do GitHub
-  - Listagem dos repositórios públicos do usuário
-  - Exibição de informações básicas: nome, descrição, linguagem principal
-  - Paginação ou carregamento otimizado
-  - Estados de loading, erro e dados vazios
+- [Tecnologias do projeto](#tecnologias-do-projeto)
+- [Get Started](#get-started)
+- [Extensões necessárias para desenvolvimento](#extensões-necessárias-para-desenvolvimento)
+- [Comandos do packagejson](#comandos-do-packagejson)
+- [Estrutura do projeto](#estrutura-do-projeto)
+  - [Diretórios principais](#diretórios-principais)
+  - [Estrutura de componentes](#estrutura-de-componentes)
+- [Consumindo recursos de API](#consumindo-recursos-de-api)
+  - [Criando um service](#criando-um-service)
+  - [Consumindo um Service em uma página](#consumindo-um-service-em-uma-página)
+- [Testando uma funcionalidade](#testando-uma-funcionalidade)
+- [Documentando componentes](#documentando-componentes)
+- [Padrões do projeto](#padrões-do-projeto)
+  - [Nome de arquivos e pastas](#nome-de-arquivos-e-pastas)
+  - [Componentes, Funções, Hooks, etc](#componentes-funções-hooks-etc)
+  - [Componentes](#componentes)
+  - [Páginas](#páginas)
+  - [Requisições HTTP](#requisições-http)
+- [Documentação complementar](#documentação-complementar)
+- [Contribuições Futuras](#contribuições-futuras)
 
-#### 2. Página de Detalhes do Repositório
-- **Endpoint**: `https://api.github.com/repos/{owner}/{repo}`
-- **Informações obrigatórias**:
-  - Nome do repositório
-  - Descrição completa
-  - Número de estrelas
-  - Número de forks
-  - Issues abertas
-  - Linguagem principal
-  - Data de criação e última atualização
-  - Link para o repositório no GitHub
+## Tecnologias do projeto
 
-## 🏗️ Estrutura do Projeto (Design Atômico)
+- [React.JS](https://react.dev/learn)
+- [Next.JS](https://nextjs.org/docs)
+- [TailwindCSS](https://tailwindcss.com/docs/installation/using-vite)
+- [NextAuth](https://next-auth.js.org/getting-started/introduction)
+- [Storybook](https://storybook.js.org/docs)
+- [Jest](https://jestjs.io/docs/getting-started)
+- [React Testing Library](https://testing-library.com/docs/)
 
-Organize seu projeto seguindo rigorosamente a metodologia de Design Atômico:
+## Get Started
 
-```
-src/
-├── components/
-│   ├── atoms/           # Elementos básicos (Button, Input, Text, Icon)
-│   ├── molecules/       # Combinações de átomos (SearchBox, RepoCard)
-│   ├── organisms/       # Grupos complexos (RepoList, Header, Footer)
-│   ├── templates/       # Layouts de página
-│   └── pages/          # Páginas completas
-├── hooks/              # Custom hooks
-├── services/           # Serviços de API
-├── types/              # Definições TypeScript
-├── utils/              # Funções utilitárias
-└── __tests__/          # Testes organizados por componente
-```
+1. Instale as dependências do projeto
 
-## ⚡ Requisitos Técnicos
-
-### 1. Design Atômico
-- [ ] Separação clara entre átomos, moléculas, organismos, templates e páginas
-- [ ] Componentes reutilizáveis e bem documentados
-- [ ] Props tipadas com TypeScript
-- [ ] Storybook é um diferencial (opcional)
-
-### 2. Boas Práticas React/Next.js
-- [ ] Uso de Server Components quando apropriado
-- [ ] Implementação de Error Boundaries
-- [ ] Otimizações de performance (useMemo, useCallback quando necessário)
-- [ ] SEO básico (meta tags, títulos dinâmicos)
-- [ ] Responsividade mobile-first
-
-### 3. Hooks do React
-- [ ] **useState**: Gerenciamento de estado local
-- [ ] **useEffect**: Efeitos colaterais e lifecycle
-- [ ] **useContext**: Compartilhamento de estado global (se necessário)
-- [ ] **Custom Hooks**: Criação de pelo menos 1 hook personalizado
-- [ ] **useMemo/useCallback**: Otimizações quando apropriado
-
-### 4. Implementação de Cache
-Escolha uma das opções e implemente corretamente:
-
-#### Opção A: SWR
-```typescript
-import useSWR from 'swr'
-
-const { data, error, isLoading } = useSWR(
-  `/api/users/${username}/repos`,
-  fetcher,
-  {
-    revalidateOnFocus: false,
-    dedupingInterval: 300000, // 5 minutos
-  }
-)
-```
-
-#### Opção B: React Query (TanStack Query)
-```typescript
-import { useQuery } from '@tanstack/react-query'
-
-const { data, isLoading, error } = useQuery({
-  queryKey: ['repos', username],
-  queryFn: () => fetchUserRepos(username),
-  staleTime: 300000, // 5 minutos
-})
-```
-
-#### Opção C: Next.js Fetch Cache
-```typescript
-const repos = await fetch(`https://api.github.com/users/${username}/repos`, {
-  next: { revalidate: 300 } // 5 minutos
-})
-```
-
-### 5. Testes Unitários
-- [ ] **Mínimo obrigatório**: 
-  - 2 componentes atômicos testados
-  - 1 funcionalidade principal (busca de repositórios)
-  - 1 custom hook testado
-- [ ] **Cobertura**: Testes de renderização, interação e estados
-- [ ] **Mocks**: APIs mockadas adequadamente
-- [ ] **Casos de teste**: Happy path, loading, error states
-
-## 🚀 Instruções de Entrega
-
-### 1. Configuração do Repositório
-1. Faça um fork deste repositório
-2. Clone o fork para sua máquina local
-3. Crie uma branch com seu nome: `feature/nome-sobrenome`
-4. Desenvolva o projeto na sua branch
-
-### 2. Desenvolvimento
-1. Inicie o projeto Next.js com TypeScript
-2. Configure as dependências necessárias
-3. Implemente as funcionalidades seguindo os requisitos
-4. Escreva os testes unitários
-5. Documente o código quando necessário
-
-### 3. Commits
-**⚠️ IMPORTANTE**: Seus commits serão avaliados! Siga as boas práticas:
-
-- Use **Conventional Commits**: `feat:`, `fix:`, `test:`, `docs:`, etc.
-- Commits atômicos e descritivos
-- Mensagens em português ou inglês (seja consistente)
-- Exemplos:
-  ```
-  feat: add search component with atomic design structure
-  test: add unit tests for Button atom component
-  feat: implement SWR cache for GitHub API calls
-  fix: handle error states in repository details page
-  docs: update README with setup instructions
-  ```
-
-### 4. Pull Request
-Quando finalizar o desenvolvimento:
-
-1. Push da sua branch para o fork
-2. Abra um Pull Request para a branch `main` do repositório original
-3. **Título do PR**: `[TESTE] Nome Completo - Desenvolvedor Frontend`
-
-#### Template do Pull Request:
-```markdown
-## 📝 Descrição
-Breve descrição do que foi implementado.
-
-## ✅ Checklist de Requisitos
-- [ ] Design Atômico implementado
-- [ ] Hooks do React utilizados adequadamente
-- [ ] Cache implementado (especificar qual: SWR/React Query/Next.js)
-- [ ] Testes unitários incluídos
-- [ ] TypeScript configurado
-- [ ] Responsividade implementada
-
-## 🧪 Testes
-- Total de testes: X
-- Componentes testados: [listar]
-- Hooks testados: [listar]
-- Cobertura estimada: X%
-
-## 🚀 Como executar
 ```bash
-# Comandos para instalar e executar
 npm install
+```
+
+> O projeto utiliza `npm` como gerenciador de pacotes, caso não tenha instalado na sua máquina siga os passos da [Documentação](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+2. Configure as credenciais do `NextAuth`
+
+Rode o comando
+
+```bash
+npx auth secret
+```
+
+> Esse comando gera um arquivo `.env.local` e dentro dele uma chave para criptografar tokens de sessão do `NextAuth`.
+
+Configure um novo App `OAuth` no seu perfil do github. Em caso de dúvidas siga a [documentação](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app). 
+
+Informe os seguintes valores para os campos:
+
+- Application name*: `<nome-para-o-app>`
+- Homepage URL*: `localhost:3000`
+- Application description: `<descricao-para-o-app>`
+- Authorization callback URL*: `localhost:3000/api/auth/callback/github`
+
+Ao final, clique em `Update application`. Você será redirecionado para página do seu aplicativo `OAuth`.
+
+Clique em `Generate a new client secret` para gerar uma nova chave de acesso.
+
+Copie o `ClientID` e o `Client secret` e cole dentro do arquivo `.env.local` nas seguintes variáveis:
+
+```
+AUTH_GITHUB_ID="<client-ID>"
+AUTH_GITHUB_SECRET="<client-secret>"
+```
+
+3. Insira a URL `https://api.github.com` na variável `GITHUB_API_URL` dentro de `.env.local`
+
+```
+GITHUB_API_URL="https://api.github.com"
+```
+
+Ao final, o arquivo `.env.example` fica:
+
+```
+AUTH_SECRET="<nextauth-secret>"
+AUTH_GITHUB_ID="<client-ID>"
+AUTH_GITHUB_SECRET="<client-secret>"
+GITHUB_API_URL="https://api.github.com"
+```
+
+4. Rode o servidor de desenvolvimento
+
+```bash
 npm run dev
-npm run test
 ```
 
-## 📱 Screenshots
-[Adicione capturas de tela da aplicação funcionando]
+5. Acesse o endereço `localhost:3000` em seu navegador.
 
-## 🔧 Decisões Técnicas
-Explique brevemente suas principais decisões arquiteturais:
-- Por que escolheu determinada biblioteca de cache
-- Como organizou os componentes atômicos
-- Desafios encontrados e soluções
+## Extensões necessárias para desenvolvimento
 
-## ⏱️ Tempo Investido
-Aproximadamente X horas
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+- [Prettier - Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [Prettier ESLint](https://marketplace.visualstudio.com/items?itemName=rvest.vs-code-prettier-eslint)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+## Comandos do `package.json`
+
+- `npm run dev`: Roda o servidor local de desenvolvimento
+- `npm run build`: Gera `build` o projeto.
+- `npm run start`: Roda o projeto em modo produção após o comando `npm run build` ter sido executado.
+- `npm lint`: Roda o script do `ESlint` em todos os arquivos do projeto
+- `npm run test`: Roda os testes no projeto,
+- `npm run test:watch`: Roda os testes no projeto no modo `watch`, ou seja, a cada mudanca no código os testes são executados novamente.
+- `npm run dev-storybook`: Roda a documentação dos componentes com o `storybook`,
+- `npm run build-storybook`: Gera `build` da documentação dos componentes com o `storybook`,
+
+## Estrutura do projeto
+
+### Diretórios principais
+
+```
+📁 src
+├── 📁 __test__
+├── 📁 app
+├── 📁 components
+├── 📁 global
+├── 📁 hooks
+├── 📁 infra
+├── 📁 services
+├── 📁 types
+├── 📁 utils
+├── 📄 middleware.ts
+└── 📄 next-auth.ts
 ```
 
-## 📏 Critérios de Avaliação
+#### `📁 __test__`
+Pasta onde se concentram os testes e mocks da aplicação usando `jest` e `@testing-library/react`. A estrutura interna é uma réplica da pasta `src`.
 
-### 1. Código (60%)
-- **Design Atômico**: Estrutura clara e organizada (15%)
-- **Boas práticas React/Next.js**: Performance e organização (15%)
-- **Hooks**: Uso adequado e eficiente (10%)
-- **Cache**: Implementação eficiente e clara (10%)
-- **Testes**: Cobertura e qualidade (10%)
+Entenda melhor sobre os testes na seção: [Testando uma funcionalidade](#testando-uma-funcionalidade)
 
-### 2. Commits (20%)
-- Qualidade das mensagens de commit
-- Atomicidade dos commits
-- Uso de Conventional Commits
-- Histórico limpo e organizado
+#### `📁 app`
+Pasta `core` da aplicação, onde o `Next.JS` renderiza as páginas. Entenda melhor sobre o padrão [App Router](https://nextjs.org/docs/app) do `Next.JS`.
 
-### 3. Documentação (20%)
-- Qualidade do Pull Request
-- README do projeto
-- Comentários no código quando necessário
-- Instruções claras de execução
+#### `📁 components`
+Pasta onde se concentram todos os componentes da aplicação. Sua organização segue os princípios do `Atomic Design`.
 
-## ⏰ Prazo e Considerações
+Entenda melhor sobre os componentes na seção: [Estrutura de componentes](#estrutura-de-componentes)
 
-- **Prazo**: 5 dias úteis após o recebimento
-- **Dúvidas**: Podem ser enviadas por email ou Issues no repositório
-- **Entrega**: Pull Request conforme instruções acima
+#### `📁 DTOs`
+Pasta onde se concentram definições de tipos de `DTOs` (*Data Transfer Objects*). São objetos utilizados na transferência de dados entre dois sistemas. Geralmente são relacionados a retornos de APIs ou envios de dados de formulários.
 
-## 🎯 Dicas para se Destacar
+#### `📁 global`
+Pasta com definições globais do projeto, como estilos.
 
-- **Performance**: Implementar lazy loading, code splitting
-- **UX**: Adicionar skeleton loading, animações suaves
-- **Acessibilidade**: ARIA labels, navegação por teclado
-- **Error Handling**: Tratamento elegante de erros
-- **Documentação**: Storybook ou documentação detalhada dos componentes
-- **Extra**: Dark mode, filtros avançados, favoritar repositórios
+#### `📁 hooks`
+Pasta onde se concentram os hooks customizados utilizados por `client components`. [Entenda mais](https://react.dev/learn/reusing-logic-with-custom-hooks)
 
-## 📚 Recursos Úteis
+#### `📁 infra`
+Pasta que configura dependências externas da aplicação. Funciona como a porta de entrada da comunicação entre o sistema e o mundo externo.
 
-- [Next.js Documentation](https://nextjs.org/docs)
-- [React Query Documentation](https://tanstack.com/query/latest)
-- [SWR Documentation](https://swr.vercel.app/)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- [GitHub API Documentation](https://docs.github.com/en/rest)
-- [Atomic Design Methodology](https://bradfrost.com/blog/post/atomic-web-design/)
+```
+📁 infra
+├── 📁 http
+│   ├── 📄 client.ts
+│   └── 📄 contract.ts
+```
 
----
+- `📁 http`: Configura `adapter` de um cliente `HTTP` usando o `fetch`, assim a aplicação não depende de detalhes da implementação da ferramenta para fazer chamadas `HTTP`.
 
-**Boa sorte! 🚀**
+#### `📁 services`.
+Serviços de comunicação com APIs ou recursos externos.
 
-Estamos ansiosos para ver sua solução e conhecer seu estilo de desenvolvimento!
+Entenda melhor sobre como criar serviços na seção: 
+
+#### `📁 types`
+Pasta que concentra definições de tipos usando `typescript`.
+
+#### `📁 utils`
+Códigos utilitários compartilhados entre as partes dos sistema.
+
+```
+📁 utils
+├── 📁 formatters
+├── 📁 mappers
+└── 📁 translators
+```
+
+- `📁 formatters`: Formatadores de dados (e.g Manipulação de datas)
+- `📁 mappers`: Mapeadores de dados de um domínio para outro (e.g Mapear dados do backend para o frontend)
+- `📁 translators`: Tradutores de dados
+
+### Estrutura de componentes
+Os componentes estão separados em uma hierarquia se respeita os princípios do [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/).
+
+- `📁 atoms`: Componentes atômicos. são os blocos de construção fundamentais para outros elementos complexos. Geralmente `tags` `html` ou outros elementos básicos.
+> Componentes `atoms` são sempre `client-side`.
+
+- `📁 molecules`: Componentes mais complexos formados pelo conjunto de componentes `atoms`(e.g. `Skeletons`, `EmptyStates`, `Pagination`, etc.)
+> Componentes `molecules` são sempre `client-side`.
+
+- `📁 organisms`: Componentes ainda mais complexos formados pelo conjunto de componentes `atoms` e `molecules`(e.g. Listagens, Partes de páginas, etc.)
+> Componentes `organisms` são sempre `client-side`.
+
+- `📁 templates`: Seções completas de páginas. São responsáveis pela lógica de exibição dos componentes e como eles vão se comportar com respostas de APIs. Portanto, é neles que chamamos os `Services` e tratamos dos dados.
+> Componentes `templates` são sempre `server-side`.
+
+`📁 pages`: Construção de páginas completas, incluindo os estados dessas páginas (e.g Erro, Empty, Loading). São nas páginas que os `Services` e `HTTP Clients` são instanciados e os parâmetros de rotas são tratados.
+> Componentes `pages` são sempre `server-side`.
+
+## Consumindo recursos de API
+
+### Criando um service
+Serviços são classes que recebem como parâmetro no construtor um `IHTTPClient` para realizar requisições e geralmente exportam um método `exec` que executa determinada requisição.
+
+```ts
+export interface IExampleService {
+  exec(example: ExampleDTO): Promise<void>;
+}
+
+export class ExamplesService implements IExampleService {
+  constructor(private readonly httpClient: IHTTPClient) {}
+
+  async exec(example: ExampleDTO): Promise<void> {
+    await this.httpClient.sendRequest<ExampleDTO>({
+      endpoint: "/example-endpoint",
+      method: HTTPMethod.POST,
+      body: example,
+    });
+  }
+}
+```
+
+Esse padrão é ideal para realizar testes, uma vez que é possível `mockar` esse serviço.
+
+```ts
+export class ExampleServiceMock implements IExampleService {
+  constructor(private readonly httpClient: IHTTPClient) {}
+
+  async exec(example: ExampleDTO): Promise<void> {
+    return new Promise((resolve) => console.log('teste'))
+  }
+}
+```
+
+### Consumindo um `Service` em uma página
+Com o `Service` criado, é possível instanciá-lo dentro de uma página em `src/components/pages`
+
+```tsx
+export async function ExamplePage(props) {
+  const exampleHTTPClient = new ExampleHTTPClient();
+  const exampleService = new ExampleService(exampleHTTPClient);
+  {/* Outras lógicas */}
+
+  return (
+    <Page {...props}>
+      {/* ... */}
+      <Suspense fallback={<ExampleSkeleton />}>
+        <ExampleBody
+          exampleService={exampleService}
+        />
+      </Suspense>
+      {/* ... */}
+    </Page>
+  );
+}
+```
+
+Quem espera os `Services` sempre são os componentes dentro `src/components/templates`.
+
+```tsx
+export async function ExampleTemplate({
+  exampleService,
+  ...props
+}) {
+  const response = await exampleService.exec();
+  {/* Outras lógicas */}
+
+  return (
+    <PageBody {...props}>
+      {/* Consumo do objeto `response` */}
+    </PageBody>
+  );
+}
+```
+
+## Testando uma funcionalidade
+A pasta `src/__test__` contém uma réplica das pastas dentro de `src`, o que facilita a identificação dos componentes para os testes.
+
+- Todos os componentes dentro de `atoms`, `molecules` e `organisms` podem ser testados sem mockar dados.
+- Os testes de funcionalidades completas precisam ser feitos nos componentes `template`, uma vez que eles podem receber mocks de dados.
+
+```tsx
+describe("ExampleTemplate", () => {
+  it("...", async () => {
+    const exampleServiceMock = new ExampleServiceMock();
+
+    render(
+      await ExampleTemplate({
+        exampleService: exampleServiceMock,
+      })
+    );
+
+    // Asserts do teste
+  });
+})
+```
+
+## Documentando componentes
+Além do padrão do `Atomic Design` dentro de `src/components`, há também uma pasta `stories` contendo a documentação dos componentes da aplicação.
+
+A documentação segue a mesma estrutura de `src/components`. Para rodar a documentação execute o comando:
+
+```bash
+npm run dev-storybook
+```
+
+Ou acesse o link remoto da documentação: [Chromatic](https://68a2ba57b7317e52a8195d69-njviiekejb.chromatic.com/).
+
+Para mais detalhes de como documentar componentes acesse a [documentação do Storybook](https://storybook.js.org/docs/writing-stories)
+
+## Padrões do projeto
+
+### Nome de arquivos e pastas
+- Utilizar o `kebab-case`
+- Testes: utilizar a extensão `.spec`
+
+### Componentes, Funções, Hooks, etc.
+- Exportação nomeada (sem ser `default`) usando `function`.
+- Funções dentro de componentes usar `arrow functions`.
+
+### Componentes
+- Separar componentes utilizando os princípios do `Atomic Design`.
+- Dar preferência por construir componentes usando o [`Composition Pattern`](https://medium.com/@guilherme.pomp/creating-react-components-with-the-composition-pattern-f59c895f27bc)
+  
+### Páginas
+
+- Devem ser `server components`
+- Devem apenas chamar os componentes dentro de `src/components/pages`, sem nenhuma lógica.
+
+### Requisições HTTP
+
+- Criar um `DTO`.
+- Criar um `Service` que utiliza o `DTO` criado e a interface `IHTTPClient` de `📁 infra`.
+- Utilizar o `fetch api` do Next.JS. [Entenda mais](https://nextjs.org/docs/app/getting-started/fetching-data)
+- Executar o `Service` dentro dos `templates`.
+
+## Documentação complementar
+- [React.JS](https://react.dev/learn)
+- [Next.JS](https://nextjs.org/docs)
+- [Data Fetch](https://nextjs.org/docs/app/getting-started/fetching-data)
+- [TailwindCSS](https://tailwindcss.com/docs/installation/using-vite)
+- [NextAuth](https://next-auth.js.org/getting-started/introduction)
+- [Storybook](https://storybook.js.org/docs)
+- [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/)
+- [Composition Pattern](https://medium.com/@guilherme.pomp/creating-react-components-with-the-composition-pattern-f59c895f27bc)
+- [Jest](https://jestjs.io/docs/getting-started)
+- [React Testing Library](https://testing-library.com/docs/)
+- [Arquitetura MVVM usando React](https://www.youtube.com/watch?v=GI8zxLviMog&t=6s&ab_channel=Zencode)
+
+## Contribuições Futuras
+
+Algumas funcionalidades que ainda não foram implementadas e que podem ser contribuições futuras podem ser encontradas em `TODO.md`
+
