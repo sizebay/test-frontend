@@ -1,20 +1,19 @@
 # Teste Prático - Desenvolvedor Frontend React/Next.js
 
-Projeto de **listagem de repositórios de usuários do GitHub**, desenvolvido como teste prático para avaliar competências de desenvolvedores frontend. O projeto aborda pontos essenciais do desenvolvimento moderno, como:
+Este projeto é uma aplicação web que permite aos usuários pesquisar **perfis** e **repositórios públicos** do GitHub.  
 
-- Arquitetura de solução
-- Responsividade *mobile first*
-- Documentação
-- Testes unitários
-- Testes de integração
-- *Data Fetching*
-- *Error Handling*
-- Roteamento de páginas
-- Cacheamento de requisições
+### ⚡ Principais funcionalidades  
+- 🔐 **Autenticação social** com GitHub via `NextAuth`  
+- 👤 **Busca de usuários e listagem de repositórios** utilizando a **API pública do GitHub**  
+- 📂 **Página de detalhes** para cada repositório, também integrada à API pública  
+- 📱 **Design responsivo**, garantindo uma boa experiência em diferentes dispositivos  
+- ⚡ **Cache de requisições** com o `fetch cache` do `Next.js`, otimizando desempenho e tempo de resposta
+- 🌙 **Switch de tema** (modo claro/escuro)  
+- 📝 **Documentação de componentes** usando o **Storybook**
 
 ## Links de Deploy
 - [Deploy](https://teste-frontend-sizebay.vercel.app/)
-- [Chromatic](https://68a2ba57b7317e52a8195d69-njviiekejb.chromatic.com/)
+- [Chromatic](https://www.chromatic.com/library?appId=68a2ba57b7317e52a8195d69)
 
 ## Sobre o autor
 
