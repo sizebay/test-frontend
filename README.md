@@ -189,7 +189,7 @@ Pasta que configura dependências externas da aplicação. Funciona como a porta
 │   └── 📄 contract.ts
 ```
 
-- `📁 http`: Configura `adapter` de um cliente `http` usando o `axios`, assim a aplicação não depende de detalhes da implementação da biblioteca para fazer chamar `http`.
+- `📁 http`: Configura `adapter` de um cliente `HTTP` usando o `fetch`, assim a aplicação não depende de detalhes da implementação da ferramenta para fazer chamadas `HTTP`.
 
 #### `📁 services`.
 Serviços de comunicação com APIs ou recursos externos.

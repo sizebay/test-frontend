@@ -51,9 +51,9 @@
 - [x] **Casos de teste**: Happy path, loading, error states
 
 #  Requisitos segundários
-- [ ] Dark mode
-- [ ] Navegação pelo teclado
+- [x] Dark mode
+- [x] Navegação pelo teclado
 - [ ] Aria-labels
-- [ ] Storybook
+- [x] Storybook
 - [ ] Filtros avançados
 - [ ] Favoritar repositórios
